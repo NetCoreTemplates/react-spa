@@ -1,22 +1,30 @@
+import { NavLink } from "react-router-dom"
+
 export default () => {
+
+    const navClass = ({isActive}: any) => [
+        "text-sm leading-6 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50",
+        isActive ? "font-bold" : "",
+    ].join(" ")
+
     return (
         <footer className="bg-accent-1 border-t border-accent-2">
 
             <nav className="pt-8 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
                 <div className="pb-6">
-                    <a href="/about" className="text-sm leading-6 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50">About</a>
+                    <NavLink to="/about" className={navClass}>About</NavLink>
                 </div>
                 <div className="pb-6">
-                    <a href="/features" className="text-sm leading-6 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50">Features</a>
+                    <NavLink to="/features" className={navClass}>Features</NavLink>
                 </div>
                 <div className="pb-6">
-                    <a href="/deploy" className="text-sm leading-6 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50">Deploy</a>
+                    <NavLink to="/deploy" className={navClass}>Deploy</NavLink>
                 </div>
                 <div className="pb-6">
-                    <a href="/posts" className="text-sm leading-6 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50">Archive</a>
+                    <NavLink to="/posts" className={navClass}>Archive</NavLink>
                 </div>
                 <div className="pb-6">
-                    <a href="/privacy" className="text-sm leading-6 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50">Privacy</a>
+                    <NavLink to="/privacy" className={navClass}>Privacy</NavLink>
                 </div>
             </nav>
 
@@ -30,7 +38,7 @@ export default () => {
                            className="mx-3 bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0">
                             Read Documentation
                         </a>
-                        <a href={`https://github.com/NetCoreTemplates/react-spa`}
+                        <a href="https://github.com/NetCoreTemplates/react-spa"
                            className="mx-3 font-bold hover:underline">
                             View on GitHub
                         </a>

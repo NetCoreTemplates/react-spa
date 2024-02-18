@@ -1,14 +1,14 @@
-import {serializeToObject} from "@servicestack/client"
-import {ChangeEvent, Dispatch, SetStateAction, SyntheticEvent, useEffect, useState} from "react"
-import {useNavigate} from "react-router-dom"
+import { serializeToObject } from "@servicestack/client"
+import { ChangeEvent, Dispatch, SetStateAction, SyntheticEvent, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 import Page from "@/components/LayoutPage"
 import { ApiContext, ErrorSummary, TextInput, Checkbox, getRedirect } from "@/components/Form"
-import {useClient} from "@/gateway"
-import {Authenticate} from "@/dtos"
-import {useAuth, Redirecting} from "@/useAuth"
-import {Button} from "@/components/ui/button"
-import { useSearchParams } from "react-router-dom"
+import { useClient } from "@/gateway"
+import { Authenticate } from "@/dtos"
+import { useAuth, Redirecting } from "@/useAuth"
+import { Button } from "@/components/ui/button"
+import { useSearchParams, Link } from "react-router-dom"
 
 export default () => {
 
@@ -51,7 +51,8 @@ export default () => {
                             <div className="flex flex-col gap-y-4">
                                 <TextInput id="userName" help="Email you signed up with" autoComplete="email"
                                            value={username} onChange={change(setUsername)}/>
-                                <TextInput id="password" type="password" help="6 characters or more" autoComplete="current-password"
+                                <TextInput id="password" type="password" help="6 characters or more"
+                                           autoComplete="current-password"
                                            value={password} onChange={change(setPassword)}/>
                                 <Checkbox id="rememberMe"/>
                             </div>
@@ -62,11 +63,11 @@ export default () => {
 
                             <div className="mt-8 text-sm">
                                 <p className="mb-3">
-                                    <a className="font-semibold" href="/signup">Register as a new user</a>
+                                    <Link className="font-semibold" to="/signup">Register as a new user</Link>
                                 </p>
                             </div>
                         </div>
-                        
+
                     </div>
                 </form>
             </section>

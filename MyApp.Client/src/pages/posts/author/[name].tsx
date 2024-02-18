@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import BlogTitle from "@/components/BlogTitle"
 import BlogPosts from "@/components/BlogPosts"
 import { ErrorSummary } from "@/components/Form"
@@ -7,14 +8,8 @@ import { useParams } from "react-router-dom"
 import { PressContext } from "@/contexts"
 import { generateSlug } from "@/utils"
 import Layout from "@/components/Layout"
-import { HelmetProvider, Helmet } from "react-helmet-async"
 
-type Props = {
-
-}
-
-export default ({ }: Props) => {
-
+export default () => {
     const press = useContext(PressContext)
     const { name } = useParams()
     const author = press.blog.authors.find(x => generateSlug(x.name) == name)
@@ -22,12 +17,7 @@ export default ({ }: Props) => {
     const title = author ? `${author.name}'s Posts` : `Author Not Found`
 
     return (
-        <Layout>
-            <HelmetProvider>
-                <Helmet>
-                    <title>{title}</title>
-                </Helmet>
-            </HelmetProvider>
+        <Layout title={title}>
             {author
                 ? <div className="relative bg-gray-50 dark:bg-gray-900 px-6 pt-16 pb-20 lg:px-8 lg:pt-24 lg:pb-28">
                     <div className="absolute inset-0">
@@ -40,7 +30,7 @@ export default ({ }: Props) => {
                         <BlogPosts posts={authorPosts} />
 
                         <div className="mt-8 text-center">
-                            <a className="text-sm font-semibold hover:underline" href="/posts">view all posts</a>
+                            <Link className="text-sm font-semibold hover:underline" to="/posts">view all posts</Link>
                         </div>
                     </div>
                 </div>

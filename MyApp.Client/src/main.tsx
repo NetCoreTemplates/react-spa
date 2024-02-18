@@ -7,10 +7,7 @@ import { Loading } from '@/components/Form'
 import { ThemeProvider } from "@/components/theme-provider"
 import { StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
-import {
-    BrowserRouter as Router,
-    useRoutes,
-} from 'react-router-dom'
+import { BrowserRouter as Router, useRoutes } from 'react-router-dom'
 
 import routes from '~react-pages'
 
@@ -34,7 +31,7 @@ const app = createRoot(document.getElementById('root')!)
 app.render(
     <StrictMode>
         <Router>
-            <App />
+            <App/>
         </Router>
     </StrictMode>,
 )

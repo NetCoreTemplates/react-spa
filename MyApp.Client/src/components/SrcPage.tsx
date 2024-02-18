@@ -1,6 +1,6 @@
 import { combinePaths } from "@servicestack/client"
 import { Icon } from "@iconify/react"
-import SrcLink from "./SrcLink"
+import SrcLink from "@/components/SrcLink"
 
 type Props = {
     path: string

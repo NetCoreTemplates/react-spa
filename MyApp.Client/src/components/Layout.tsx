@@ -1,7 +1,7 @@
 import Nav from "./Nav"
 import Footer from "./Footer"
 import Meta from "./Meta"
-import {HelmetProvider, Helmet} from "react-helmet-async"
+import { HelmetProvider, Helmet } from "react-helmet-async"
 
 type Props = {
     title?: string

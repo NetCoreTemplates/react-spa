@@ -1,13 +1,13 @@
-import {ChangeEvent, Dispatch, SetStateAction, SyntheticEvent, useEffect, useState} from "react"
-import {serializeToObject, leftPart, rightPart, toPascalCase} from "@servicestack/client"
-import {useNavigate} from "react-router-dom"
+import { ChangeEvent, Dispatch, SetStateAction, SyntheticEvent, useEffect, useState } from "react"
+import { serializeToObject, leftPart, rightPart, toPascalCase } from "@servicestack/client"
+import { useNavigate } from "react-router-dom"
 
 import Page from "@/components/LayoutPage"
-import {FormLoading, ErrorSummary, TextInput, Checkbox, getRedirect, ApiContext} from "@/components/Form"
-import {Button} from "@/components/ui/button"
-import {useClient} from "@/gateway"
-import {Register, RegisterResponse} from "@/dtos"
-import {useAuth, Redirecting} from "@/useAuth"
+import { FormLoading, ErrorSummary, TextInput, Checkbox, getRedirect, ApiContext } from "@/components/Form"
+import { Button } from "@/components/ui/button"
+import { useClient } from "@/gateway"
+import { Register, RegisterResponse } from "@/dtos"
+import { useAuth, Redirecting } from "@/useAuth"
 import { useSearchParams } from "react-router-dom"
 
 export default () => {
@@ -51,7 +51,7 @@ export default () => {
             } else {
                 navigate("/signin")
             }
-            
+
         }
     }
 
@@ -73,7 +73,8 @@ export default () => {
                                            value={displayName} onChange={change(setDisplayName)}/>
                                 <TextInput id="userName" autoComplete="email"
                                            value={username} onChange={change(setUsername)}/>
-                                <TextInput id="password" type="password" help="6 characters or more" autoComplete="new-password"
+                                <TextInput id="password" type="password" help="6 characters or more"
+                                           autoComplete="new-password"
                                            value={password} onChange={change(setPassword)}/>
                                 <TextInput id="confirmPassword" type="password" defaultValue={password}/>
                                 <Checkbox id="autoLogin"/>

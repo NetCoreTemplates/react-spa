@@ -1,5 +1,4 @@
 import MarkdownComponent from "@/components/MarkdownComponent"
-import { HelmetProvider, Helmet } from "react-helmet-async"
 import Layout from "@/components/Layout"
 import { leftPart, rightPart } from "@servicestack/client"
 import { useContext } from "react"
@@ -21,12 +20,7 @@ export default () => {
         return rightPart(release, '_')
     }
 
-    return (<Layout>
-        <HelmetProvider>
-            <Helmet>
-                <title>What's New</title>
-            </Helmet>
-        </HelmetProvider>
+    return (<Layout title="What's New">
         <div className="container mx-auto px-5">
             <section className="flex-col md:flex-row flex justify-center mt-16 mb-16 md:mb-12">
                 <h1 className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-slate-900 dark:text-slate-50 sm:text-7xl">

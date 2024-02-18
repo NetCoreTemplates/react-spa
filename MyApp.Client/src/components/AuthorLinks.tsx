@@ -1,4 +1,4 @@
-import { Author } from "../../../../src"
+import { Author } from "vite-plugin-press"
 
 type Props = {
     author: Author

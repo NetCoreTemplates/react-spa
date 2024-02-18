@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout"
+import { Link } from "react-router-dom"
 import AuthorLinks from "@/components/AuthorLinks"
 import { useContext } from "react"
 import { PressContext } from "@/contexts"
@@ -49,12 +50,12 @@ export default (): JSX.Element => {
                         <div className="flex justify-between">
                             <div className="md:mb-12 flex items-center">
                                 {authorHref
-                                    ? <a href={authorHref}><img className="w-12 h-12 rounded-full mr-4 text-cyan-600" src={authorProfileUrl} /></a>
+                                    ? <Link to={authorHref}><img className="w-12 h-12 rounded-full mr-4 text-cyan-600" src={authorProfileUrl} /></Link>
                                     : <img className="w-12 h-12 rounded-full mr-4 text-cyan-600" src={authorProfileUrl} />}
 
                                 {!author ? null : (<div className="flex flex-col">
                                     {authorHref
-                                        ? <a className="text-xl font-semibold hover:underline" href={authorHref}>{post.author}</a>
+                                        ? <Link className="text-xl font-semibold hover:underline" to={authorHref}>{post.author}</Link>
                                         : <span className="text-xl font-semibold">{post.author}</span>}
                                     <AuthorLinks author={author} />
                                 </div>)}
@@ -69,7 +70,7 @@ export default (): JSX.Element => {
                             <div>
                                 <div className="mb-4 flex flex-wrap">
                                     {post.tags.map(tag =>
-                                        <a key={tag} href={tagLink(tag)} className="mr-2 mb-2 text-xs leading-5 font-semibold bg-slate-400/10 dark:bg-slate-400/30 rounded-full py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20 dark:hover:bg-slate-400/40 dark:highlight-white/5">{tag}</a>)}
+                                        <Link key={tag} to={tagLink(tag)} className="mr-2 mb-2 text-xs leading-5 font-semibold bg-slate-400/10 dark:bg-slate-400/30 rounded-full py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20 dark:hover:bg-slate-400/40 dark:highlight-white/5">{tag}</Link>)}
                                 </div>
                                 {!post.date ? null : <div className="max-w-3xl mx-auto">
                                     <div className="mb-6 text-lg text-gray-500 dark:text-gray-400">
@@ -95,7 +96,7 @@ export default (): JSX.Element => {
                             <div className="flex justify-between">
                                 <div>
                                     {authorHref
-                                        ? <a href={authorHref}><img className="w-20 h-20 rounded-full text-cyan-600" src={authorProfileUrl} /></a>
+                                        ? <Link to={authorHref}><img className="w-20 h-20 rounded-full text-cyan-600" src={authorProfileUrl} /></Link>
                                         : <img className="w-20 h-20 rounded-full text-cyan-600" src={authorProfileUrl} />}
 
                                     <div className="mt-2 font-medium text-2xl">
@@ -117,21 +118,21 @@ export default (): JSX.Element => {
                                     {authorPosts.map(authorPost => (<div key={authorPost.path}>
                                         <div className="flex flex-col overflow-hidden">
                                             <div className="flex-shrink-0">
-                                                <a href={postLink(authorPost)}>
+                                                <Link to={postLink(authorPost)}>
                                                     <img className="h-48 w-full object-cover" src={authorPost.image} alt="" />
-                                                </a>
+                                                </Link>
                                             </div>
                                             <div className="flex flex-1 flex-col justify-between bg-white dark:bg-black p-6">
                                                 <div className="flex-1">
                                                     <p className="text-sm font-medium text-indigo-600 dark:text-indigo-300">
                                                         Article
                                                     </p>
-                                                    <a href={postLink(authorPost)} className="mt-2 block">
+                                                    <Link to={postLink(authorPost)} className="mt-2 block">
                                                         <p className="text-xl font-semibold text-gray-900 dark:text-gray-50 whitespace-nowrap overflow-hidden text-ellipsis" title={authorPost.title}>
                                                             {authorPost.title}
                                                         </p>
                                                         <p className="mt-3 text-base text-gray-500 dark:text-gray-400">{authorPost.summary}</p>
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                                 <div className="mt-6 flex items-center">
                                                     <div className="flex-shrink-0">
@@ -141,7 +142,7 @@ export default (): JSX.Element => {
                                                     <div className="ml-3">
                                                         <p className="text-sm font-medium text-gray-900 dark:text-gray-50">
                                                             {authorLink(authorPost.author)
-                                                                ? <a href={authorLink(authorPost.author)!} className="hover:underline">{authorPost.author}</a>
+                                                                ? <Link to={authorLink(authorPost.author)!} className="hover:underline">{authorPost.author}</Link>
                                                                 : <span>{authorPost.author}</span>}
                                                         </p>
                                                         <div className="flex space-x-1 text-sm text-gray-500 dark:text-gray-400">

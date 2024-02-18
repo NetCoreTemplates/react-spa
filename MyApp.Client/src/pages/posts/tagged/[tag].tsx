@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import Layout from "@/components/Layout"
 import BlogTitle from "@/components/BlogTitle"
 import BlogPosts from "@/components/BlogPosts"
@@ -9,10 +10,7 @@ import { PressContext } from "@/contexts"
 import { generateSlug } from "@/utils"
 import { HelmetProvider, Helmet } from "react-helmet-async"
 
-type Props = {
-}
-
-export default ({ }: Props) => {
+export default () => {
     const press = useContext(PressContext)
     const { tag } = useParams()
 
@@ -48,13 +46,13 @@ export default ({ }: Props) => {
                         <div className="flex flex-wrap justify-center">
                             {allTags.map(tag => tag == selectedTag
                                 ? <span className="mr-2 mb-2 text-xs leading-5 font-semibold bg-indigo-600 text-white rounded-full py-1 px-3 flex items-center space-x-2">{tag}</span>
-                                : <a href={tagLink(tag)} className="mr-2 mb-2 text-xs leading-5 font-semibold bg-slate-400/10 dark:bg-slate-400/30 rounded-full py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20 dark:hover:bg-slate-400/40 dark:highlight-white/5">{tag}</a>)}
+                                : <Link to={tagLink(tag)} className="mr-2 mb-2 text-xs leading-5 font-semibold bg-slate-400/10 dark:bg-slate-400/30 rounded-full py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20 dark:hover:bg-slate-400/40 dark:highlight-white/5">{tag}</Link>)}
                         </div>
                     </div>
                     <div className="mt-12 relative mx-auto max-w-7xl">
                         <BlogPosts posts={taggedPosts} />
                         <div className="mt-8 text-center">
-                            <a className="text-sm font-semibold hover:underline" href="/posts">view all posts</a>
+                            <Link className="text-sm font-semibold hover:underline" to="/posts">view all posts</Link>
                         </div>
                     </div>
                 </div>

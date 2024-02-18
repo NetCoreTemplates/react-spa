@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import BlogTitle from "@/components/BlogTitle"
 import BlogPosts from "@/components/BlogPosts"
 import SrcPage from "@/components/SrcPage"
@@ -6,12 +7,8 @@ import { useContext } from "react"
 import { PressContext } from "@/contexts"
 import { generateSlug } from "@/utils"
 import Layout from "@/components/Layout"
-import { HelmetProvider, Helmet } from "react-helmet-async"
 
-type Props = {
-
-}
-
+type Props = {}
 export default ({ }: Props) => {
 
     const press = useContext(PressContext)
@@ -33,12 +30,7 @@ export default ({ }: Props) => {
     const thisYear = new Date().getFullYear()
 
     return (
-        <Layout>
-            <HelmetProvider>
-                <Helmet>
-                    <title>{title}</title>
-                </Helmet>
-            </HelmetProvider>
+        <Layout title={title}>
             <>
                 <div className="relative bg-gray-50 dark:bg-gray-900 px-6 pt-16 pb-20 lg:px-8 lg:pt-24 lg:pb-28">
                     <div className="absolute inset-0">
@@ -50,24 +42,22 @@ export default ({ }: Props) => {
                     <div className="relative my-4 mx-auto max-w-7xl">
                         <div className="flex flex-wrap justify-center">
                             {allTags.map(tag =>
-                                <a key={tag} href={tagLink(tag)} className="mr-2 mb-2 text-xs leading-5 font-semibold bg-slate-400/10 dark:bg-slate-400/30 rounded-full py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20 dark:hover:bg-slate-400/40 dark:highlight-white/5">{tag}</a>)}
+                                <Link key={tag} to={tagLink(tag)} className="mr-2 mb-2 text-xs leading-5 font-semibold bg-slate-400/10 dark:bg-slate-400/30 rounded-full py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20 dark:hover:bg-slate-400/40 dark:highlight-white/5">{tag}</Link>)}
                         </div>
                     </div>
                     <div className="relative mb-8 mx-auto max-w-7xl">
                         <div className="flex flex-wrap justify-center">
                             <b className="text-sm font-semibold">{thisYear}</b>
                             {allYears.filter(x => x != thisYear).map(year =>
-                                <a key={year} className="ml-3 text-sm text-indigo-700 dark:text-indigo-300 font-semibold hover:underline" href={yearLink(year)}>{year}</a>)}
+                                <Link key={year} className="ml-3 text-sm text-indigo-700 dark:text-indigo-300 font-semibold hover:underline" to={yearLink(year)}>{year}</Link>)}
                         </div>
                     </div>
                     <div className="relative mx-auto max-w-7xl">
                         <BlogPosts posts={allPosts.filter((x: any) => new Date(x.date).getFullYear() == thisYear)} />
-
                         <div className="mt-8 text-center">
-                            <a className="text-sm font-semibold hover:underline" href="/posts">view all posts</a>
+                            <Link className="text-sm font-semibold hover:underline" to="/posts">view all posts</Link>
                         </div>
                     </div>
-
                 </div>
 
                 <div className="my-8 flex justify-center gap-x-4">

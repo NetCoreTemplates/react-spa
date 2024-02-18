@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import Layout from "@/components/Layout"
 import GettingStarted from "@/components/GettingStarted"
 import VideoGroup from "@/components/VideoGroup"
@@ -17,9 +18,9 @@ const Index = () => {
                     </p>
                     <div className="mx-auto mt-5 max-w-md sm:flex sm:justify-center md:mt-8">
                         <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                            <a href="https://ui.shadcn.com/docs/components/accordion" className="flex w-full items-center justify-center rounded-md border border-transparent bg-link-dark dark:bg-link-dark px-8 py-3 text-base font-medium text-white hover:bg-gray-700 md:py-4 md:px-10 md:text-lg">
+                            <Link to="https://ui.shadcn.com/docs/components/accordion" className="flex w-full items-center justify-center rounded-md border border-transparent bg-link-dark dark:bg-link-dark px-8 py-3 text-base font-medium text-white hover:bg-gray-700 md:py-4 md:px-10 md:text-lg">
                                 React Component Gallery
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
