@@ -1,0 +1,193 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+[v-cloak] {display:none}
+
+@tailwind components;
+
+/* Write you own custom component styles here */
+
+/* override element defaults */
+b, strong { font-weight:600; }
+
+/*vue*/
+[v-cloak] {display:none}
+
+/* @tailwindcss/aspect css */
+.aspect-h-9 {
+  --tw-aspect-h: 9;
+}
+.aspect-w-16 {
+  position: relative;
+  padding-bottom: calc(var(--tw-aspect-h) / var(--tw-aspect-w) * 100%);
+  --tw-aspect-w: 16;
+}
+.aspect-w-16 > * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/*typography*/
+.prose pre::-webkit-scrollbar, .prose code::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: #2d3748;
+}
+.prose pre::-webkit-scrollbar-thumb, .prose code::-webkit-scrollbar-thumb {
+  background-color: rgb(100 116 139);
+}
+code[class*=language-], pre[class*=language-] {
+  background-color:#1f2937;
+  min-width: fit-content;
+}
+
+/* dark mode autocomplete fields */
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+.dark input[data-autocompleted] {
+  background-color: transparent !important;
+}
+
+/*markdown containers*/
+.copy p, .copy p code { color:#fff }
+.sh-copy { max-height: 34px; }
+.copied { display: none}
+.copying .copied { display: block }
+.copying .nocopy { display: none }
+
+.cp p, .cp p code { margin:0; padding:0 }
+
+.sh-copy code { font-size: 16px }
+.sh-copy p, .sh-copy p code { color: rgb(243 244 246) }
+.sh-copy p::before { content:'$ '; color: rgb(156 163 175) }
+.sh-copy a { color: rgb(243 244 246) }
+.sh-copy a:hover { text-decoration: none }
+
+/* Custom Info Containers*/
+.custom-block.tip,.custom-block.info,.custom-block.warning,.custom-block.danger {
+  margin: 1rem 0;
+  border-left: .5rem solid;
+  padding: .1rem 1.5rem;
+  overflow-x: auto;
+}
+.custom-block.tip {
+  background-color: #f3f5f7;
+  border-color: #007bff
+}
+.custom-block.info {
+  background-color: #f3f5f7;
+  border-color: #476582
+}
+.custom-block.warning {
+  border-color: #e7c000;
+  color: #6b5900;
+  background-color: #ffe5644d
+}
+.custom-block.warning .custom-block-title {
+  color: #b29400
+}
+.custom-block.warning a {
+  color: #2c3e50
+}
+.custom-block.danger {
+  border-color: #c00;
+  color: #4d0000;
+  background-color: #ffe6e6
+}
+.custom-block.danger .custom-block-title {
+  color: #900
+}
+.custom-block.danger a {
+  color: #2c3e50
+}
+.dark .custom-block {
+  background: #111827;
+}
+.custom-block.details {
+  position: relative;
+  display: block;
+  border-radius: 2px;
+  margin: 1.6em 0;
+  padding: 1.6em;
+  background-color: #eee
+}
+.custom-block.details h4 {
+  margin-top: 0
+}
+.custom-block.details figure:last-child,.custom-block.details p:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0
+}
+.custom-block.details summary {
+  outline: none;
+  cursor: pointer
+}
+.custom-block-title {
+  margin-bottom: -.4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

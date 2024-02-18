@@ -1,0 +1,9 @@
+{
+  "localBaseUrl": "https://localhost:5001",
+  "publicBaseUrl": "https://vue-spa.web-templates.io",
+  "siteTwitter": "@Vue",
+  "blogTitle": "From the blog",
+  "blogDescription": "Writing on software design, company building, and the aerospace industry.",
+  "blogEmail": "email@example.org (Vue)",
+  "blogImageUrl": "https://servicestack.net/img/logo.png"
+}
