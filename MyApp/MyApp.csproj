@@ -43,15 +43,14 @@
     <MakeDir Directories="$(BuildDir)wwwroot" Condition="!Exists('$(BuildDir)wwwroot')" />
   </Target>
 
-  <ItemGroup>
-    <CopyDist Include="../MyApp.Client/dist/**/*.*" />
-  </ItemGroup>
-  
-  <Target Name="CreateAppDataFolder" AfterTargets="AfterPublish">
+  <Target Name="CreateAppDataFolder" BeforeTargets="Publish">
     <MakeDir Directories="$(PublishDir)App_Data" Condition="!Exists('$(PublishDir)App_Data')" />
     <Exec Command="npm run build" WorkingDirectory="../MyApp.Client" />
     <RemoveDir Directories="$(PublishDir)wwwroot" />
-    <Copy SourceFiles="@(CopyDist)" DestinationFolder="$(PublishDir)wwwroot\%(RecursiveDir)" />
+    <ItemGroup>
+      <CopyDist Include="../MyApp.Client/dist/**/*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(CopyDist)" DestinationFiles="@(CopyDist->'$(PublishDir)wwwroot\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
 
 </Project>
