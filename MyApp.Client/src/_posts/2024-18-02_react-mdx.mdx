@@ -18,7 +18,7 @@ itself to quickly develop highly interactive, modular applications.
 
 Where creating a component is as simple as:
 
-**[Hello.tsx]()**
+**[Hello.tsx](https://github.com/NetCoreTemplates/react-spa/blob/main/MyApp.Client/src/_posts/components/Hello.tsx)**
 
 ```tsx
 type Props = { name:string }
@@ -30,7 +30,7 @@ export default ({ name }:Props) => <b>Hello, {name}!</b>
 
 Or a simple reactive example:
 
-**[Counter.tsx]()**
+**[Counter.tsx](https://github.com/NetCoreTemplates/react-spa/blob/main/MyApp.Client/src/_posts/components/Counter.tsx)**
 
 ```tsx
 import { useState } from 'react'
@@ -67,7 +67,7 @@ The Plugin component shows how we can easily utilize the rich components in the
 [shadcn](https://ui.shadcn.com/docs/components/accordion) and [radix-ui](https://www.radix-ui.com/)
 component libraries:
 
-**[Plugin.tsx]()**
+**[Plugin.tsx](https://github.com/NetCoreTemplates/react-spa/blob/main/MyApp.Client/src/_posts/components/Plugin.tsx)**
 
 ```tsx
 import { Button as PrimaryButton } from "@/components/ui/button"
@@ -125,7 +125,7 @@ client.api(new Hello({ name }))
 You'll typically use all these libraries in your **API-enabled** components as seen in the
 **HelloApi** component which calls the `Hello` API on each key press:
 
-**[HelloApi.tsx]()**
+**[HelloApi.tsx](https://github.com/NetCoreTemplates/react-spa/blob/main/MyApp.Client/src/_posts/components/HelloApi.tsx)**
 
 ```tsx
 import { useState, useEffect } from "react"
