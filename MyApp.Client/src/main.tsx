@@ -5,14 +5,17 @@ import Layout from '@/components/Layout'
 import { Loading } from '@/components/Form'
 
 import { ThemeProvider } from "@/components/theme-provider"
-import { StrictMode, Suspense } from 'react'
+import { StrictMode, Suspense, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter as Router, useRoutes } from 'react-router-dom'
+import { BrowserRouter as Router, useRoutes, useLocation } from 'react-router-dom'
 
 import routes from '~react-pages'
 
 import press from "virtual:press"
 import { PressContext } from './contexts'
+import { useApp } from "@/gateway";
+
+useApp().load()
 
 function App() {
     return (
@@ -26,11 +29,20 @@ function App() {
     )
 }
 
+function ScrollToTop() {
+    const { pathname } = useLocation();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+    return null;
+}
+
 const app = createRoot(document.getElementById('root')!)
 
 app.render(
     <StrictMode>
         <Router>
+            <ScrollToTop />
             <App/>
         </Router>
     </StrictMode>,
