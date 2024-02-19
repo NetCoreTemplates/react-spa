@@ -19,11 +19,10 @@ export default () => {
             </div>
 
             <VideoGroup
-                title="Vue Components"
-                summary="Learn about productive features in our growing Vue Component Library"
-                group="react"
-                learnMore="https://docs.servicestack.net/vue/"/>
-
+                title="SPA Development"
+                summary="Learn about ServiceStack's productive features for rapidly developing Single Page Apps"
+                group="react"/>
+            
             <div className="my-8 flex justify-center gap-x-4">
                 <SrcPage path="pages/videos.vue"/>
             </div>

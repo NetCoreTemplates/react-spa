@@ -59,7 +59,7 @@
     "typescript": "^5.2.2",
     "vite": "^5.1.0",
     "vite-plugin-pages": "^0.32.0",
-    "vite-plugin-press": "^1.0.9",
+    "vite-plugin-press": "^1.0.10",
     "vite-plugin-svgr": "^4.2.0"
   }
 }
