@@ -94,7 +94,7 @@ export function useApp() {
 
     const load = async (force?:boolean) => {
         if (appState.metadata && !force) return
-        let r = await fetch(combinePaths(client.baseUrl, '/types/metadata.json'))
+        let r = await fetch(combinePaths(client.baseUrl, '/api/TypesMetadata'))
         if (r.ok) {
             let json = await r.text()
             appState.metadata = JSON.parse(json) as MetadataTypes
