@@ -8,7 +8,7 @@ export default () => {
     ].join(" ")
 
     return (
-        <footer className="bg-accent-1 border-t border-accent-2">
+        <footer className="bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
 
             <nav className="pt-8 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
                 <div className="pb-6">

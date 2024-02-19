@@ -26,6 +26,8 @@ services.AddIdentity<ApplicationUser, IdentityRole>(options => {
     .AddSignInManager()
     .AddDefaultTokenProviders();
 
+services.ConfigureApplicationCookie(options => options.DisableRedirectsForApis());
+
 services.AddDataProtection()
     .PersistKeysToFileSystem(new DirectoryInfo("App_Data"));
 

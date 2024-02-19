@@ -1,127 +1,139 @@
-import { ChangeEvent, FormEventHandler, useEffect, useState } from "react"
-import { Icon } from "@iconify/react"
-
+﻿import { ConfirmDelete, ErrorSummary, SelectInput, TextAreaInput, TextInput } from "@/components/Form"
 import {
-    ApiContext,
-    CloseButton,
-    ErrorSummary,
-    TextInput,
-    TextAreaInput,
-    SelectInput, 
-    ConfirmDelete,
-} from "@/components/Form"
+    Sheet,
+    SheetContent,
+    SheetFooter,
+    SheetHeader,
+    SheetTitle,
+} from "@/components/ui/sheet"
+import { Booking, DeleteBooking, QueryBookings, RoomType, UpdateBooking } from "@/dtos"
 import { Button } from "@/components/ui/button"
-import SrcLink from "@/components/SrcLink"
-
-import { useClient, useApp } from "@/gateway"
-import { DeleteBooking, QueryBookings, RoomType, UpdateBooking } from "@/dtos"
+import { useApp, useClient } from "@/gateway"
+import { useState, useEffect, FormEvent, ChangeEvent } from "react"
+import { ApiContext } from "@/components/Form"
+import { useAuth } from "@/useAuth"
 import { sanitizeForUi } from "@/utils"
+import SrcPage from "@/components/SrcPage.tsx";
 
-type CreateProps = {
-    className?: string
-    id: number
+type Props = {
+    id?: number
     onDone: () => void
+    onSave: () => void
 }
-function Edit ({ className, id, onDone }:CreateProps) {
+export default ({ id, onDone, onSave }: Props) => {
 
+    const client = useClient()
+    const { loading } = client
+    const { hasRole } = useAuth()
     const visibleFields = "name,roomType,roomNumber,bookingStartDate,bookingEndDate,cost,notes"
 
+    const [editBooking, setEditBooking] = useState<Booking | null>(null)
+
     const app = useApp()
-    const client = useClient()
 
     const [request, setRequest] = useState(new UpdateBooking())
 
     useEffect(() => {
         (async () => {
-            const api = await client.api(new QueryBookings({ id }))
-            if (api.succeeded) {
-                setRequest(new UpdateBooking(sanitizeForUi(api.response?.results![0])))
+            if (id) {
+                const api = await client.api(new QueryBookings({id}))
+                const booking = api.response ? api.response.results[0] : null
+                setEditBooking(booking)
+                if (booking) setRequest(new UpdateBooking(sanitizeForUi({... booking })))
+            } else {
+                setEditBooking(null)
             }
         })()
-    }, [id])
+    }, [id]);
 
-    const onSubmit:FormEventHandler<HTMLFormElement> = async (e) => {
+    async function onSubmit(e:FormEvent<HTMLFormElement>) {
         e.preventDefault()
+        await save()
+    }
+    async function save() {
         const api = await client.api(request)
-        if (api.succeeded) onDone()
+        if (api.succeeded) (onSave ?? onDone)()
     }
-    const onDelete = async () => {
-        const api = await client.apiVoid(new DeleteBooking({ id }))
-        if (api.succeeded) onDone()
+    async function onDelete() {
+        const api = await client.apiVoid(new DeleteBooking({id}))
+        if (api.succeeded) (onSave ?? onDone)()
     }
-
-    const change = (f:(dto:UpdateBooking,value:string) => void) => {
-        return (e:ChangeEvent<HTMLInputElement>) => {
+    function change(f: (dto: UpdateBooking, value: string) => void) {
+        return (e: ChangeEvent<HTMLInputElement>) => {
             f(request, e.target.value)
             setRequest(new UpdateBooking(request))
         }
     }
 
     return (<ApiContext.Provider value={client}>
-<form onSubmit={onSubmit} className={className}>
-        <div className="shadow overflow-hidden sm:rounded-md bg-white">
-            <div className="relative px-4 py-5 bg-white sm:p-6">
-
-                <CloseButton onClose={onDone}/>
-
-                <fieldset>
-                    <legend className="text-base font-medium text-gray-900 text-center mb-4">Edit Booking</legend>
-
-                    <ErrorSummary except={visibleFields} className="mb-4" />
-
-                    <div className="grid grid-cols-6 gap-6">
-
-                        <div className="col-span-6 sm:col-span-3">
-                            <TextInput id="name" required placeholder="Name for this booking"
-                               defaultValue={request.name} onChange={change((x,value) => x.name = value)} />
+        <Sheet open={editBooking != null} onOpenChange={onDone}>
+            <SheetContent className="w-screen xl:max-w-3xl md:max-w-xl max-w-lg">
+                <SheetHeader>
+                    <SheetTitle>Edit Booking</SheetTitle>
+                </SheetHeader>
+                {!editBooking ? null :
+                    <form className="grid gap-4 py-4" onSubmit={onSubmit}>
+                        <input className="hidden" type="submit"/>
+                        <fieldset disabled={loading}>
+                            <ErrorSummary except={visibleFields} className="mb-4"/>
+                            <div className="grid grid-cols-6 gap-6">
+                                <div className="col-span-6 sm:col-span-3">
+                                    <TextInput id="name" required placeholder="Name for this booking"
+                                               defaultValue={request.name}
+                                               onChange={change((x, value) => x.name = value)}/>
+                                </div>
+                                <div className="col-span-6 sm:col-span-3">
+                                    <SelectInput id="roomType" options={app.enumOptions('RoomType')}
+                                                 value={request.roomType}
+                                                 onChange={change((x, value) => x.roomType = value as RoomType)}/>
+                                </div>
+                                <div className="col-span-6 sm:col-span-3">
+                                    <TextInput type="number" id="roomNumber" min="0" required
+                                               defaultValue={request.roomNumber}
+                                               onChange={change((x, value) => x.roomNumber = Number(value))}/>
+                                </div>
+                                <div className="col-span-6 sm:col-span-3">
+                                    <TextInput type="number" id="cost" min="0" required
+                                               defaultValue={request.cost}
+                                               onChange={change((x, value) => x.cost = Number(value))}/>
+                                </div>
+                                <div className="col-span-6 sm:col-span-3">
+                                    <TextInput type="date" id="bookingStartDate" required
+                                               defaultValue={request.bookingStartDate}
+                                               onChange={change((x, value) => x.bookingStartDate = value)}/>
+                                </div>
+                                <div className="col-span-6 sm:col-span-3">
+                                    <TextInput type="date" id="bookingEndDate"
+                                               defaultValue={request.bookingEndDate}
+                                               onChange={change((x, value) => x.bookingEndDate = value)}/>
+                                </div>
+                                <div className="col-span-6">
+                                    <TextAreaInput id="notes" placeholder="Notes about this booking"
+                                                   style={{height: '6rem'}}
+                                                   defaultValue={request.notes}
+                                                   onChange={change((x, value) => x.notes = value)}/>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div className="flex justify-center">
+                            <SrcPage path="bookings-crud/Edit.tsx" />
                         </div>
-
-                        <div className="col-span-6 sm:col-span-3">
-                            <SelectInput id="roomType" options={app.enumOptions('RoomType')}
-                                value={request.roomType} onChange={change((x,value) => x.roomType = value as RoomType)} />
+                    </form>}
+                <SheetFooter>
+                    <div
+                        className="w-full absolute bottom-0 left-0 border-gray-200 dark:border-gray-700 border-t mt-4 px-4 py-3 bg-gray-50 dark:bg-gray-900 sm:px-6 flex flex-wrap justify-between">
+                        <div>
+                            {!hasRole('Manager') ? null :
+                                <ConfirmDelete onDelete={onDelete}>Delete</ConfirmDelete>}
                         </div>
-
-                        <div className="col-span-6 sm:col-span-3">
-                            <TextInput type="number" id="roomNumber" min="0" required
-                               defaultValue={request.roomNumber} onChange={change((x,value) => x.roomNumber = Number(value))} />
-                        </div>
-
-                        <div className="col-span-6 sm:col-span-3">
-                            <TextInput type="number" id="cost" min="0" required
-                               defaultValue={request.cost} onChange={change((x,value) => x.cost = Number(value))} />
-                        </div>
-
-                        <div className="col-span-6 sm:col-span-3">
-                            <TextInput type="date" id="bookingStartDate" required
-                               defaultValue={request.bookingStartDate} onChange={change((x,value) => x.bookingStartDate = value)} />
-                        </div>
-                        <div className="col-span-6 sm:col-span-3">
-                            <TextInput type="date" id="bookingEndDate"
-                               defaultValue={request.bookingEndDate} onChange={change((x,value) => x.bookingEndDate = value)} />
-                        </div>
-
-                        <div className="col-span-6">
-                            <TextAreaInput id="notes" placeholder="Notes about this booking" style={{ height: '6rem' }}
-                                           defaultValue={request.notes} onChange={change((x,value) => x.notes = value)} />
+                        <div></div>
+                        <div className="flex justify-end">
+                            <Button variant="outline" onClick={onDone}>Cancel</Button>
+                            <Button type="submit" className="ml-4" disabled={loading} onClick={save}>Save</Button>
                         </div>
                     </div>
-                </fieldset>
-            </div>
-
-            <div className="mt-4 px-4 py-3 bg-gray-50 text-right sm:px-6">
-                <div className="flex justify-between items-center">
-                    <div>
-                        <ConfirmDelete onDelete={onDelete}>Delete</ConfirmDelete>
-                    </div>
-                    <SrcLink href="https://github.com/NetCoreTemplates/nextjs/blob/main/ui/pages/bookings-crud/edit.tsx">
-                        <Icon icon="logos:vue" className="w-5 h-5 inline" />
-                    </SrcLink>
-                    <div><Button>Update Booking</Button></div>
-                </div>
-            </div>
-
-        </div>
-    </form>
-</ApiContext.Provider>)
+                </SheetFooter>
+            </SheetContent>
+        </Sheet>
+    </ApiContext.Provider>)
 }
-export default Edit

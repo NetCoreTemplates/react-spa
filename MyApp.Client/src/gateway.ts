@@ -34,6 +34,8 @@ export type FieldErrorArgs = {
 }
 export type ClientContext = ApiState & {
     setError(e:ErrorArgs): void
+    clearErrors(): void
+    setStatus: React.Dispatch<React.SetStateAction<ResponseStatus | undefined>>
     addFieldError(e:FieldErrorArgs): void
     api<TResponse>(request: IReturn<TResponse> | ApiRequest, args?: any, method?: string): Promise<ApiResult<TResponse>>
     apiVoid(request: IReturnVoid | ApiRequest, args?: any, method?: string): Promise<ApiResult<EmptyResponse>>
@@ -44,6 +46,8 @@ export function useClient() : ClientContext {
     const [error, setStatus] = useState<ResponseStatus|undefined>()
     const [loading, setLoading] = useState(false)
 
+    const clearErrors = () => setStatus(undefined)
+    
     const setError = ({ message, errorCode, fieldName, errors } : ErrorArgs) => {
         errorCode ??= 'Exception'
         errors ??= []
@@ -80,7 +84,7 @@ export function useClient() : ClientContext {
         return apiResult
     }
 
-    return { loading, error, setError, addFieldError, api, apiVoid }
+    return { loading, error, setError, addFieldError, setStatus, clearErrors, api, apiVoid }
 }
 
 export type AppState = {
