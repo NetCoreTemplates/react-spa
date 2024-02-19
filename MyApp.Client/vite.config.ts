@@ -81,8 +81,6 @@ export default defineConfig(async () => {
             })
         }
     }
-    
-    console.log('vite.config', baseUrl, target, { posts: fs.existsSync('./src/_posts') })
 
     return {
         define: { API_URL: `"${target}"` },
