@@ -21,7 +21,7 @@ export default () => {
             <VideoGroup
                 title="Vue Components"
                 summary="Learn about productive features in our growing Vue Component Library"
-                group="vue"
+                group="react"
                 learnMore="https://docs.servicestack.net/vue/"/>
 
             <div className="my-8 flex justify-center gap-x-4">
