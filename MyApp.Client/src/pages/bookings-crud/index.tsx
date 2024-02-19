@@ -89,7 +89,7 @@ function Index() {
                     data-driven systems in mins
                     <a className="font-semibold" href="https://docs.servicestack.net/autoquery/bookings-crud"> more...</a>
                 </p>
-                <iframe className="mt-4 w-full aspect-video" src="https://www.youtube.com/embed/rSFiikDjGos" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe className="mt-4 w-full aspect-video" src="https://www.youtube.com/embed/rSFiikDjGos" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
             </div>
         </div>
         
