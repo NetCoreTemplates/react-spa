@@ -19,6 +19,12 @@ export const Routes = {
     forbidden: () => '/forbidden',
 }
 
+declare var API_URL:string //defined in vite.config.ts
+
+export function apiUrl(path:string) {
+    return combinePaths(API_URL,path)
+}
+
 export const client = new JsonServiceClient()
 
 export type ErrorArgs = {

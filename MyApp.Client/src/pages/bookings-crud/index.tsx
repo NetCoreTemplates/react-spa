@@ -5,7 +5,7 @@ import { ValidateAuth } from "@/useAuth"
 import Create from "./Create"
 import Edit from "./Edit"
 import { Booking, QueryBookings } from "@/dtos"
-import { useClient } from "@/gateway"
+import { useClient, apiUrl } from "@/gateway"
 import { formatCurrency, formatDate } from "@/utils"
 import { DataTable, columnDefs, getCoreRowModel } from "@/components/DataTable"
 import { Button } from "@/components/ui/button"
@@ -68,6 +68,31 @@ function Index() {
                     <SrcPage path="bookings-crud/index.tsx"/>
                 </div>
             </div>)}
+
+        <div className="pb-20">
+            <h4 className="mt-20 text-center text-xl">
+                Manage Bookings in
+                <a className="font-semibold" href={apiUrl('/locode/QueryBookings')}> Locode </a> or
+                <a className="font-semibold" href={apiUrl('/ui/QueryBookings')}> API Explorer </a>
+            </h4>
+            <div className="mt-20 mx-auto text-gray-500 max-w-screen-lg">
+                <h2 className="mt-4 text-3xl sm:text-4xl text-slate-900 font-extrabold tracking-tight dark:text-slate-50">
+                    Create a multi-user Booking system in minutes
+                </h2>
+                <p className="my-3 mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl">
+                    The Bookings APIs are built using
+                    <a className="font-semibold" href="https://docs.servicestack.net/autoquery-crud">AutoQuery CRUD</a>,
+                    allowing for rapid development of typed CRUD Services using only declarative POCO DTOs, enabling
+                    developing entire
+                    <a className="font-semibold" href="https://docs.servicestack.net/autoquery/crud#advanced-crud-example"> audited</a>
+                    &amp; <a className="font-semibold" href="https://docs.servicestack.net/autoquery/audit-log"> verifiable</a>
+                    data-driven systems in mins
+                    <a className="font-semibold" href="https://docs.servicestack.net/autoquery/bookings-crud"> more...</a>
+                </p>
+                <iframe className="mt-4 w-full aspect-video" src="https://www.youtube.com/embed/rSFiikDjGos" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+        
     </Page>)
 }
 
