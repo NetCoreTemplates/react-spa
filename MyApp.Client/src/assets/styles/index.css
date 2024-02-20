@@ -45,6 +45,10 @@ code[class*=language-], pre[class*=language-] {
   background-color:#1f2937;
   min-width: fit-content;
 }
+.dark .prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *,pre code)) {
+  background-color: #172554; /* blue-950 */
+  color: #e5e7eb; /* gray-200 */
+}
 
 /* dark mode autocomplete fields */
 .dark input:-webkit-autofill,
