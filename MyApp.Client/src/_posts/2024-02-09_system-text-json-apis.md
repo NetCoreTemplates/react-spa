@@ -50,6 +50,11 @@ Service Clients, which is configured to:
 - Supports `[DataContract]` annotations
 - Supports Custom Enum Serialization
 
+### Benefits all Add ServiceStack Reference Languages
+
+This compatibility immediately benefits all of ServiceStack's [Add ServiceStack Reference](https://docs.servicestack.net/add-servicestack-reference)
+native typed integrations for **11 programming languages** which all utilize ServiceStack's JSON API endpoints - now serialized with System.Text.Json
+
 ### Support for DataContract Annotations
 
 Support for .NET's `DataContract` serialization attributes was added using a custom `TypeInfoResolver`, specifically it supports:
