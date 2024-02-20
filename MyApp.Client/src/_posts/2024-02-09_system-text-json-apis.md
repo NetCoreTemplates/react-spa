@@ -4,7 +4,6 @@ summary: ServiceStack .NET 8+ APIs can now be configured to use high-performance
 tags: [servicestack,.net8,json,apis]
 image: https://images.unsplash.com/photo-1644325349124-d1756b79dd42?crop=entropy&fit=crop&h=1000&w=2000
 author: Gayle Smith
-draft: true
 ---
 
 In continuing our focus to enable ServiceStack to become a deeply integrated part of .NET 8 Application's, ServiceStack

@@ -4,7 +4,6 @@ summary: Explore the new Identity Auth Admin UI for creating and managing Identi
 tags: [servicestack,.net8,auth]
 image: https://images.unsplash.com/photo-1563920443079-783e5c786b83?crop=entropy&fit=crop&h=1000&w=2000
 author: Lucy Bates
-draft: true
 ---
 
 With ServiceStack now [deeply integrated into ASP.NET Core Apps](/posts/servicestack-endpoint-routing) we're back to
