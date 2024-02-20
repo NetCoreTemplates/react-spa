@@ -13,7 +13,7 @@ export default (): JSX.Element => {
         <Button onClick={() => setCount(count + 1)}>Click me</Button>
 
         <div className="mt-8 flex justify-center gap-x-4">
-            <SrcPage path="pages/counter.tsx"/>
+            <SrcPage path="counter.tsx"/>
         </div>
     </Page>)
 }

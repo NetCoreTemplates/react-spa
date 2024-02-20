@@ -81,7 +81,7 @@ function Index() {
                 </h2>
                 <p className="my-3 mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl">
                     The Bookings APIs are built using
-                    <a className="font-semibold" href="https://docs.servicestack.net/autoquery-crud"> AutoQuery CRUD </a>,
+                    <a className="font-semibold" href="https://docs.servicestack.net/autoquery-crud"> AutoQuery CRUD</a>,
                     allowing for rapid development of typed CRUD Services using only declarative POCO DTOs, enabling
                     developing entire
                     <a className="font-semibold" href="https://docs.servicestack.net/autoquery/crud#advanced-crud-example"> audited </a>

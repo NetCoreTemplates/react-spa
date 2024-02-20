@@ -61,7 +61,7 @@ export default ({ }: Props) => {
                 </div>
 
                 <div className="my-8 flex justify-center gap-x-4">
-                    <SrcPage path="pages/posts/index.tsx" />
+                    <SrcPage path="posts/index.tsx" />
                 </div>
             </>
         </Layout>

@@ -188,7 +188,7 @@ export default () => {
                 </section>)}
             </div>
             <div className="my-8 flex justify-center gap-x-4">
-                <SrcPage path="pages/blog.vue"/>
+                <SrcPage path="blog.vue"/>
             </div>
         </Layout>
     </>)
