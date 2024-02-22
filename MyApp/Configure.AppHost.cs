@@ -23,10 +23,10 @@ public class AppHost() : AppHostBase("MyApp"), IHostingStartup
     // Configure your AppHost with the necessary configuration and dependencies your App needs
     public override void Configure()
     {
+        TypeScriptGenerator.InsertTsNoCheck = true;
+
         SetConfig(new HostConfig {
         });
-
-        TypeScriptGenerator.InsertTsNoCheck = true;
     }
     
     // TODO: Replace with your own License Key. FREE Individual or OSS License available from: https://servicestack.net/free
