@@ -166,6 +166,10 @@ export default () => {
                                     </div>
                                 </div>
                             </div>))}
+                            {remainingPosts.length >= 15
+                                ? <div className="mt-8 text-center">
+                                    <a className="text-sm font-semibold hover:underline" href="/posts/">view all posts</a>
+                                </div> : null}
                         </div>
                         <div className="w-1/3">
                             <div className="pl-8">
