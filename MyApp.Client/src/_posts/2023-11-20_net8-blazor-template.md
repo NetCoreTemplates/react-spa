@@ -29,18 +29,8 @@ We’ll also discuss the project's structure, usage of **ASP.NET Core Identity**
     Blazor Tailwind Template
 </h3></div>
 <div class="py-8 max-w-7xl mx-auto px-4 sm:px-6">
-    <lite-youtube class="w-full mx-4 my-4" width="560" height="315" videoid="hqyozHSL0Nk" style="background-image: url('https://img.youtube.com/vi/hqyozHSL0Nk/maxresdefault.jpg')"></lite-youtube>
+    <LiteYouTube id="hqyozHSL0Nk" title=".NET 8 Blazor Tailwind Template" />
 </div>
-</div>
-
-<div class="not-prose relative bg-white dark:bg-black py-4">
-    <div class="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
-        <p class="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-50 sm:text-4xl">Create a new Blazor Tailwind App</p>
-        <p class="mx-auto mt-5 max-w-prose text-xl text-gray-500"> 
-            Create a new Blazor Tailwind project with your preferred project name:
-        </p>
-    </div>
-    <blazor-template repo="NetCoreTemplates/blazor" name="Blazor"></blazor-template>
 </div>
 
 ## ASP.NET Core Identity Integration

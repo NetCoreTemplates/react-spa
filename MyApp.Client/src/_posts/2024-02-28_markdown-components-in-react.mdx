@@ -1,0 +1,307 @@
+---
+title: React Components in Markdown
+summary: How to reference and Import React Components in Markdown
+author: Lucy Bates
+tags: [docs, markdown]
+image: https://images.unsplash.com/photo-1700427296131-0cc4c4610fc6?crop=entropy&fit=crop&h=1000&w=2000
+---
+
+import GettingStarted from "@/components/GettingStarted"
+import Hello from "./components/Hello"
+import Counter from "./components/Counter"
+import Plugin from "./components/Plugin"
+import HelloApi from "./components/HelloApi"
+import ChartJs from "./components/ChartJs"
+
+## React Components in Markdown Pages
+
+Components that are frequently used can be registered as global components in 
+[MarkdownComponent.tsx](https://github.com/ServiceStack/press-react/blob/main/src/components/MarkdownComponent.tsx) by
+adding them to the `Components` collection, e.g:
+
+```ts
+export const Components: { [name: string]: JSX.Element } = {
+    Iconify: Icon,
+    Files,
+    Youtube,
+    FileLayout,
+    Include,
+    Alert,
+    //...
+}
+```
+
+Which will let you reference them in `*.md` and `*.mdx` Markdown files without having to import them, e.g:
+
+```tsx
+<div className="py-20 flex justify-evenly">
+  <Iconify className="w-28 h-28" icon="logos:vue" />
+  <Iconify className="w-28 h-28" icon="logos:vitejs" />
+  <Iconify className="w-28 h-28" icon="logos:react" />
+</div>
+```
+
+<div className="py-20 flex justify-evenly">
+  <Iconify className="w-28 h-28" icon="logos:vue" />
+  <Iconify className="w-28 h-28" icon="logos:vitejs" />
+  <Iconify className="w-28 h-28" icon="logos:react" />
+</div>
+
+## Importing React Components
+
+If you need to import and use (non Global) React Components you'll need to change your `*.md` extension to `*.mdx` in order
+to be able to use [MDX](https://mdxjs.com) syntax in your Markdown pages.
+
+Any components you want to use in the markdown page will need to imported right at the top of the page using standard JSX import
+syntax, e.g:
+
+```tsx
+import GettingStarted from "@/components/GettingStarted"
+import Hello from "./components/Hello"
+import Counter from "./components/Counter"
+import Plugin from "./components/Plugin"
+import HelloApi from "./components/HelloApi"
+import ChartJs from "./components/ChartJs"
+```
+
+Where you're able to import any of your App's components using the absolute `@/components` reference to reference the 
+App's Home Page's [GettingStarted.tsx](https://github.com/ServiceStack/press-react/blob/main/src/components/GettingStarted.tsx)
+component:
+
+<div className="py-20 not-prose flex justify-center">
+  <GettingStarted template="press-react" />
+</div>
+
+Alternatively components only used in Markdown content is recommended to use the relative `./components/` reference
+to reference components in [/_posts/components/](https://github.com/ServiceStack/press-react/tree/main/src/_posts/components),
+
+Like the minimal [Hello.tsx](https://github.com/ServiceStack/press-react/blob/main/src/_posts/components/Hello.tsx):
+
+```tsx
+type Props = { name:string }
+export default ({ name }:Props) => (<b>Hello, {name}!</b>)
+```
+
+That can be referenced using normal JSX component reference syntax, e.g:
+
+```tsx
+<Hello name="Vue 3" />
+```
+
+<div className="text-center text-2xl py-2">
+    <Hello name="Vue 3" />
+</div>
+
+Since Markdown and MDX are eventually converted into React components themselves, there's no restriction into what
+components can be referenced, from simple Reactive components:
+
+```tsx
+export default () => {
+    let [count, setCount] = useState(1)
+    return <b onClick={() => setCount(count+=1)}>Counter {count}</b>
+}
+```
+
+```tsx
+<Counter />
+```
+
+<div className="text-center text-2xl py-2 cursor-pointer select-none">
+    <Counter />
+</div>
+
+To components like [Plugin.tsx](https://github.com/ServiceStack/press-react/blob/main/src/_posts/components/Plugin.tsx) that
+make use of external React component libraries:
+
+```tsx
+import { Button as PrimaryButton } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+export default () => {
+  return (<Dialog>
+      <DialogTrigger asChild>
+        <PrimaryButton>Open Modal</PrimaryButton>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Greetings</DialogTitle>
+          <DialogDescription className="p-4 text-xl">
+            Hello @servicestack/vue!
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>)
+}
+```
+
+```tsx
+<Plugin />
+```
+
+<div className="text-center">
+    <Plugin id="plugin" className="text-2xl py-4" />
+</div>
+
+Or components that use Ajax to invoke JSON Server APIs like 
+[HelloApi.tsx](https://github.com/ServiceStack/press-react/blob/main/src/_posts/components/HelloApi.tsx):
+
+```tsx
+import { ChangeEvent, useState, useEffect } from "react"
+import { JsonServiceClient } from "@servicestack/client"
+import { TextInput } from "@/components/Form"
+import { Hello } from "@/dtos"
+
+type Props = { value: string }
+export default ({ value }:Props) => {
+    const [name, setName] = useState(value)
+    const [result, setResult] = useState('')
+    
+    const client = new JsonServiceClient(baseUrl)
+    useEffect(() => {
+        (async () => {
+            let api = await client.api(new Hello({ name }))
+            if (api.response) {
+                setResult(api.response.result)
+            }
+        })()
+    }, [name])
+
+    return (<div className="my-8 max-w-fit mx-auto">
+      <TextInput value={name} onChange={(e) => setName(e.target.value)}/>
+      <b className="my-2 block text-center text-lg">{result}</b>
+    </div>)
+}
+```
+
+```tsx
+<HelloApi value="React" />
+```
+
+<HelloApi value="React" />
+
+Or components relying on dynamically loading external CDN scripts like [Chart.JS](https://www.chartjs.org):
+
+```tsx
+import { useEffect, useRef } from "react"
+import { addScript } from "@servicestack/client"
+
+const loadJs = addScript(
+  'https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js')
+
+declare var Chart:any
+
+type Props = { type?:string, data?:any, options?:any }
+
+export default ({ type, data, options }:Props) => {
+    const canvas = useRef<HTMLCanvasElement>(null)
+    let chart:any = null
+    useEffect(() => {
+        loadJs.then(() => {
+            options ??= {
+                responsive: true,
+                legend: {
+                    position: "top"
+                }
+            }
+            if (chart) {
+                chart.destroy()
+                chart = null
+            }
+            chart = new Chart(canvas.current, {
+                type: type || "bar",
+                data: data,
+                options,
+            })
+        })
+    }, [])
+
+    return <div><canvas ref={canvas}></canvas></div>
+}
+```
+
+Which can be called with complex nested object graph properties:
+
+```tsx
+<ChartJs data={{
+    labels: [
+        '10,000 Rows',
+        '100,000 Rows'
+    ],
+    datasets: [
+    {
+        label: 'SQLite Memory',
+        backgroundColor: 'rgba(201, 203, 207, 0.2)',
+        borderColor: 'rgb(201, 203, 207)',
+        borderWidth: 1,
+        data: [17.066, 166.747]
+    },
+    {
+        label: 'SQLite Disk',
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgb(255, 99, 132)',
+        borderWidth: 1,
+        data: [20.224, 199.697]
+    },
+    //...
+  ]
+}} />
+```
+
+To embed beautiful interactive charts directly within your Markdown documentation:
+
+<ChartJs data={{
+    labels: [
+        '10,000 Rows',
+        '100,000 Rows'
+    ],
+    datasets: [
+    {
+        label: 'SQLite Memory',
+        backgroundColor: 'rgba(201, 203, 207, 0.2)',
+        borderColor: 'rgb(201, 203, 207)',
+        borderWidth: 1,
+        data: [17.066, 166.747]
+    },
+    {
+        label: 'SQLite Disk',
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgb(255, 99, 132)',
+        borderWidth: 1,
+        data: [20.224, 199.697]
+    },
+    {
+        label: 'PostgreSQL',
+        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+        borderColor: 'rgb(153, 102, 255)',
+        borderWidth: 1,
+        data: [14.389, 115.645]
+    },
+    {
+        label: 'MySQL',
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgb(54, 162, 235)',
+        borderWidth: 1,
+        data: [64.389, 310.966]
+    },
+    {
+        label: 'MySqlConnector',
+        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+        borderColor: 'rgb(255, 159, 64)',
+        borderWidth: 1,
+        data: [64.427, 308.574]
+    },
+    {
+        label: 'SQL Server',
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgb(255, 99, 132)',
+        borderWidth: 1,
+        data: [89.821, 835.181]
+    }]
+}} />

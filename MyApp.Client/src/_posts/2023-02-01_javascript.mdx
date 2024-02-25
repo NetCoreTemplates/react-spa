@@ -1,0 +1,186 @@
+---
+title: Simple, Modern React MDX
+summary: Learn about JS Modules, Vue 3 and available rich UI Components
+tags: [js, dev]
+image: https://images.unsplash.com/photo-1497515114629-f71d768fd07c?crop=entropy&fit=crop&h=1000&w=2000
+author: Brandon Foley
+---
+
+import Hello from "./components/Hello"
+import Counter from "./components/Counter"
+import Plugin from "./components/Plugin"
+import HelloApi from "./components/HelloApi"
+
+<Icon className="sm:float-left mr-4 w-28 h-28" style={{marginTop:'-4px'}} icon="vscode-icons:file-type-js-official" />
+
+JavaScript has progressed significantly in recent times where many of the tooling & language enhancements
+that we used to rely on external tools for is now available in modern browsers alleviating the need for
+complex tooling and npm dependencies that have historically plagued modern web development.
+
+The good news is that the complex npm tooling that was previously considered mandatory in modern JavaScript App
+development can be considered optional as we can now utilize modern browser features like
+[async/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function),
+[JavaScript Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules),
+[dynamic imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import),
+[import maps](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap)
+and [modern language features](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide) for a
+sophisticated development workflow without the need for any npm build tools.
+
+### Bringing Simplicity Back
+
+The [razor](https://github.com/NetCoreTemplates/razor) template focuses on simplicity and eschews many aspects that has
+complicated modern JavaScript development,
+specifically:
+
+- No npm node_modules or build tools
+- No client side routing
+- No heavy client state
+
+Effectively abandoning the traditional SPA approach in lieu of a simpler [MPA](https://docs.astro.build/en/concepts/mpa-vs-spa/)
+development model using Razor Pages for Server Rendered content with any interactive UIs progressively enhanced with JavaScript.
+
+#### Freedom to use any JS library
+
+Avoiding the SPA route ends up affording more flexibility on which JS libraries each page can use as without heavy bundled JS
+blobs of all JS used in the entire App, it's free to only load the required JS each page needs to best implement its
+required functionality, which can be any JS library, preferably utilizing ESM builds that can be referenced from a
+[JavaScript Module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), taking advantage of the module system
+native to modern browsers able to efficiently download the declarative matrix of dependencies each script needs.
+
+### Best libraries for progressive Multi Page Apps
+
+It includes a collection of libraries we believe offers the best modern development experience in Progressive
+MPA Web Apps, specifically:
+
+#### [Tailwind CLI](https://tailwindcss.com/docs/installation)
+Tailwind enables a responsive, utility-first CSS framework for creating maintainable CSS at scale without the need for any CSS
+preprocessors like Sass, which is configured to run from an npx script to avoid needing any node_module dependencies.
+
+#### [Vue 3](https://vuejs.org/guide/introduction.html)
+Vue is a popular Progressive JavaScript Framework that makes it easy to create interactive Reactive Components whose
+[Composition API](https://vuejs.org/api/composition-api-setup.html) offers a nice development model without requiring any
+pre-processors like JSX.
+
+Where creating a component is as simple as:
+
+```jsx
+type Props = { name:string }
+export default ({ name }:Props) => (<b>Hello, {name}!</b>)
+```
+<div className="text-center text-2xl py-2">
+    <Hello name="Vue 3" />
+</div>
+
+Or a simple reactive example:
+
+```jsx
+import { useState } from 'react'
+
+export default () => {
+    let [count, setCount] = useState(1)
+    return <b onClick={() => setCount(count+=1)}>Counter {count}</b>
+}
+```
+
+<div className="text-center text-2xl py-2 cursor-pointer select-none">
+    <Counter />
+</div>
+
+### React Components in Markdown
+
+Inside `.mdx` Markdown pages React Components can be embedded using MDX Syntax:
+
+```tsx
+<Hello name="Vue 3" />
+<Counter />
+```
+
+```tsx
+import { Button as PrimaryButton } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+export default () => {
+  return (<Dialog>
+      <DialogTrigger asChild>
+        <PrimaryButton>Open Modal</PrimaryButton>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Greetings</DialogTitle>
+          <DialogDescription className="p-4 text-xl">
+            Hello @servicestack/vue!
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>)
+}
+```
+
+```tsx
+<Plugin />
+```
+
+<div className="text-center">
+    <Plugin id="plugin" className="text-2xl py-4" />
+</div>
+
+
+## API Development
+
+For better IDE intelli-sense during development, you can save your server's annotated Typed DTOs to disk with:
+
+:::sh
+npm run dtos
+:::
+
+That can be referenced instead to unlock your IDE's static analysis type-checking and intelli-sense benefits during development:
+
+```js
+import { Hello } from '@/dtos'
+client.api(new Hello({ name }))
+```
+
+You'll typically use all these libraries in your **API-enabled** components as seen in the
+[HelloApi.tsx](https://github.com/NetCoreTemplates/react-spa/blob/main/MyApp.Client/src/_posts/components/HelloApi.tsx)
+component which calls the [Hello](https://react-spa.web-templates.io/ui/Hello) API on each key press:
+
+```tsx
+import { ChangeEvent, useState, useEffect } from "react"
+import { JsonServiceClient } from "@servicestack/client"
+import { TextInput } from "@/components/Form"
+import { Hello } from "@/dtos"
+
+type Props = { value: string }
+export default ({ value }:Props) => {
+    const [name, setName] = useState(value)
+    const [result, setResult] = useState('')
+    
+    const client = new JsonServiceClient()
+    useEffect(() => {
+        (async () => {
+            let api = await client.api(new Hello({ name }))
+            if (api.response) {
+                setResult(api.response.result)
+            }
+        })()
+    }, [name])
+
+    return (<div className="my-8 max-w-fit mx-auto">
+      <TextInput value={name} onChange={e => setName(e.target.value)} />
+      <b className="my-2 block text-center text-lg">{result}</b>
+    </div>)
+}
+```
+
+```tsx
+<HelloApi value="React" />
+```
+
+<HelloApi value="React" />
