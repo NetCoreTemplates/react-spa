@@ -9,12 +9,14 @@ import { env } from 'process'
 import Press from "vite-plugin-press"
 import Pages from 'vite-plugin-pages'
 import svgr from 'vite-plugin-svgr'
+import mdx from "@mdx-js/rollup"
 import remarkFrontmatter from 'remark-frontmatter' // YAML and such.
 import remarkGfm from 'remark-gfm' // Tables, footnotes, strikethrough, task lists, literal URLs.
 import remarkPrism from 'remark-prism'
 import remarkParse from "remark-parse"
 import rehypeStringify from 'rehype-stringify'
 import remarkDirective from 'remark-directive'
+import rehypeRaw from 'rehype-raw'
 import { remarkContainers, remarkFencedCode } from './vite.config.markdown'
 
 const baseFolder =
@@ -56,13 +58,11 @@ const baseUrl = process.env.NODE_ENV === 'development'
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => {
-    const mdx = await import('@mdx-js/rollup')
-
     return {
         define: { API_URL: `"${apiUrl}"` },
         plugins: [
             svgr(),
-            mdx.default({
+            mdx({
                 // See https://mdxjs.com/advanced/plugins
                 remarkPlugins: [
                     remarkFrontmatter,
@@ -74,6 +74,7 @@ export default defineConfig(async () => {
                     remarkContainers,
                 ],
                 rehypePlugins: [
+                    [rehypeRaw, {passThrough:['mdxjsEsm','mdxFlowExpression','mdxJsxFlowElement','mdxJsxTextElement','mdxTextExpression']}],
                     rehypeStringify,
                 ],
             }),

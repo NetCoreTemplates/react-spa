@@ -173,7 +173,6 @@ TextConfig.ConfigureSystemJsonOptions(options => {
 We've also added partial support for [Customized JSON Responses](https://docs.servicestack.net/customize-json-responses)
 for the following customization options:
 
-:::{.table,w-full}
 | Name                         | Alias |
 |------------------------------|-------|
 | EmitCamelCaseNames           | eccn  |
@@ -182,7 +181,6 @@ for the following customization options:
 | ExcludeDefaultValues         | edv   |
 | IncludeNullValues            | inv   |
 | Indent                       | pp    |
-:::
 
 These can be applied to the JSON Response by returning a decorated `HttpResult` with a custom `ResultScope`, e.g:
 
