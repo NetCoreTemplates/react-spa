@@ -21,9 +21,9 @@ export default () => {
                 title="SPA Development"
                 summary="Learn about ServiceStack's productive features for rapidly developing Single Page Apps"
                 group="react"/>
-            
+
             <div className="my-8 flex justify-center gap-x-4">
-                <SrcPage path="videos.vue"/>
+                <SrcPage path="videos.tsx"/>
             </div>
 
         </Layout>

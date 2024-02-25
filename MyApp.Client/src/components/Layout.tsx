@@ -1,4 +1,4 @@
-import Nav from "./Nav"
+import Header from "./Header"
 import Footer from "./Footer"
 import Meta from "./Meta"
 import { HelmetProvider, Helmet } from "react-helmet-async"
@@ -17,7 +17,7 @@ const Layout = ({title, children}: Props) => {
                 </Helmet>
             </HelmetProvider>}
             <Meta/>
-            <Nav/>
+            <Header/>
             <div className="min-h-screen">
                 <main role="main">
                     <main>{children}</main>

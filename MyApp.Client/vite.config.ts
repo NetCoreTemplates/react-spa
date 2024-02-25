@@ -15,7 +15,7 @@ import remarkPrism from 'remark-prism'
 import remarkParse from "remark-parse"
 import rehypeStringify from 'rehype-stringify'
 import remarkDirective from 'remark-directive'
-import { visit } from 'unist-util-visit'
+import { remarkContainers, remarkFencedCode } from './vite.config.markdown'
 
 const baseFolder =
     env.APPDATA !== undefined && env.APPDATA !== ''
@@ -58,31 +58,6 @@ const baseUrl = process.env.NODE_ENV === 'development'
 export default defineConfig(async () => {
     const mdx = await import('@mdx-js/rollup')
 
-    // Convert :::component{.cls}::: Markdown Containers to <component className="cls" />
-    function remarkContainers() {
-        return function (tree:any) {
-            let prevType = ''
-            visit(tree, (node): any => {
-                const type = node.type
-                const data = node.data || (node.data = {})
-                // match :::include <file>::: unless within :::pre container block
-                if (node.children && node.children[0]?.value?.startsWith(':::include ') && prevType !== 'containerDirective') {
-                    const match = node.children[0]?.value.match(/include\s+([^:]+)\s*/)
-                    if (match && match[1]) {
-                        data.hName = 'include'
-                        data.hProperties = Object.assign({}, data.hProperties, { src: match[1] })
-                        data.hChildren = []
-                    }
-                } else if (type === 'textDirective' || type === 'leafDirective' || type === 'containerDirective') {
-                    data.hName = node.name
-                    data.hProperties = Object.assign({}, data.hProperties, { className: node.attributes?.class })
-                }
-                prevType = node.type
-                return node
-            })
-        }
-    }
-
     return {
         define: { API_URL: `"${apiUrl}"` },
         plugins: [
@@ -91,6 +66,7 @@ export default defineConfig(async () => {
                 // See https://mdxjs.com/advanced/plugins
                 remarkPlugins: [
                     remarkFrontmatter,
+                    remarkFencedCode,
                     remarkDirective,
                     remarkGfm,
                     remarkParse,

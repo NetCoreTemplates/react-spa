@@ -433,13 +433,13 @@ Similarly the **sh** container is ideal for displaying and copying shell command
 #### Input
 
     :::sh
-    npm run prerender
+    npm run dev
     :::
 
 #### Output
 
 :::sh
-npm run prerender
+npm run dev
 :::
 
 ### YouTube

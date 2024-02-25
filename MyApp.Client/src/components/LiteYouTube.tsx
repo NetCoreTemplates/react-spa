@@ -10,7 +10,7 @@ export type imgResolution =
 export interface LiteYouTubeProps {
   announce?: string;
   id: string;
-  title: string;
+  title?: string;
   activatedClass?: string;
   adNetwork?: boolean;
   aspectHeight?: number;

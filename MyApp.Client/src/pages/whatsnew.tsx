@@ -1,5 +1,6 @@
 import MarkdownComponent from "@/components/MarkdownComponent"
 import Layout from "@/components/Layout"
+import SrcPage from "@/components/SrcPage"
 import { leftPart, rightPart } from "@servicestack/client"
 import { useContext } from "react"
 import { PressContext } from "@/contexts"
@@ -53,6 +54,9 @@ export default () => {
                     </div>))}
                 </div>
             ))}
+        </div>
+        <div className="my-8 flex justify-center gap-x-4">
+            <SrcPage path="whatsnew.tsx"/>
         </div>
     </Layout>)
 }
