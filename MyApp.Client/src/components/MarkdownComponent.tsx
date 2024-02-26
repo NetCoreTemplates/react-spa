@@ -96,16 +96,16 @@ function Youtube({ arg }: { arg: string }) {
 function Files({ body }: { body?: string }) {
     /* Takes an ascii string of indented folder and file paths:
     const from = `/meta
-        /2022
-            all.json
-            posts.json
-            videos.json
-        /2023
-            all.json
-            posts.json
+      /2022
         all.json
-        index.json`
-
+        posts.json
+        videos.json
+      /2023
+        all.json
+        posts.json
+      all.json
+      index.json`
+    
     // and returns a nested object representing the file structure:
     const to = {
         meta: {
