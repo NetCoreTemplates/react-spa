@@ -115,36 +115,26 @@ function Files({ body }: { body?: string }) {
         }
     }
     */
-    function parseFileStructure(ascii: string) {
-        const parseLineIndentation = (line:string) => {
-            const match = line.match(/^(\s*)/)
-            return match ? match[0].length / 2 : 0
-        }
-        const lines = ascii.trim().split("\n")
-        const root = {}
-    
-        let currentPath: any = [root]
-        lines.forEach((line) => {
+    function parseFileStructure(ascii:string, indent:number = 2) {
+        const lines = ascii.split('\n')
+        const root = { _: [] }
+        const stack = [root]
+
+        for (const line of lines) {
+            const depth = line.search(/\S/)/indent
             const name = line.trim()
-            const isFile = name.includes(".")
-            const level = parseLineIndentation(line)
-    
-            // Navigate up the currentPath to find the current level's parent
-            while (level < currentPath.length - 1) {
-                currentPath.pop()
-            }
-    
-            if (isFile) {
-                // Current Line is a file, add it to the files array (denoted by "_")
-                currentPath[level]._ ??= []
-                currentPath[level]._.push(name)
+            const parent:{[name:string]:any} = stack[depth]
+
+            if (name.includes('.')) {
+                parent._.push(name)
             } else {
-                const dir = name.replace("/", "")
-                // Current Line is a folder, create a new object and update the currentPath
-                currentPath[level][dir] ??= {}
-                currentPath.push(currentPath[level][dir])
+                const newObj = { _: [] }
+                const dir = name.substring(1)
+                parent[dir] = newObj
+                stack.length = depth + 1
+                stack.push(newObj)
             }
-        })
+        }
         return root
     }
     
