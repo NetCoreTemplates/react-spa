@@ -121,18 +121,19 @@ function Files({ body }: { body?: string }) {
         const stack = [root]
 
         for (const line of lines) {
-            const depth = line.search(/\S/)/indent
+            const depth = line.search(/\S/) / indent
             const name = line.trim()
             const parent:{[name:string]:any} = stack[depth]
+            const isDir = name.startsWith('/')
 
-            if (name.includes('.')) {
-                parent._.push(name)
-            } else {
-                const newObj = { _: [] }
-                const dir = name.substring(1)
-                parent[dir] = newObj
+            if (isDir) {
+                const dirName = name.substring(1)
+                const dirContents = { _: [] }
+                parent[dirName] = dirContents
                 stack.length = depth + 1
-                stack.push(newObj)
+                stack.push(dirContents)
+            } else {
+                parent._.push(name)
             }
         }
         return root
