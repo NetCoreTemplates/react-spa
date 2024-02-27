@@ -23,8 +23,8 @@ The **vite-press-plugin** currently powers the markdown features in the followin
 
 #### Vite Templates with vite-press-plugin
 
-- [press-vue](https://press-vue.web-templates.io) - Vite Vue App
-- [press-react](https://press-react.web-templates.io) - Vite React App
+- [press-vue](https://press-vue.servicestack.net) - Vite Vue App
+- [press-react](https://press-react.servicestack.net) - Vite React App
 
 <div class="not-prose mt-8 grid grid-cols-2 gap-4">
     <a class="block group border dark:border-gray-800 hover:border-indigo-700 dark:hover:border-indigo-700 flex flex-col justify-between" href="https://press-vue.servicestack.net">
@@ -204,7 +204,7 @@ Additional information about the Website Blog is maintained in `_posts/config.js
 ```json
 {
   "localBaseUrl": "http://localhost:5173",
-  "publicBaseUrl": "https://press-vue.web-templates.io",
+  "publicBaseUrl": "https://press-vue.servicestack.net",
   "siteTwitter": "@Vue",
   "blogTitle": "From the blog",
   "blogDescription": "Writing on software design and aerospace industry.",
