@@ -168,10 +168,10 @@ export const TextAreaInput: FC<TextAreaInputProps> = ({ status, id, className, p
     }
 
     return (<div>
-        {!useLabel ? null : <label htmlFor={id} className="block text-sm font-medium text-gray-700">{useLabel}</label>}
+        {!useLabel ? null : <label htmlFor={id} className="block text-sm font-medium text-gray-700 dark:text-gray-200">{useLabel}</label>}
         <div className="mt-1 relative rounded-md shadow-sm">
             <textarea className={classNames(['shadow-sm block w-full sm:text-sm rounded-md', ...cssClass(
-                'text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300',
+                'text-gray-900 dark:text-gray-50 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 dark:border-gray-600',
                 'text-red-900 focus:ring-red-500 focus:border-red-500 border-red-300')])}
                    id={id} name={id} placeholder={usePlaceholder} {...remaining}/>
         </div>
@@ -211,9 +211,9 @@ export const SelectInput: FC<SelectInputProps> = ({ status, id, className, place
             : []
 
     return (<>
-        {!useLabel ? null : <label htmlFor={id} className="block text-sm font-medium text-gray-700">{useLabel}</label>}
-        <select className={classNames(['mt-1 block w-full pl-3 pr-10 py-2 text-base focus:outline-none border-gray-300 sm:text-sm rounded-md', ...cssClass(
-            'text-gray-900 focus:ring-indigo-500 focus:border-indigo-500',
+        {!useLabel ? null : <label htmlFor={id} className="block text-sm font-medium text-gray-700 dark:text-gray-200">{useLabel}</label>}
+        <select className={classNames(['mt-1 block w-full pl-3 pr-10 py-2 text-base focus:outline-none border-gray-300 dark:border-gray-600 sm:text-sm rounded-md', ...cssClass(
+            'text-gray-900 dark:text-gray-50 focus:ring-indigo-500 focus:border-indigo-500',
             'text-red-900 focus:ring-red-500 focus:border-red-500')])}
                 id={id} name={id} placeholder={usePlaceholder} {...remaining}>
             {kvpValues().map(({key,value}:{key:string,value:string}) => <option key={key} value={key}>{value}</option>)}

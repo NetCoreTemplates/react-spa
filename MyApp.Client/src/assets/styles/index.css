@@ -59,6 +59,12 @@ code[class*=language-], pre[class*=language-] {
   background-color: transparent !important;
 }
 
+/* dark mode forms fixes */
+.dark select, .dark textarea {
+  background-color: #000;
+}
+
+
 /*markdown containers*/
 .copy p, .copy p code { color:#fff }
 .sh-copy { max-height: 34px; }
