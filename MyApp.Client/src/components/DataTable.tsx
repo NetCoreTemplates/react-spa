@@ -77,7 +77,7 @@ export function DataTable<TData, TValue>(props: DataTableProps<TData, TValue>) {
                         table.getRowModel().rows.map((row) => (
                             <tr className={cn("border-b transition-colors",
                                 (enableRowSelection ? "cursor-pointer " : ""),
-                                row.getIsSelected() 
+                                enableRowSelection && row.getIsSelected() 
                                     ? "bg-indigo-100 dark:bg-blue-800" 
                                     : (enableRowSelection ? "hover:bg-yellow-50 dark:hover:bg-blue-900 " : "") +
                                         (stripedRows
