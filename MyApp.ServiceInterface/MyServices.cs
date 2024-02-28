@@ -18,7 +18,7 @@ public class MyServices : Service
     public object Any(GetWeatherForecast request)
     {
         var rng = new Random();
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast(
+        return Enumerable.Range(1, 5).Select(index => new Forecast(
             Date: (request.Date ?? DateOnly.FromDateTime(DateTime.Now)).AddDays(index),
             TemperatureC: rng.Next(-20, 55),
             Summary: summaries[rng.Next(summaries.Length)]

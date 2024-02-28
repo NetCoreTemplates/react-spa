@@ -1,5 +1,5 @@
 /* Options:
-Date: 2024-02-18 12:11:40
+Date: 2024-02-28 19:37:38
 Version: 8.13
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: https://localhost:5001
@@ -229,14 +229,14 @@ export class Booking extends AuditBase
     public constructor(init?: Partial<Booking>) { super(init); (Object as any).assign(this, init); }
 }
 
-export class WeatherForecast implements IGet
+export class Forecast implements IGet
 {
     public date: string;
     public temperatureC: number;
     public summary?: string;
     public temperatureF: number;
 
-    public constructor(init?: Partial<WeatherForecast>) { (Object as any).assign(this, init); }
+    public constructor(init?: Partial<Forecast>) { (Object as any).assign(this, init); }
 }
 
 export class PageStats
@@ -440,14 +440,14 @@ export class Hello implements IReturn<HelloResponse>, IGet
     public createResponse() { return new HelloResponse(); }
 }
 
-export class GetWeatherForecast implements IReturn<WeatherForecast[]>, IGet
+export class GetWeatherForecast implements IReturn<Forecast[]>, IGet
 {
     public date?: string;
 
     public constructor(init?: Partial<GetWeatherForecast>) { (Object as any).assign(this, init); }
     public getTypeName() { return 'GetWeatherForecast'; }
     public getMethod() { return 'GET'; }
-    public createResponse() { return new Array<WeatherForecast>(); }
+    public createResponse() { return new Array<Forecast>(); }
 }
 
 export class AdminData implements IReturn<AdminDataResponse>, IGet
