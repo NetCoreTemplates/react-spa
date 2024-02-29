@@ -10,7 +10,7 @@ export default () => {
         <Layout title={title}>
             <div className="flex justify-center my-10">
                 <div className="text-center">
-                    <Icon icon="material-symbols:hangout-video" className="text-green-600 w-36 h-36 inline-block" />
+                    <Icon icon="material-symbols:hangout-video" className="text-link-dark w-36 h-36 inline-block" />
                     <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left">
                         {title}
                     </h1>
