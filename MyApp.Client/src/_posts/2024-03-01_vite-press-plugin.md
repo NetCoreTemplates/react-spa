@@ -12,16 +12,16 @@ add markdown powered content features without needing to adopt an opinionated fr
 
 ## Universal Markdown Features
 
-A goal for **vite-press-plugin** is to implement a suite of universal markdown-powered features that can be
-reused across all our Vue, React and .NET Razor and Blazor project templates, allowing you to freely copy and 
-incorporate same set of markdown feature folders to power markdown content features across a range of 
-websites built with different technologies.
+A goal for **vite-press-plugin** is to implement a suite of universal markdown-powered features that can be reused across 
+Vue, React and .NET Razor and Blazor projects, allowing you to incorporate same set of markdown feature 
+folders to power markdown content features across a range of websites built with different technologies.
 
 ### Vite Apps with vite-press-plugin
 
-The **vite-press-plugin** currently powers the markdown features in the following Vite Vue and React templates:
+The **vite-press-plugin** currently powers the markdown features in the static Vite Vue and React templates which are
+ideal for creating static websites, blogs, documentation and marketing websites that can be hosted FREE on [GitHub Pages CDN](https://pages.github.com):
 
-#### Vite Templates with vite-press-plugin
+#### Static Vite Templates with vite-press-plugin
 
 - [press-vue](https://press-vue.servicestack.net) - Vite Vue App
 - [press-react](https://press-react.servicestack.net) - Vite React App
@@ -37,7 +37,16 @@ The **vite-press-plugin** currently powers the markdown features in the followin
     </a>
 </div>
 
+The **vite-press-plugin** makes the Markdown features available to the Vite App, whilst the markdown rendering itself is optimally
+implemented in:
+
+- Vue Templates - with [markdown-it](https://github.com/markdown-it/markdown-it) in [Vue SFC](https://vuejs.org/guide/scaling-up/sfc.html) Components
+- React Templates - with [remark](https://github.com/remarkjs/remark) and [MDX](https://mdxjs.com) in [React](https://react.dev) Components
+
 #### .NET 8 API backend with Vite Vue & React SPA frontend
+
+When more capabilities are required and you want a .NET API backend to your Vite Vue or React SPA frontend, 
+you can use one of our integrated .NET 8 SPA templates:
 
  - [vue-spa](https://vue-spa.web-templates.io) - .NET 8 API with Vite Vue SPA frontend
  - [react-spa](https://react-spa.web-templates.io) - .NET 8 API with Vite React SPA frontend
@@ -53,12 +62,6 @@ The **vite-press-plugin** currently powers the markdown features in the followin
     </a>
 </div>
 
-The **vite-press-plugin** makes the Markdown features available to the Vite App, whilst the markdown rendering itself is optimally
-implemented in:
-
- - Vue Templates - with [markdown-it](https://github.com/markdown-it/markdown-it) in [Vue SFC](https://vuejs.org/guide/scaling-up/sfc.html) Components
- - React Templates - with [remark](https://github.com/remarkjs/remark) and [MDX](https://mdxjs.com) in [React](https://react.dev) Components
-
 ### .NET Templates with C# and Markdig
 
 Whilst the same Markdown feature folders are [implemented in C#](https://razor-ssg.web-templates.io/posts/razor-ssg)
@@ -67,8 +70,8 @@ and rendered with [Markdig](https://github.com/xoofx/markdig) and either Razor P
 #### .NET 8 Razor SSG and Blazor SSR Templates
 
  - [razor-ssg](https://razor-ssg.web-templates.io) - .NET Razor SSG Blog and Marketing Website with **Markdig**
- - [blazor-vue](https://blazor-vue.web-templates.io) - .NET 8 Blazor Server Rendered Website with **Markdig**
  - [razor-press](https://razor-press.web-templates.io) - .NET Razor SSG Documentation Website with **Markdig**
+ - [blazor-vue](https://blazor-vue.web-templates.io) - .NET 8 Blazor Server Rendered Website with **Markdig**
 
 <div class="not-prose mt-8 grid grid-cols-2 gap-4">
     <a class="block group border dark:border-gray-800 hover:border-indigo-700 dark:hover:border-indigo-700 flex flex-col justify-between" href="https://razor-ssg.web-templates.io">
