@@ -11,14 +11,14 @@ using MyApp.Data;
 namespace MyApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240208094427_CreateIdentitySchema")]
+    [Migration("20240301000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {

@@ -9,12 +9,6 @@ AppHost.RegisterKey();
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
-// $ dotnet ef migrations add CreateIdentitySchema
-// $ dotnet ef database update
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
-    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString, b => b.MigrationsAssembly(nameof(MyApp))));
 services.AddDatabaseDeveloperPageExceptionFilter();
 
 services.AddAuthorization();
