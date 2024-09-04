@@ -22,7 +22,7 @@ on:
 
 jobs:
   push_to_registry:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion != 'failure' }}
     steps:
       # Checkout latest or specific tag
@@ -59,7 +59,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 22
       # Run npm install
       - name: Install and build npm
         run: |
@@ -78,7 +78,7 @@ jobs:
 
   deploy_via_ssh:
     needs: push_to_registry
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion != 'failure' }}
     steps:
       # Checkout latest or specific tag
