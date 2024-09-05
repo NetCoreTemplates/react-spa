@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
+using ServiceStack.Jobs;
 using MyApp.Data;
 using MyApp.ServiceInterface;
-using ServiceStack.Jobs;
 
 [assembly: HostingStartup(typeof(MyApp.ConfigureBackgroundJobs))]
 
@@ -10,12 +10,40 @@ namespace MyApp;
 public class ConfigureBackgroundJobs : IHostingStartup
 {
     public void Configure(IWebHostBuilder builder) => builder
-        .ConfigureServices(services => {
+        .ConfigureServices((context,services) => {
+            var smtpConfig = context.Configuration.GetSection(nameof(SmtpConfig))?.Get<SmtpConfig>();
+            if (smtpConfig is not null)
+            {
+                services.AddSingleton(smtpConfig);
+            }
+            // Lazily register SendEmailCommand to allow SmtpConfig to only be required if used 
+            services.AddTransient<SendEmailCommand>(c => new SendEmailCommand(
+                c.GetRequiredService<ILogger<SendEmailCommand>>(),
+                c.GetRequiredService<IBackgroundJobs>(),
+                c.GetRequiredService<SmtpConfig>()));
+            
             services.AddPlugin(new CommandsFeature());
             services.AddPlugin(new BackgroundsJobFeature());
             services.AddHostedService<JobsHostedService>();
         }).ConfigureAppHost(afterAppHostInit: appHost => {
             var services = appHost.GetApplicationServices();
+
+            // Log if EmailSender is enabled and SmtpConfig missing
+            var log = services.GetRequiredService<ILogger<ConfigureBackgroundJobs>>();
+            var emailSender = services.GetRequiredService<IEmailSender<ApplicationUser>>();
+            if (emailSender is EmailSender)
+            {
+                var smtpConfig = services.GetService<SmtpConfig>();
+                if (smtpConfig is null)
+                {
+                    log.LogWarning("SMTP is not configured, please configure SMTP to enable sending emails");
+                }
+                else
+                {
+                    log.LogWarning("SMTP is configured with <{FromEmail}> {FromName}", smtpConfig.FromEmail, smtpConfig.FromName);
+                }
+            }
+            
             var jobs = services.GetRequiredService<IBackgroundJobs>();
             // Example of registering a Recurring Job to run Every Hour
             //jobs.RecurringCommand<MyCommand>(Schedule.Hourly);
