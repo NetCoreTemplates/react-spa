@@ -9,8 +9,4 @@ public class ApplicationUser : IdentityUser
     public string? LastName { get; set; }
     public string? DisplayName { get; set; }
     public string? ProfileUrl { get; set; }
-    public string? FacebookUserId { get; set; }
-    public string? GoogleUserId { get; set; }
-    public string? GoogleProfilePageUrl { get; set; }
-    public string? MicrosoftUserId { get; set; }
 }
