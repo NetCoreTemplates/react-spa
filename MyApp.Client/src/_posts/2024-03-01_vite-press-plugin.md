@@ -106,7 +106,7 @@ title:   Vite Press Plugin
 summary: Introducing the Vite Press Plugin
 author:  Lucy Bates
 tags:    [docs,markdown]
-image:   https://source.unsplash.com/random/2000x1000/?stationary
+image:   https://picsum.photos/2000/1000
 ---
 ```
 
