@@ -16,6 +16,7 @@
         <ContainerLabel Include="service" Value="my-app" />
     </ItemGroup>
 
+
   <ItemGroup>
     <Using Include="MyApp" />
     <Using Include="ServiceStack" />
