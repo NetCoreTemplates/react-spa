@@ -3,7 +3,8 @@ import LayoutPage from "@/components/LayoutPage"
 import SrcPage from "@/components/SrcPage"
 import { useClient } from "@/gateway"
 import { GetWeatherForecast, Forecast } from "@/dtos"
-import { columnDefs, DataTable, getCoreRowModel } from "@/components/DataTable.tsx"
+import { columnDefs, DataTable, getCoreRowModel } from "@/components/DataTable"
+import { CellContext } from "@tanstack/react-table"
 
 export default (): JSX.Element => {
     const client = useClient()
@@ -18,17 +19,30 @@ export default (): JSX.Element => {
         })()
     }, [])
 
-    const columns = columnDefs(['date', 'temperatureC', 'temperatureF', 'summary'],
-        ({ temperatureC, temperatureF}) => {
+    const columns = columnDefs<Forecast>(['date', 'temperatureC', 'temperatureF', 'summary'],
+        ({ temperatureC, temperatureF }) => {
             temperatureC.header = "Temp. (C)"
             temperatureF.header = "Temp. (F)"
-            temperatureC.cell = temperatureF.cell = ({ getValue }) => <>{getValue()}&deg;</>
+
+            // Properly type the cell renderer function
+            const tempCellRenderer = ({ getValue }: CellContext<Forecast, number>) => (
+                <>{getValue()}&deg;</>
+            )
+
+            temperatureC.cell = tempCellRenderer
+            temperatureF.cell = tempCellRenderer
         })
 
-    return (<LayoutPage title="Weather">
-        <DataTable columns={columns} data={forecasts} getCoreRowModel={getCoreRowModel()} />
-        <div className="mt-8 flex justify-center gap-x-4">
-            <SrcPage path="weather.tsx" />
-        </div>
-    </LayoutPage>)
+    return (
+        <LayoutPage title="Weather">
+            <DataTable
+                columns={columns}
+                data={forecasts}
+                getCoreRowModel={getCoreRowModel()}
+            />
+            <div className="mt-8 flex justify-center gap-x-4">
+                <SrcPage path="weather.tsx" />
+            </div>
+        </LayoutPage>
+    )
 }
