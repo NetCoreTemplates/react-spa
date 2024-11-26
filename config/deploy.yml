@@ -25,11 +25,6 @@ proxy:
   # kamal-proxy connects to your container over port 80, use `app_port` to specify a different port.
   app_port: 8080
 
-  healthcheck:
-    interval: 3
-    path: /metadata
-    timeout: 3
-
 # Credentials for your image host.
 registry:
   # Specify the registry server, if you're not using Docker Hub
