@@ -1,11 +1,12 @@
 import { fileURLToPath, URL } from 'node:url'
-
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
 import fs from 'fs'
 import path from 'path'
 import child_process from 'child_process'
 import { env } from 'process'
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 import Press from "vite-plugin-press"
 import Pages from 'vite-plugin-pages'
 import svgr from 'vite-plugin-svgr'
@@ -96,6 +97,7 @@ export default defineConfig(async () => {
                 extensions: ['tsx', 'mdx']
             }),
             react(),
+            tailwindcss(),
             Press({
                 baseUrl,
                 //Uncomment to generate metadata *.json 

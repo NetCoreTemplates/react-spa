@@ -1,12 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  darkMode: ["class"],
-  content: [
-    './public/**/*.{ts,tsx,md,mdx,html}',
-    './src/**/*.{ts,tsx,md,mdx}',
-    './*.{ts,tsx}',
-  ],
-  prefix: "",
+import { type Config } from 'tailwindcss'
+
+export default {
   theme: {
     container: {
       center: true,
@@ -16,7 +10,7 @@ module.exports = {
       },
     },
     extend: {
-      typography: (theme) => ({
+      typography: ({ theme }) => ({
         DEFAULT: {
           css: {
             'pre': {
@@ -98,10 +92,5 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
-  },
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
-    require("tailwindcss-animate"),
-  ],
-}
+  }
+} satisfies Config
