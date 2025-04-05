@@ -1,6 +1,6 @@
 # react-spa
 
-.NET 8.0 react-spa Pages Tailwind Website.
+.NET 8.0 react-spa Pages Tailwind Website
 
 [![](https://raw.githubusercontent.com/ServiceStack/Assets/master/csharp-templates/react-spa.png)](http://react-spa.web-templates.io)
 
