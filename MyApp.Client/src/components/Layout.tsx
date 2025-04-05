@@ -1,7 +1,6 @@
 import Header from "./Header"
 import Footer from "./Footer"
 import Meta from "./Meta"
-import { HelmetProvider, Helmet } from "react-helmet-async"
 
 type Props = {
     title?: string
@@ -11,11 +10,7 @@ type Props = {
 const Layout = ({title, children}: Props) => {
     return (
         <>
-            {!title ? null : <HelmetProvider>
-                <Helmet>
-                    <title>{title}</title>
-                </Helmet>
-            </HelmetProvider>}
+            {!title ? null : <title>{title}</title>}
             <Meta/>
             <Header/>
             <div className="min-h-screen">

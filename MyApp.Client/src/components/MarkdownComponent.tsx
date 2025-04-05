@@ -6,7 +6,7 @@ import LiteYouTube from "./LiteYouTube"
 import FileLayout from "./FileLayout"
 import { Icon } from "@iconify/react"
 
-export const Components: { [name: string]: JSX.Element | Function } = {
+export const Components: { [name: string]: React.JSX.Element | Function } = {
     Files,
     Icon,
     Iconify: Icon, // alias for portability with Vue Markdown
@@ -153,7 +153,7 @@ type Props = {
     type: string
     group?: string
 }
-export default ({ doc, type, group }: Props): JSX.Element => {
+export default ({ doc, type, group }: Props): React.JSX.Element => {
     const press = React.useContext(PressContext)
 
     const components = (press.components as any)[type] || {}

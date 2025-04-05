@@ -3,13 +3,12 @@ import { Link } from "react-router-dom"
 import AuthorLinks from "@/components/AuthorLinks"
 import { useContext } from "react"
 import { PressContext } from "@/contexts"
-import { HelmetProvider, Helmet } from "react-helmet-async"
 import { generateSlug, dateLabel, dateTimestamp } from "@/utils"
 import { useParams } from "react-router-dom"
 import MarkdownComponent from "@/components/MarkdownComponent"
 import { ErrorSummary } from "@/components/Form"
 
-export default (): JSX.Element => {
+export default (): React.JSX.Element => {
     const press = useContext(PressContext)
 
     const { slug } = useParams()
@@ -36,11 +35,7 @@ export default (): JSX.Element => {
 
     return (
         <Layout>
-            <HelmetProvider>
-                <Helmet>
-                    <title>{title}</title>
-                </Helmet>
-            </HelmetProvider>
+            <title>{title}</title>
             {post ? (<>
                 <div className="container px-5 mb-32 mx-auto">
                     <article className="mt-20">

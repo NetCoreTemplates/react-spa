@@ -3,7 +3,7 @@ import LayoutPage from "@/components/LayoutPage"
 import { Button } from "@/components/ui/button"
 import SrcPage from "@/components/SrcPage"
 
-export default (): JSX.Element => {
+export default (): React.JSX.Element => {
     const [count, setCount] = useState(0)
     const title = `Counter`
 

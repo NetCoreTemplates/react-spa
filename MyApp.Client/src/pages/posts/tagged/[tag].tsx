@@ -8,7 +8,6 @@ import { useContext } from "react"
 import { useParams } from "react-router-dom"
 import { PressContext } from "@/contexts"
 import { generateSlug } from "@/utils"
-import { HelmetProvider, Helmet } from "react-helmet-async"
 
 export default () => {
     const press = useContext(PressContext)
@@ -29,11 +28,7 @@ export default () => {
 
     return (
         <Layout>
-            <HelmetProvider>
-                <Helmet>
-                    <title>{title}</title>
-                </Helmet>
-            </HelmetProvider>
+            <title>{title}</title>
             {selectedTag
                 ? <div className="relative bg-gray-50 dark:bg-gray-900 px-6 pt-16 pb-20 lg:px-8 lg:pt-24 lg:pb-28">
                     <div className="absolute inset-0">

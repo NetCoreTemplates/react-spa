@@ -23,8 +23,6 @@
     "lucide-react": "^0.487.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-helmet": "^6.1.0",
-    "react-helmet-async": "^2.0.5",
     "react-router": "^7.5.0",
     "react-router-dom": "^7.5.0",
     "swr": "^2.3.3",

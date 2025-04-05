@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import LayoutPage from "@/components/LayoutPage"
 import SrcPage from "@/components/SrcPage"
 import { useClient } from "@/gateway"
@@ -6,7 +6,7 @@ import { GetWeatherForecast, Forecast } from "@/dtos"
 import { columnDefs, DataTable, getCoreRowModel } from "@/components/DataTable"
 import { CellContext } from "@tanstack/react-table"
 
-export default (): JSX.Element => {
+export default (): React.JSX.Element => {
     const client = useClient()
     const [forecasts, setForecasts] = useState<Forecast[]>([])
 

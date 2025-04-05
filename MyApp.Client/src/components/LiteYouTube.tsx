@@ -29,7 +29,7 @@ export interface LiteYouTubeProps {
   muted?: boolean,
   thumbnail?: string,
   rel?: string,
-  containerElement?: keyof JSX.IntrinsicElements;
+  containerElement?: keyof React.JSX.IntrinsicElements;
   style?: React.CSSProperties;
 }
 
@@ -45,8 +45,8 @@ function LiteYouTubeEmbedComponent(props: LiteYouTubeProps, ref: React.Ref<HTMLI
   const announceWatch = props.announce || "Watch";
   const format = props.webp ? 'webp' : 'jpg';
   const vi = props.webp ? 'vi_webp' : 'vi';
-  const posterUrl = props.thumbnail || (!props.playlist 
-    ? `https://i.ytimg.com/${vi}/${videoId}/${posterImp}.${format}` 
+  const posterUrl = props.thumbnail || (!props.playlist
+    ? `https://i.ytimg.com/${vi}/${videoId}/${posterImp}.${format}`
     : `https://i.ytimg.com/${vi}/${videoPlaylisCovertId}/${posterImp}.${format}`);
 
   let ytUrl = props.noCookie
