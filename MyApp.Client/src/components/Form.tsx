@@ -123,7 +123,7 @@ export const TextInput: FC<TextInputProps> = ({ status, id, type, className, pla
     
     return (<div>
         {!useLabel ? null : <label htmlFor={id} className="block text-sm font-medium text-gray-700 dark:text-gray-200">{useLabel}</label>}
-        <div className="mt-1 relative rounded-md shadow-sm">
+        <div className="mt-1 relative">
           <input type={useType} className={classNames([input.base, ...cssClass(input.valid,input.invalid)])}
             id={id} name={id} placeholder={usePlaceholder} {...remaining} />
         {!hasErrorField ? null : <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -169,7 +169,7 @@ export const TextAreaInput: FC<TextAreaInputProps> = ({ status, id, className, p
 
     return (<div>
         {!useLabel ? null : <label htmlFor={id} className="block text-sm font-medium text-gray-700 dark:text-gray-200">{useLabel}</label>}
-        <div className="mt-1 relative rounded-md shadow-sm">
+        <div className="mt-1 relative">
             <textarea className={classNames(['shadow-sm block w-full sm:text-sm rounded-md', ...cssClass(
                 'text-gray-900 dark:text-gray-50 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 dark:border-gray-600',
                 'text-red-900 focus:ring-red-500 focus:border-red-500 border-red-300')])}

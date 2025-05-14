@@ -7,6 +7,6 @@
     "rerun:last": "npm run revert:last && npm run migrate"
   },
   "dependencies": {
-    "@servicestack/client": "^2.1.6"
+    "@servicestack/client": "^2.1.11"
   }
 }
