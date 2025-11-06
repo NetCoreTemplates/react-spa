@@ -36,31 +36,36 @@ if (!certificateName) {
 const certFilePath = path.join(baseFolder, `${certificateName}.pem`);
 const keyFilePath = path.join(baseFolder, `${certificateName}.key`);
 
-console.log(`Certificate path: ${certFilePath}`);
+// Only generate certificates for dev server, not for build
+const isDevServer = !process.argv.includes('build');
 
-if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
+if (isDevServer) {
+    console.log(`Certificate path: ${certFilePath}`);
 
-    // mkdir to fix dotnet dev-certs error 3 https://github.com/dotnet/aspnetcore/issues/58330
-    if (!fs.existsSync(baseFolder)) {
-        fs.mkdirSync(baseFolder, { recursive: true });
-    }
-    if (
-        0 !==
-        child_process.spawnSync(
-            "dotnet",
-            [
-                "dev-certs",
-                "https",
-                "--export-path",
-                certFilePath,
-                "--format",
-                "Pem",
-                "--no-password",
-            ],
-            { stdio: "inherit" }
-        ).status
-    ) {
-        throw new Error("Could not create certificate.");
+    if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
+
+        // mkdir to fix dotnet dev-certs error 3 https://github.com/dotnet/aspnetcore/issues/58330
+        if (!fs.existsSync(baseFolder)) {
+            fs.mkdirSync(baseFolder, { recursive: true });
+        }
+        if (
+            0 !==
+            child_process.spawnSync(
+                "dotnet",
+                [
+                    "dev-certs",
+                    "https",
+                    "--export-path",
+                    certFilePath,
+                    "--format",
+                    "Pem",
+                    "--no-password",
+                ],
+                { stdio: "inherit" }
+            ).status
+        ) {
+            throw new Error("Could not create certificate.");
+        }
     }
 }
 
@@ -100,7 +105,7 @@ export default defineConfig(async () => {
             tailwindcss(),
             Press({
                 baseUrl,
-                //Uncomment to generate metadata *.json 
+                //Uncomment to generate metadata *.json
                 //metadataPath: './public/api',
             }),
         ],
@@ -108,6 +113,9 @@ export default defineConfig(async () => {
             alias: {
                 '@': fileURLToPath(new URL('./src', import.meta.url)),
             }
+        },
+        build: {
+            target: 'baseline-widely-available',
         },
         server: {
             proxy: {
@@ -117,10 +125,12 @@ export default defineConfig(async () => {
                 }
             },
             port: 5173,
-            https: {
-                key: fs.readFileSync(keyFilePath),
-                cert: fs.readFileSync(certFilePath),
-            }
+            ...(fs.existsSync(keyFilePath) && fs.existsSync(certFilePath) ? {
+                https: {
+                    key: fs.readFileSync(keyFilePath),
+                    cert: fs.readFileSync(certFilePath),
+                }
+            } : {})
         }
     }
 })
