@@ -2,9 +2,8 @@
 title: ASP.NET Core JWT Identity Auth
 summary: Learn about integration and value added features of ASP.NET Core JWT Identity Auth   
 tags: [servicestack,.net8,auth]
-image: https://images.unsplash.com/photo-1618482914248-29272d021005?crop=entropy&fit=crop&h=1000&w=2000
 author: Brandon Foley
-draft: true
+image: https://servicestack.net/img/posts/jwt-identity-auth/bg.webp
 ---
 
 JWTs enable stateless authentication of clients without servers needing to maintain any Auth state in server infrastructure

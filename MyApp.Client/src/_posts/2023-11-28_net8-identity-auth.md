@@ -2,8 +2,8 @@
 title: ASP.NET Core Identity Auth in .NET 8  
 summary: ServiceStack has switched to ASP.NET Core Identity Auth in new .NET 8 Blazor, Razor and MVC Project Templates  
 tags: [c#, identity-auth, templates]
-image: https://images.unsplash.com/photo-1635602739175-bab409a6e94c?crop=entropy&fit=crop&h=1000&w=2000
 author: Brandon Foley
+image: https://servicestack.net/img/posts/net8-identity-auth/bg.webp
 ---
 
 ### ASP.NET Core Identity Auth now the default
