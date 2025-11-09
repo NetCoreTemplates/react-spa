@@ -1,20 +1,19 @@
 import { serializeToObject } from "@servicestack/client"
-import { ChangeEvent, Dispatch, SetStateAction, SyntheticEvent, useEffect, useState } from "react"
+import { SyntheticEvent, useEffect, useState} from "react"
 import { useNavigate } from "react-router-dom"
 
 import Page from "@/components/LayoutPage"
-import { ApiContext, ErrorSummary, TextInput, Checkbox, getRedirect } from "@/components/Form"
-import { useClient } from "@/gateway"
+import { getRedirect } from "@/gateway"
+import { ErrorSummary, TextInput, PrimaryButton, SecondaryButton, useClient, ApiStateContext } from "@servicestack/react"
 import { Authenticate } from "@/dtos"
-import { useAuth, Redirecting } from "@/useAuth"
-import { Button } from "@/components/ui/button"
+import { appAuth, Redirecting } from "@/auth.tsx"
 import { useSearchParams, Link } from "react-router-dom"
 
 export default () => {
 
     const client = useClient()
-    const [username, setUsername] = useState<string>()
-    const [password, setPassword] = useState<string>()
+    const [username, setUsername] = useState<string|number>()
+    const [password, setPassword] = useState<string|number>()
 
     const setUser = (email: string) => {
         setUsername(email)
@@ -23,11 +22,11 @@ export default () => {
     const navigate = useNavigate()
     const [searchParams] = useSearchParams()
 
-    const {signedIn, revalidate} = useAuth();
+    const { user, revalidate } = appAuth()
     useEffect(() => {
-        if (signedIn) navigate(getRedirect(searchParams) || "/", {replace: true})
-    }, [signedIn]);
-    if (signedIn) return <Redirecting/>
+        if (user) navigate(getRedirect(searchParams) || "/", {replace: true})
+    }, [user]);
+    if (user) return <Redirecting/>
 
     const onSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -38,11 +37,8 @@ export default () => {
             await revalidate()
     }
 
-    const change = (setField: (Dispatch<SetStateAction<string | undefined>>)) =>
-        (e: ChangeEvent<HTMLInputElement>) => setField(e.target.value)
-
     return (<Page title="Use a local account to log in." className="max-w-lg">
-        <ApiContext.Provider value={client}>
+        <ApiStateContext.Provider value={client}>
             <section className="mt-4 sm:shadow overflow-hidden sm:rounded-md">
                 <form onSubmit={onSubmit}>
                     <div className="shadow overflow-hidden sm:rounded-md">
@@ -50,15 +46,14 @@ export default () => {
                         <div className="px-4 py-5 bg-white dark:bg-black space-y-6 sm:p-6">
                             <div className="flex flex-col gap-y-4">
                                 <TextInput id="userName" help="Email you signed up with" autoComplete="email"
-                                           value={username} onChange={change(setUsername)}/>
+                                           value={username} onChange={setUsername}/>
                                 <TextInput id="password" type="password" help="6 characters or more"
                                            autoComplete="current-password"
-                                           value={password} onChange={change(setPassword)}/>
-                                <Checkbox id="rememberMe"/>
+                                           value={password} onChange={setPassword}/>
                             </div>
 
                             <div>
-                                <Button id="login-submit" type="submit">Log in</Button>
+                                <PrimaryButton>Log in</PrimaryButton>
                             </div>
 
                             <div className="mt-8 text-sm">
@@ -71,22 +66,22 @@ export default () => {
                     </div>
                 </form>
             </section>
-        </ApiContext.Provider>
+        </ApiStateContext.Provider>
         <div className="mt-8">
             <h3 className="xs:block mr-4 leading-8 text-gray-500">Quick Links</h3>
             <div className="flex flex-wrap max-w-lg gap-2">
-                <Button variant="outline" type="button" onClick={_ => setUser('admin@email.com')}>
+                <SecondaryButton onClick={() => setUser('admin@email.com')}>
                     admin@email.com
-                </Button>
-                <Button variant="outline" type="button" onClick={_ => setUser('manager@email.com')}>
+                </SecondaryButton>
+                <SecondaryButton onClick={() => setUser('manager@email.com')}>
                     manager@email.com
-                </Button>
-                <Button variant="outline" type="button" onClick={_ => setUser('employee@email.com')}>
+                </SecondaryButton>
+                <SecondaryButton onClick={() => setUser('employee@email.com')}>
                     employee@email.com
-                </Button>
-                <Button variant="outline" type="button" onClick={_ => setUser('new@user.com')}>
+                </SecondaryButton>
+                <SecondaryButton onClick={() => setUser('new@user.com')}>
                     new@user.com
-                </Button>
+                </SecondaryButton>
             </div>
         </div>
     </Page>)

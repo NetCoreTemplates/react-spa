@@ -2,7 +2,7 @@ import './assets/styles/index.css'
 import './assets/styles/main.css'
 import 'react/jsx-runtime'
 import Layout from '@/components/Layout'
-import { Loading } from '@/components/Form'
+import { Loading, ClientContext } from "@servicestack/react"
 
 import { ThemeProvider } from "@/components/theme-provider"
 import { StrictMode, Suspense, useEffect } from 'react'
@@ -13,16 +13,18 @@ import routes from '~react-pages'
 
 import press from "virtual:press"
 import { PressContext } from './contexts'
-import { useApp } from "@/gateway";
+import { client, init } from "@/gateway"
 
-useApp().load()
+init()
 
 function App() {
     return (
         <Suspense fallback={<Layout><Loading className='p-4'></Loading></Layout>}>
             <ThemeProvider defaultTheme="light" storageKey="color-scheme">
                 <PressContext.Provider value={press}>
-                    {useRoutes(routes)}
+                    <ClientContext.Provider value={client}>
+                        {useRoutes(routes)}
+                    </ClientContext.Provider>
                 </PressContext.Provider>
             </ThemeProvider>
         </Suspense>

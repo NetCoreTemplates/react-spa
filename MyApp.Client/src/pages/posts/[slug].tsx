@@ -6,9 +6,9 @@ import { PressContext } from "@/contexts"
 import { generateSlug, dateLabel, dateTimestamp } from "@/utils"
 import { useParams } from "react-router-dom"
 import MarkdownComponent from "@/components/MarkdownComponent"
-import { ErrorSummary } from "@/components/Form"
+import { ErrorSummary } from "@servicestack/react"
 
-export default (): React.JSX.Element => {
+export default () => {
     const press = useContext(PressContext)
 
     const { slug } = useParams()
@@ -61,13 +61,13 @@ export default (): React.JSX.Element => {
                                 <img src={post.image} alt={`${post.title} Background`} className="shadow-small" />
                             </div>
                         </div>
-                        <div className="flex max-w-3xl mx-auto justify-between">
+                        <div className="flex max-w-4xl mx-auto justify-between">
                             <div>
                                 <div className="mb-4 flex flex-wrap">
                                     {post.tags.map(tag =>
                                         <Link key={tag} to={tagLink(tag)} className="mr-2 mb-2 text-xs leading-5 font-semibold bg-slate-400/10 dark:bg-slate-400/30 rounded-full py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20 dark:hover:bg-slate-400/40 dark:highlight-white/5">{tag}</Link>)}
                                 </div>
-                                {!post.date ? null : <div className="max-w-3xl mx-auto">
+                                {!post.date ? null : <div className="max-w-4xl mx-auto">
                                     <div className="mb-6 text-lg text-gray-500 dark:text-gray-400">
                                         <time dateTime={dateTimestamp(post.date)}>{dateLabel(post.date)}</time>
                                         <span className="px-1" aria-hidden="true">&middot;</span>
@@ -77,7 +77,7 @@ export default (): React.JSX.Element => {
 
                             </div>
                         </div>
-                        <div className="max-w-3xl mx-auto">
+                        <div className="max-w-4xl mx-auto">
                             <div id="post" className="prose dark:prose-invert lg:prose-xl max-w-none mb-32">
                                 <MarkdownComponent type="blog" doc={post} />
                             </div>
@@ -87,7 +87,7 @@ export default (): React.JSX.Element => {
 
                 {!author || !authorPosts.length ? null :
                     (<div className="bg-gray-50 dark:bg-gray-900 py-20">
-                        <div className="max-w-3xl mx-auto">
+                        <div className="max-w-4xl mx-auto">
                             <div className="flex justify-between">
                                 <div>
                                     {authorHref

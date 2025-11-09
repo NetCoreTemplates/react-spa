@@ -9,23 +9,24 @@ AppHost.RegisterKey();
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
+services.AddAuthorization();
+services.AddAuthentication(options =>
+    {
+        options.DefaultScheme = IdentityConstants.ApplicationScheme;
+        options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+    })
+    .AddIdentityCookies();
+services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo("App_Data"));
+
 services.AddDatabaseDeveloperPageExceptionFilter();
 
-services.AddAuthorization();
-services.AddIdentity<ApplicationUser, IdentityRole>(options => {
-        //options.User.AllowedUserNameCharacters = null;
-        options.SignIn.RequireConfirmedAccount = true;
-    })
+services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddSignInManager()
     .AddDefaultTokenProviders();
 
-services.ConfigureApplicationCookie(options => options.DisableRedirectsForApis());
-
-services.AddDataProtection()
-    .PersistKeysToFileSystem(new DirectoryInfo("App_Data"));
-
-// Add application services.
 services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 // Uncomment to send emails with SMTP, configure SMTP with "SmtpConfig" in appsettings.json
 // services.AddSingleton<IEmailSender<ApplicationUser>, EmailSender>();

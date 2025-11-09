@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react"
 import Layout from "@/components/Layout"
 import GettingStarted from "@/components/GettingStarted"
 import Include from "@/components/Include"
+import BuiltInUis from "@/components/BuiltInUis"
 import VideoGroup from "@/components/VideoGroup"
 import LiteYouTube from "@/components/LiteYouTube"
 import SrcPage from "@/components/SrcPage"
@@ -44,7 +45,7 @@ const Index = () => {
                     </p>
                     <div className="mx-auto mt-5 max-w-md sm:flex sm:justify-center md:mt-8">
                         <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                            <Link to="https://ui.shadcn.com/docs/components/accordion"
+                            <Link to="https://react.servicestack.net"
                                   className="flex w-full items-center justify-center rounded-md border border-transparent bg-link-dark dark:bg-link-dark px-8 py-3 text-base font-medium text-white hover:bg-gray-700 md:py-4 md:px-10 md:text-lg">
                                 React Component Gallery
                             </Link>
@@ -64,15 +65,24 @@ const Index = () => {
                 </div>
             </section>
 
-            <div className="relative">
-                <div className="mt-8 max-w-6xl mx-auto">
-                    <div className="aspect-w-16 aspect-h-9 pb-24">
-                        <LiteYouTube id="WXLF0piz6G0" poster="maxresdefault"
-                                     title="Productive ASP.NET Core Vite React SPA Tailwind Template with Identity Auth"/>
-                    </div>
+            <div className="flex justify-center my-20 py-20 bg-slate-100 dark:bg-slate-800">
+                <div className="text-center">
+                    <Icon icon="mdi:feature-highlight" className="text-link-dark w-36 h-36 inline-block"/>
+                    <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-tight md:leading-none mb-12 text-center md:text-left">
+                        Built-in UIs
+                    </h1>
                 </div>
             </div>
 
+            <div className="mb-40 mx-auto max-w-7xl">
+                <p className="mt-4 mb-10 mx-auto max-w-4xl text-xl text-gray-600 dark:text-gray-400">
+                    Manage your ServiceStack App and explore, discover, query and call APIs instantly with 
+                    built-in Auto UIs dynamically generated from the rich metadata of your App's typed C# APIs &amp; DTOs
+                </p>
+                
+                <BuiltInUis />
+            </div>
+            
             <div className="container mx-auto px-5 mb-24">
                 {!primaryPost ? null : <section>
                     <div className="mb-8 md:mb-16">
@@ -109,6 +119,15 @@ const Index = () => {
                         </div>
                     </div>
                 </section>}
+            </div>
+
+            <div className="relative">
+                <div className="mt-8 max-w-6xl mx-auto">
+                    <div className="aspect-w-16 aspect-h-9 pb-24">
+                        <LiteYouTube id="WXLF0piz6G0" poster="maxresdefault"
+                                     title="Productive ASP.NET Core Vite React SPA Tailwind Template with Identity Auth"/>
+                    </div>
+                </div>
             </div>
 
             <div className="flex justify-center my-20 py-20 bg-slate-100 dark:bg-slate-800">

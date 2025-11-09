@@ -1,14 +1,12 @@
-import { ChangeEvent, Dispatch, SetStateAction, SyntheticEvent, useEffect, useState } from "react"
+import { SyntheticEvent, useEffect, useState } from "react"
+import { useClient, FormLoading, ErrorSummary, TextInput, PrimaryButton, SecondaryButton, ApiStateContext } from "@servicestack/react"
 import { serializeToObject, leftPart, rightPart, toPascalCase } from "@servicestack/client"
 import { useNavigate } from "react-router-dom"
-
 import Page from "@/components/LayoutPage"
-import { FormLoading, ErrorSummary, TextInput, Checkbox, getRedirect, ApiContext } from "@/components/Form"
-import { Button } from "@/components/ui/button"
-import { useClient } from "@/gateway"
+import { getRedirect } from "@/gateway"
 import { Register, RegisterResponse } from "@/dtos"
-import { useAuth, Redirecting } from "@/useAuth"
 import { useSearchParams } from "react-router-dom"
+import { appAuth, Redirecting } from "@/auth.tsx"
 
 export default () => {
 
@@ -16,7 +14,9 @@ export default () => {
     const [displayName, setDisplayName] = useState<string>()
     const [username, setUsername] = useState<string>()
     const [password, setPassword] = useState<string>()
+    const [confirmPassword, setConfirmPassword] = useState<string>()
     const navigate = useNavigate()
+    const { user, revalidate } = appAuth()
 
     const setUser = (email: string) => {
         let first = leftPart(email, '@');
@@ -24,14 +24,14 @@ export default () => {
         setDisplayName(toPascalCase(first) + ' ' + toPascalCase(last))
         setUsername(email)
         setPassword('p@55wOrd')
+        setConfirmPassword('p@55wOrd')
     }
 
     const [searchParams] = useSearchParams()
-    const {signedIn, revalidate} = useAuth()
     useEffect(() => {
-        if (signedIn) navigate(getRedirect(searchParams) || "/")
-    }, [signedIn])
-    if (signedIn) return <Redirecting/>
+        if (user) navigate(getRedirect(searchParams) || "/")
+    }, [user])
+    if (user) return <Redirecting/>
 
     const onSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -51,15 +51,11 @@ export default () => {
             } else {
                 navigate("/signin")
             }
-
         }
     }
 
-    const change = (setField: (Dispatch<SetStateAction<string | undefined>>)) =>
-        (e: ChangeEvent<HTMLInputElement>) => setField(e.target.value)
-
     return (<Page title="Sign Up" className="max-w-lg">
-        <ApiContext.Provider value={client}>
+        <ApiStateContext.Provider value={client}>
             <section className="mt-4 sm:shadow overflow-hidden sm:rounded-md">
                 <form onSubmit={onSubmit} className="max-w-prose">
                     <div className="shadow overflow-hidden sm:rounded-md">
@@ -70,33 +66,32 @@ export default () => {
                             </h3>
                             <div className="flex flex-col gap-y-4">
                                 <TextInput id="displayName" help="Your first and last name" autoComplete="name"
-                                           value={displayName} onChange={change(setDisplayName)}/>
+                                           value={displayName} onChange={setDisplayName}/>
                                 <TextInput id="userName" autoComplete="email"
-                                           value={username} onChange={change(setUsername)}/>
+                                           value={username} onChange={setUsername}/>
                                 <TextInput id="password" type="password" help="6 characters or more"
                                            autoComplete="new-password"
-                                           value={password} onChange={change(setPassword)}/>
-                                <TextInput id="confirmPassword" type="password" defaultValue={password}/>
-                                <Checkbox id="autoLogin"/>
+                                           value={password} onChange={setPassword}/>
+                                <TextInput id="confirmPassword" type="password" value={confirmPassword} onChange={setConfirmPassword}/>
                             </div>
                         </div>
                         <div className="pt-5 px-4 py-3 bg-gray-50 dark:bg-gray-900 text-right sm:px-6">
                             <div className="flex justify-end">
-                                <FormLoading className="flex-1"/>
-                                <Button className="ml-3">Sign Up</Button>
+                                { client.loading ? <FormLoading className="flex-1"/> : null }
+                                <PrimaryButton className="ml-3">Sign Up</PrimaryButton>
                             </div>
                         </div>
                     </div>
                 </form>
             </section>
-        </ApiContext.Provider>
+        </ApiStateContext.Provider>
 
         <div className="flex mt-8 ml-8">
             <h3 className="mr-4 leading-8 text-gray-500">Quick Links</h3>
             <div className="flex flex-wrap max-w-lg gap-2">
-                <Button variant="outline" onClick={() => setUser('new@user.com')}>
+                <SecondaryButton onClick={() => setUser('new@user.com')}>
                     new@user.com
-                </Button>
+                </SecondaryButton>
             </div>
         </div>
     </Page>)

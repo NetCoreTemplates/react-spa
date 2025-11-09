@@ -153,7 +153,7 @@ type Props = {
     type: string
     group?: string
 }
-export default ({ doc, type, group }: Props): React.JSX.Element => {
+export default ({ doc, type, group }: Props) => {
     const press = React.useContext(PressContext)
 
     const components = (press.components as any)[type] || {}

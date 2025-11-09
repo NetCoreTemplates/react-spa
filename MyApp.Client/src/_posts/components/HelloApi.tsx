@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { JsonServiceClient } from "@servicestack/client"
 import { TextInput } from "@servicestack/react"
 import { Hello } from "@/dtos"
@@ -19,7 +19,7 @@ export default ({ value }:Props) => {
     }, [name])
 
     return (<div className="my-8 max-w-fit mx-auto">
-        <TextInput value={name} onChange={(value: string | number) => setName(String(value))} />
+        <TextInput id="name" value={name} onChange={setName} />
         <b className="my-2 block text-center text-lg">{result}</b>
     </div>)
 }

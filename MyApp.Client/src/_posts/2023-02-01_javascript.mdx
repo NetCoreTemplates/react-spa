@@ -173,7 +173,7 @@ export default ({ value }:Props) => {
     }, [name])
 
     return (<div className="my-8 max-w-fit mx-auto">
-      <TextInput value={name} onChange={e => setName(e.target.value)} />
+      <TextInput value={name} onChange={setName} />
       <b className="my-2 block text-center text-lg">{result}</b>
     </div>)
 }

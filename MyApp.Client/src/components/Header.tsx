@@ -1,12 +1,11 @@
 import { Link, NavLink } from "react-router-dom"
 import Logo from "@/assets/img/logo.svg?react"
-import DarkModeToggle from "@/components/DarkModeToggle"
-import { Button } from "@/components/ui/button"
-import { useAuth } from "@/useAuth"
+import { DarkModeToggle, SecondaryButton } from "@servicestack/react"
+import { appAuth } from "@/auth.tsx"
 
 export default () => {
-    const {auth, signout} = useAuth()
-
+    const { user, hasRole, signOut } = appAuth()
+    
     const navClass = ({isActive}: any) => [
         "p-4 flex items-center justify-start mw-full hover:text-sky-500 dark:hover:text-sky-400",
         isActive ? "text-link-dark dark:text-link-dark" : "",
@@ -35,7 +34,7 @@ export default () => {
                             <NavLink to="/todomvc" className={navClass}>Todos</NavLink>
                         </li>
                         <li className="relative flex flex-wrap just-fu-start m-0">
-                            <NavLink to="/bookings-crud" className={navClass}>Bookings</NavLink>
+                            <NavLink to="/bookings-auto" className={navClass}>Bookings</NavLink>
                         </li>
                         <li className="relative flex flex-wrap just-fu-start m-0">
                             <NavLink to="/whatsnew" className={navClass}>What's New</NavLink>
@@ -46,34 +45,38 @@ export default () => {
                         <li className="relative flex flex-wrap just-fu-start m-0">
                             <NavLink to="/videos" className={navClass}>Videos</NavLink>
                         </li>
-                        {auth
+                        {user
                             ? (<>
+                                {hasRole('Admin')
+                                    ? <li className="relative flex flex-wrap just-fu-start m-0">
+                                        <NavLink to="/admin" className={navClass}>Admin</NavLink>
+                                    </li> : null}
                                 <li>
                                     <div className="mx-3 relative">
                                         <div>
                                             <Link to="/profile"
                                                   className="max-w-xs bg-white dark:bg-black rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 lg:p-2 lg:rounded-md lg:hover:bg-gray-50 dark:lg:hover:bg-gray-900 dark:ring-offset-black"
                                                   id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                                <img className="h-8 w-8 rounded-full" src={auth.profileUrl} alt=""/>
+                                                <img className="h-8 w-8 rounded-full" src={user.profileUrl} alt=""/>
                                                 <span
                                                     className="hidden ml-3 text-gray-700 dark:text-gray-300 text-sm font-medium lg:block">
                                                 <span className="sr-only">Open user menu for </span>
-                                                    {auth.userName}
+                                                    {user.userName}
                                                 </span>
                                             </Link>
                                         </div>
                                     </div>
                                 </li>
                                 <li className="mr-3 relative flex flex-wrap just-fu-start m-0">
-                                    <Button variant="outline" onClick={() => signout()}>
+                                    <SecondaryButton onClick={() => signOut()}>
                                         Sign Out
-                                    </Button>
+                                    </SecondaryButton>
                                 </li>
                             </>)
                             : (<li className="relative flex flex-wrap just-fu-start m-0">
-                                <Button variant="outline" className="m-2" asChild>
+                                <SecondaryButton className="m-2">
                                     <Link to="/signin">Sign In</Link>
-                                </Button>
+                                </SecondaryButton>
                             </li>)
                         }
                         <li className="relative flex flex-wrap just-fu-start m-0">

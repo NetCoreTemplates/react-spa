@@ -12,7 +12,7 @@ public class ConfigureDb : IHostingStartup
     public void Configure(IWebHostBuilder builder) => builder
         .ConfigureServices((context, services) => {
             var connectionString = context.Configuration.GetConnectionString("DefaultConnection")
-                ?? "DataSource=App_Data/app.db;Cache=Shared";
+                                   ?? "DataSource=App_Data/app.db;Cache=Shared";
             
             services.AddOrmLite(options => options.UseSqlite(connectionString));
 

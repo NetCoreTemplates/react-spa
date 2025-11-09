@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import Layout from "@/components/Layout"
 import BlogTitle from "@/components/BlogTitle"
 import BlogPosts from "@/components/BlogPosts"
-import { ErrorSummary } from "@/components/Form"
+import { ErrorSummary } from "@servicestack/react"
 
 import { useContext } from "react"
 import { useParams } from "react-router-dom"

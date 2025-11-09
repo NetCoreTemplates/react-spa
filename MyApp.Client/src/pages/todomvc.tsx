@@ -1,12 +1,11 @@
+import { useState, type ReactNode, KeyboardEvent, MouseEvent, useEffect } from "react"
+import { classNames, ResponseStatus } from "@servicestack/client"
+import { TextInput } from "@servicestack/react"
 import { Icon } from "@iconify/react"
-import { useState, type ReactNode, ChangeEvent, KeyboardEvent, MouseEvent, useEffect } from "react"
-import classNames from "classnames"
 import Page from "@/components/LayoutPage"
-import { TextInput } from "@/components/Form"
 import { client } from "@/gateway"
 import { CreateTodo, DeleteTodo, DeleteTodos, QueryTodos, Todo, UpdateTodo } from "@/dtos"
-import { ResponseStatus } from "@servicestack/client"
-import SrcPage from "@/components/SrcPage.tsx";
+import SrcPage from "@/components/SrcPage.tsx"
 
 export type Filter = "all" | "finished" | "unfinished"
 
@@ -71,7 +70,7 @@ const TodosMvc = () => {
         <div>
             <div className="mb-3">
                 <TextInput status={error} id="Text" placeholder="What needs to be done?" label=""
-                           value={newTodo} onChange={(e: ChangeEvent<HTMLInputElement>) => setNewTodo(e.target.value)}
+                           value={newTodo} onChange={setNewTodo}
                            onKeyUp={async (e: KeyboardEvent<HTMLInputElement>) => {
                                e.stopPropagation();
                                if (e.key == "Enter") await addTodo()

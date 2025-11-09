@@ -1,6 +1,6 @@
 /* Options:
-Date: 2024-02-28 19:37:38
-Version: 8.13
+Date: 2025-11-09 14:16:56
+Version: 8.91
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: https://localhost:5001
 
@@ -33,12 +33,12 @@ export interface IGet
 
 export interface IHasSessionId
 {
-    sessionId?: string;
+    sessionId: string;
 }
 
 export interface IHasBearerToken
 {
-    bearerToken?: string;
+    bearerToken: string;
 }
 
 export interface IPost
@@ -87,59 +87,19 @@ export class QueryBase
     public fields: string;
 
     // @DataMember(Order=7)
-    public meta: { [index: string]: string; };
+    public meta: { [index:string]: string; };
 
     public constructor(init?: Partial<QueryBase>) { (Object as any).assign(this, init); }
 }
 
 export class QueryData<T> extends QueryBase
 {
-    // @DataMember(Order=1)
-    public skip?: number;
-
-    // @DataMember(Order=2)
-    public take?: number;
-
-    // @DataMember(Order=3)
-    public orderBy: string;
-
-    // @DataMember(Order=4)
-    public orderByDesc: string;
-
-    // @DataMember(Order=5)
-    public include: string;
-
-    // @DataMember(Order=6)
-    public fields: string;
-
-    // @DataMember(Order=7)
-    public meta: { [index: string]: string; };
 
     public constructor(init?: Partial<QueryData<T>>) { super(init); (Object as any).assign(this, init); }
 }
 
 export class QueryDb<T> extends QueryBase
 {
-    // @DataMember(Order=1)
-    public skip?: number;
-
-    // @DataMember(Order=2)
-    public take?: number;
-
-    // @DataMember(Order=3)
-    public orderBy: string;
-
-    // @DataMember(Order=4)
-    public orderByDesc: string;
-
-    // @DataMember(Order=5)
-    public include: string;
-
-    // @DataMember(Order=6)
-    public fields: string;
-
-    // @DataMember(Order=7)
-    public meta: { [index: string]: string; };
 
     public constructor(init?: Partial<QueryDb<T>>) { super(init); (Object as any).assign(this, init); }
 }
@@ -190,6 +150,18 @@ export class Coupon
     public constructor(init?: Partial<Coupon>) { (Object as any).assign(this, init); }
 }
 
+export class User
+{
+    public id: string;
+    public userName: string;
+    public firstName: string;
+    public lastName: string;
+    public displayName: string;
+    public profileUrl: string;
+
+    public constructor(init?: Partial<User>) { (Object as any).assign(this, init); }
+}
+
 /** @description Booking Details */
 export class Booking extends AuditBase
 {
@@ -201,30 +173,12 @@ export class Booking extends AuditBase
     public bookingEndDate?: string;
     public cost: number;
     // @References("typeof(MyApp.ServiceModel.Coupon)")
-    public couponId?: string;
+    public couponId: string;
 
     public discount: Coupon;
-    public notes?: string;
+    public notes: string;
     public cancelled?: boolean;
-    // @DataMember(Order=1)
-    public createdDate: string;
-
-    // @DataMember(Order=2)
-    // @Required()
-    public createdBy: string;
-
-    // @DataMember(Order=3)
-    public modifiedDate: string;
-
-    // @DataMember(Order=4)
-    // @Required()
-    public modifiedBy: string;
-
-    // @DataMember(Order=5)
-    public deletedDate?: string;
-
-    // @DataMember(Order=6)
-    public deletedBy: string;
+    public employee: User;
 
     public constructor(init?: Partial<Booking>) { super(init); (Object as any).assign(this, init); }
 }
@@ -233,7 +187,7 @@ export class Forecast implements IGet
 {
     public date: string;
     public temperatureC: number;
-    public summary?: string;
+    public summary: string;
     public temperatureF: number;
 
     public constructor(init?: Partial<Forecast>) { (Object as any).assign(this, init); }
@@ -260,7 +214,7 @@ export class ResponseError
     public message: string;
 
     // @DataMember(Order=4)
-    public meta: { [index: string]: string; };
+    public meta: { [index:string]: string; };
 
     public constructor(init?: Partial<ResponseError>) { (Object as any).assign(this, init); }
 }
@@ -281,9 +235,30 @@ export class ResponseStatus
     public errors: ResponseError[];
 
     // @DataMember(Order=5)
-    public meta: { [index: string]: string; };
+    public meta: { [index:string]: string; };
 
     public constructor(init?: Partial<ResponseStatus>) { (Object as any).assign(this, init); }
+}
+
+// @DataContract
+export class QueryResponse<T>
+{
+    // @DataMember(Order=1)
+    public offset: number;
+
+    // @DataMember(Order=2)
+    public total: number;
+
+    // @DataMember(Order=3)
+    public results: T[] = [];
+
+    // @DataMember(Order=4)
+    public meta: { [index:string]: string; };
+
+    // @DataMember(Order=5)
+    public responseStatus: ResponseStatus;
+
+    public constructor(init?: Partial<QueryResponse<T>>) { (Object as any).assign(this, init); }
 }
 
 export class HelloResponse
@@ -295,7 +270,7 @@ export class HelloResponse
 
 export class AdminDataResponse
 {
-    public pageStats: PageStats[];
+    public pageStats: PageStats[] = [];
 
     public constructor(init?: Partial<AdminDataResponse>) { (Object as any).assign(this, init); }
 }
@@ -337,7 +312,7 @@ export class RegisterResponse implements IHasSessionId, IHasBearerToken
     public responseStatus: ResponseStatus;
 
     // @DataMember(Order=12)
-    public meta: { [index: string]: string; };
+    public meta: { [index:string]: string; };
 
     public constructor(init?: Partial<RegisterResponse>) { (Object as any).assign(this, init); }
 }
@@ -349,27 +324,6 @@ export class Todo
     public isFinished: boolean;
 
     public constructor(init?: Partial<Todo>) { (Object as any).assign(this, init); }
-}
-
-// @DataContract
-export class QueryResponse<Todo>
-{
-    // @DataMember(Order=1)
-    public offset: number;
-
-    // @DataMember(Order=2)
-    public total: number;
-
-    // @DataMember(Order=3)
-    public results: Todo[];
-
-    // @DataMember(Order=4)
-    public meta: { [index: string]: string; };
-
-    // @DataMember(Order=5)
-    public responseStatus: ResponseStatus;
-
-    public constructor(init?: Partial<QueryResponse<Todo>>) { (Object as any).assign(this, init); }
 }
 
 // @DataContract
@@ -409,10 +363,13 @@ export class AuthenticateResponse implements IHasSessionId, IHasBearerToken
     public permissions: string[];
 
     // @DataMember(Order=12)
-    public responseStatus: ResponseStatus;
+    public authProvider: string;
 
     // @DataMember(Order=13)
-    public meta: { [index: string]: string; };
+    public responseStatus: ResponseStatus;
+
+    // @DataMember(Order=14)
+    public meta: { [index:string]: string; };
 
     public constructor(init?: Partial<AuthenticateResponse>) { (Object as any).assign(this, init); }
 }
@@ -492,7 +449,7 @@ export class Register implements IReturn<RegisterResponse>, IPost
     public errorView: string;
 
     // @DataMember(Order=11)
-    public meta: { [index: string]: string; };
+    public meta: { [index:string]: string; };
 
     public constructor(init?: Partial<Register>) { (Object as any).assign(this, init); }
     public getTypeName() { return 'Register'; }
@@ -505,7 +462,7 @@ export class ConfirmEmail implements IReturnVoid, IGet
 {
     public userId: string;
     public code: string;
-    public returnUrl?: string;
+    public returnUrl: string;
 
     public constructor(init?: Partial<ConfirmEmail>) { (Object as any).assign(this, init); }
     public getTypeName() { return 'ConfirmEmail'; }
@@ -517,28 +474,8 @@ export class ConfirmEmail implements IReturnVoid, IGet
 export class QueryTodos extends QueryData<Todo> implements IReturn<QueryResponse<Todo>>
 {
     public id?: number;
-    public ids?: number[];
-    public textContains?: string;
-    // @DataMember(Order=1)
-    public skip?: number;
-
-    // @DataMember(Order=2)
-    public take?: number;
-
-    // @DataMember(Order=3)
-    public orderBy: string;
-
-    // @DataMember(Order=4)
-    public orderByDesc: string;
-
-    // @DataMember(Order=5)
-    public include: string;
-
-    // @DataMember(Order=6)
-    public fields: string;
-
-    // @DataMember(Order=7)
-    public meta: { [index: string]: string; };
+    public ids: number[];
+    public textContains: string;
 
     public constructor(init?: Partial<QueryTodos>) { super(init); (Object as any).assign(this, init); }
     public getTypeName() { return 'QueryTodos'; }
@@ -587,7 +524,7 @@ export class DeleteTodo implements IReturnVoid, IDelete
 // @Route("/todos", "DELETE")
 export class DeleteTodos implements IReturnVoid, IDelete
 {
-    public ids: number[];
+    public ids: number[] = [];
 
     public constructor(init?: Partial<DeleteTodos>) { (Object as any).assign(this, init); }
     public getTypeName() { return 'DeleteTodos'; }
@@ -628,7 +565,7 @@ export class Authenticate implements IReturn<AuthenticateResponse>, IPost
     public errorView: string;
 
     // @DataMember(Order=9)
-    public meta: { [index: string]: string; };
+    public meta: { [index:string]: string; };
 
     public constructor(init?: Partial<Authenticate>) { (Object as any).assign(this, init); }
     public getTypeName() { return 'Authenticate'; }
@@ -642,26 +579,6 @@ export class Authenticate implements IReturn<AuthenticateResponse>, IPost
 export class QueryBookings extends QueryDb<Booking> implements IReturn<QueryResponse<Booking>>
 {
     public id?: number;
-    // @DataMember(Order=1)
-    public skip?: number;
-
-    // @DataMember(Order=2)
-    public take?: number;
-
-    // @DataMember(Order=3)
-    public orderBy: string;
-
-    // @DataMember(Order=4)
-    public orderByDesc: string;
-
-    // @DataMember(Order=5)
-    public include: string;
-
-    // @DataMember(Order=6)
-    public fields: string;
-
-    // @DataMember(Order=7)
-    public meta: { [index: string]: string; };
 
     public constructor(init?: Partial<QueryBookings>) { super(init); (Object as any).assign(this, init); }
     public getTypeName() { return 'QueryBookings'; }
@@ -673,32 +590,23 @@ export class QueryBookings extends QueryDb<Booking> implements IReturn<QueryResp
 // @Route("/coupons", "GET")
 export class QueryCoupons extends QueryDb<Coupon> implements IReturn<QueryResponse<Coupon>>
 {
-    public id?: string;
-    // @DataMember(Order=1)
-    public skip?: number;
-
-    // @DataMember(Order=2)
-    public take?: number;
-
-    // @DataMember(Order=3)
-    public orderBy: string;
-
-    // @DataMember(Order=4)
-    public orderByDesc: string;
-
-    // @DataMember(Order=5)
-    public include: string;
-
-    // @DataMember(Order=6)
-    public fields: string;
-
-    // @DataMember(Order=7)
-    public meta: { [index: string]: string; };
+    public id: string;
 
     public constructor(init?: Partial<QueryCoupons>) { super(init); (Object as any).assign(this, init); }
     public getTypeName() { return 'QueryCoupons'; }
     public getMethod() { return 'GET'; }
     public createResponse() { return new QueryResponse<Coupon>(); }
+}
+
+// @ValidateRequest(Validator="IsAdmin")
+export class QueryUsers extends QueryDb<User> implements IReturn<QueryResponse<User>>
+{
+    public id: string;
+
+    public constructor(init?: Partial<QueryUsers>) { super(init); (Object as any).assign(this, init); }
+    public getTypeName() { return 'QueryUsers'; }
+    public getMethod() { return 'GET'; }
+    public createResponse() { return new QueryResponse<User>(); }
 }
 
 /** @description Create a new Booking */
@@ -721,8 +629,8 @@ export class CreateBooking implements IReturn<IdResponse>, ICreateDb<Booking>
     public bookingStartDate: string;
 
     public bookingEndDate?: string;
-    public notes?: string;
-    public couponId?: string;
+    public notes: string;
+    public couponId: string;
 
     public constructor(init?: Partial<CreateBooking>) { (Object as any).assign(this, init); }
     public getTypeName() { return 'CreateBooking'; }
@@ -736,7 +644,7 @@ export class CreateBooking implements IReturn<IdResponse>, ICreateDb<Booking>
 export class UpdateBooking implements IReturn<IdResponse>, IPatchDb<Booking>
 {
     public id: number;
-    public name?: string;
+    public name: string;
     public roomType?: RoomType;
     // @Validate(Validator="GreaterThan(0)")
     public roomNumber?: number;
@@ -746,8 +654,8 @@ export class UpdateBooking implements IReturn<IdResponse>, IPatchDb<Booking>
 
     public bookingStartDate?: string;
     public bookingEndDate?: string;
-    public notes?: string;
-    public couponId?: string;
+    public notes: string;
+    public couponId: string;
     public cancelled?: boolean;
 
     public constructor(init?: Partial<UpdateBooking>) { (Object as any).assign(this, init); }
@@ -773,6 +681,9 @@ export class DeleteBooking implements IReturnVoid, IDeleteDb<Booking>
 // @ValidateRequest(Validator="HasRole(`Employee`)")
 export class CreateCoupon implements IReturn<IdResponse>, ICreateDb<Coupon>
 {
+    // @Validate(Validator="NotEmpty")
+    public id: string;
+
     // @Validate(Validator="NotEmpty")
     public description: string;
 

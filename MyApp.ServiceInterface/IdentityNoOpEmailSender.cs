@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using MyApp.Data;
 
-namespace MyApp.Data;
+namespace MyApp.ServiceInterface;
 
-/// <summary>
-/// To send real emails, configure SmtpConfig in appsettings.json and register EmailSender instead
-/// </summary>
+// Remove the "else if (EmailSender is IdentityNoOpEmailSender)" block from RegisterConfirmation.razor after updating with a real implementation.
 public sealed class IdentityNoOpEmailSender : IEmailSender<ApplicationUser>
 {
     private readonly IEmailSender emailSender = new NoOpEmailSender();

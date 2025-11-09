@@ -15,9 +15,6 @@ export default () => {
                     <NavLink to="/about" className={navClass}>About</NavLink>
                 </div>
                 <div className="pb-6">
-                    <NavLink to="/deploy" className={navClass}>Deploy</NavLink>
-                </div>
-                <div className="pb-6">
                     <NavLink to="/posts" className={navClass}>Archive</NavLink>
                 </div>
                 <div className="pb-6">

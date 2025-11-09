@@ -5,7 +5,6 @@ import { leftPart, rightPart } from "@servicestack/client"
 import { useContext } from "react"
 import { PressContext } from "@/contexts"
 
-
 export default () => {
     const press = useContext(PressContext)
     const releases = press.whatsNew
