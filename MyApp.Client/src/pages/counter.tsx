@@ -1,13 +1,11 @@
 import { useState } from "react"
+import { PrimaryButton } from "@servicestack/react"
 import LayoutPage from "@/components/LayoutPage"
 import SrcPage from "@/components/SrcPage"
-import { PrimaryButton } from "@servicestack/react"
 
 export default () => {
     const [count, setCount] = useState(0)
-    const title = `Counter`
-
-    return (<LayoutPage title={title}>
+    return (<LayoutPage title="Counter">
         <p className="my-4">Current count: {count}</p>
 
         <PrimaryButton onClick={() => setCount(count + 1)}>Click me</PrimaryButton>

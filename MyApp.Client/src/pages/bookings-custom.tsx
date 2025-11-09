@@ -10,7 +10,7 @@ function Index() {
     const { currency } = useFormatters()
     const [coupon, setCoupon] = useState<any>(null)
 
-    return (<Page title="Bookings CRUD (Custom)" className="max-w-screen-lg">
+    return (<Page title="Bookings CRUD (Custom Columns)" className="max-w-screen-lg">
 
         <div className="mb-4 flex justify-end">
             <Link to="/bookings-auto" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
@@ -79,7 +79,7 @@ function Index() {
             )}
             
             <div className="mt-4 text-center text-gray-400 flex justify-center -ml-6">
-                <SrcPage path="bookings-crud/index.tsx"/>
+                <SrcPage path="bookings-custom.tsx"/>
             </div>
         </div>
 

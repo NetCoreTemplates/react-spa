@@ -9,7 +9,7 @@ import { Link } from "react-router-dom"
 function Index() {
 
 
-    return (<Page title="Bookings CRUD (Auto)" className="max-w-screen-lg">
+    return (<Page title="Bookings CRUD (Auto Columns)" className="max-w-screen-lg">
 
         <div className="mb-4 flex justify-end">
             <Link to="/bookings-custom" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
@@ -21,7 +21,7 @@ function Index() {
             <AutoQueryGrid type="Booking"/>
 
             <div className="mt-4 text-center text-gray-400 flex justify-center -ml-6">
-                <SrcPage path="bookings-crud/index.tsx"/>
+                <SrcPage path="bookings-auto.tsx"/>
             </div>
         </div>
 

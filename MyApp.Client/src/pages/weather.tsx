@@ -11,8 +11,8 @@ export default (): React.JSX.Element => {
     useEffect(() => {
         (async () => {
             const api = await client.api(new GetWeatherForecast())
-            if (api.succeeded) {
-                setForecasts(api.response!)
+            if (api.response) {
+                setForecasts(api.response)
             }
         })()
     }, [])
