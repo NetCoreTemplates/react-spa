@@ -55,7 +55,7 @@ export default () => {
                                     <div className="mx-3 relative">
                                         <div>
                                             <Link to="/profile"
-                                                  className="max-w-xs bg-white dark:bg-black rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 lg:p-2 lg:rounded-md lg:hover:bg-gray-50 dark:lg:hover:bg-gray-900 dark:ring-offset-black"
+                                                  className="max-w-xs rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 lg:p-2 lg:rounded-md lg:hover:bg-gray-50 dark:lg:hover:bg-gray-900 dark:ring-offset-black"
                                                   id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                                                 <img className="h-8 w-8 rounded-full" src={user.profileUrl} alt=""/>
                                                 <span
