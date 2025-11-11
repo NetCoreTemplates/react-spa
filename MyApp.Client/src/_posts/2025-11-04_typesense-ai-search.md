@@ -112,5 +112,4 @@ content and generate embeddings using custom field definitions defined in [types
 
 ## Feedback & Support
 
-We'd love to hear your feedback! If you encounter any issues or have suggestions for improvements, please 
-[let us know!](https://forums.servicestack.net/).
+We'd love to hear your feedback! If you encounter any issues or have suggestions for improvements, please [let us know!](https://forums.servicestack.net/).
