@@ -2,12 +2,12 @@ import './assets/styles/index.css'
 import './assets/styles/main.css'
 import 'react/jsx-runtime'
 import Layout from '@/components/Layout'
-import { Loading, ClientContext } from "@servicestack/react"
+import { Loading, ClientContext, setLinkComponent } from "@servicestack/react"
 
 import { ThemeProvider } from "@/components/theme-provider"
 import { StrictMode, Suspense, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter as Router, useRoutes, useLocation } from 'react-router-dom'
+import { BrowserRouter as Router, useRoutes, useLocation, Link } from 'react-router-dom'
 
 import routes from '~react-pages'
 
@@ -15,6 +15,8 @@ import press from "virtual:press"
 import { PressContext } from './contexts'
 import { client, init } from "@/gateway"
 
+// Configure the library to use React Router's Link component
+setLinkComponent(Link)
 init()
 
 function App() {
