@@ -15,4 +15,3 @@ Alternatively write new project files directly into an empty repository, using t
     $ git clone https://github.com/<User>/<ProjectName>.git
     $ cd <ProjectName>
     $ x new react-spa
-
