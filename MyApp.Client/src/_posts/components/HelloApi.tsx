@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
-import { JsonServiceClient } from "@servicestack/client"
-import { TextInput } from "@servicestack/react"
+import { TextInput, useClient } from "@servicestack/react"
 import { Hello } from "@/dtos"
 
 type Props = { value: string }
@@ -8,7 +7,7 @@ export default ({ value }:Props) => {
     const [name, setName] = useState(value)
     const [result, setResult] = useState('')
     
-    const client = new JsonServiceClient()
+    const client = useClient()
     useEffect(() => {
         (async () => {
             let api = await client.api(new Hello({ name }))
