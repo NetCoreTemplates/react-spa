@@ -9,6 +9,7 @@ import SrcPage from "@/components/SrcPage"
 import { generateSlug, dateLabel, dateTimestamp } from "@/lib/utils"
 import { PressContext } from "@/contexts"
 import { useContext } from "react"
+import FeatureLinks from "@/components/FeatureLinks"
 
 const Index = () => {
     const press = useContext(PressContext)
@@ -68,6 +69,8 @@ const Index = () => {
             </section>
 
             <AutoUis className="mt-40 max-w-7xl mx-auto" />
+
+            <FeatureLinks />
 
             <div className="container mx-auto px-5 mb-24">
                 {!primaryPost ? null : <section>

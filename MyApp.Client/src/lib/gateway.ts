@@ -3,8 +3,17 @@ import { appendQueryString, nameOf, IReturn, JsonServiceClient } from "@services
 import useSWR from "swr"
 import { Authenticate } from "@/lib/dtos"
 
+const serverRoutePaths = [
+    '/Identity',
+    '/api',
+    '/ui',
+    '/chat',
+    '/admin-ui',
+    '/swagger',
+]
+
 export function isServerRoute(path:string) {
-    return path.startsWith('/Identity')
+    return serverRoutePaths.some(x => path.startsWith(x))
 }
 
 export const Routes = {
