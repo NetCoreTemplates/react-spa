@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { useAuth, Loading } from "@servicestack/react"
-import { client, Routes } from "./gateway"
+import { client, isServerRoute, Routes } from "./gateway"
 import { Authenticate } from "@/lib/dtos"
 
 export const Redirecting = () => {
@@ -14,37 +14,41 @@ type ValidateAuthProps = {
   redirectTo?: string
 }
 export function ValidateAuth<TOriginalProps extends {}>(Component:React.FC<TOriginalProps>, validateProps? :ValidateAuthProps) {
-  let { role, permission, redirectTo } = validateProps ?? {}
-  const compWithProps: React.FC<TOriginalProps> = (props) => {
-    const navigate = useNavigate()
-    const authProps = useAuth()
-    const { user, isAuthenticated, hasRole } = authProps
-    const location = useLocation()
-    useEffect(() => {
-      const goTo = shouldRedirect()
-      if (goTo) {
-        navigate(goTo, { replace:true })
-      }
-    }, [user])
+    let { role, permission, redirectTo } = validateProps ?? {}
+    const compWithProps: React.FC<TOriginalProps> = (props) => {
+        const navigate = useNavigate()
+        const location = useLocation()
+        const authProps = useAuth()
+        const { user, isAuthenticated, hasRole } = authProps
+        useEffect(() => {
+            const goTo = shouldRedirect()
+            if (goTo) {
+                if (isServerRoute(goTo)) {
+                    window.location.href = goTo
+                } else {
+                    navigate(goTo, { replace: true })
+                }
+            }
+        }, [user])
 
-    redirectTo ??= location.pathname
+        redirectTo ??= location.pathname
 
-    const shouldRedirect = () => !isAuthenticated
-        ? Routes.signin(redirectTo)
-        : role && !hasRole(role)
-            ? Routes.forbidden()
-            : permission && !hasRole(permission)
+        const shouldRedirect = () => !isAuthenticated
+            ? Routes.signin(redirectTo)
+            : role && !hasRole(role)
                 ? Routes.forbidden()
-                : null;
+                : permission && !hasRole(permission)
+                    ? Routes.forbidden()
+                    : null;
 
-    if (shouldRedirect()) {
-      return <Redirecting />
+        if (shouldRedirect()) {
+            return <Redirecting />
+        }
+
+        return <Component {...props} />
     }
 
-    return <Component {...props} />
-  }
-
-  return compWithProps
+    return compWithProps
 }
 
 export function appAuth() {
