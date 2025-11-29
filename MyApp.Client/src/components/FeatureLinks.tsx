@@ -19,6 +19,9 @@ export default () => {
                 <TextLink href="/ui" className={navClass("/ui")}>API Explorer</TextLink>
             </div>
             <div className="pb-6">
+                <TextLink href="/admin-ui" className={navClass("/admin-ui")}>Admin UI</TextLink>
+            </div>
+            <div className="pb-6">
                 <TextLink href="/about" className={navClass("/about")}>About</TextLink>
             </div>
             <div className="pb-6">

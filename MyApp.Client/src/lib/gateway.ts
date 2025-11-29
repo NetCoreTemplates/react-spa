@@ -10,6 +10,7 @@ const serverRoutePaths = [
     '/chat',
     '/admin-ui',
     '/swagger',
+    '/scalar',
 ]
 
 export function isServerRoute(path:string) {
