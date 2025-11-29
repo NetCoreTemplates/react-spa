@@ -1,5 +1,5 @@
 import Page from "@/components/LayoutPage"
-import { ValidateAuth } from "@/auth.tsx"
+import { ValidateAuth } from "@/lib/auth"
 
 import SrcPage from "@/components/SrcPage"
 import { AutoQueryGrid } from "@servicestack/react"

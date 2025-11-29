@@ -12,9 +12,11 @@
     "postinstall": "node ./postinstall.mjs"
   },
   "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-dialog": "^1.1.13",
     "@radix-ui/react-dropdown-menu": "^2.1.14",
     "@radix-ui/react-slot": "^1.2.2",
+    "@radix-ui/react-tabs": "^1.1.13",
     "@servicestack/client": "^2.1.11",
     "@servicestack/react": "^2.0.15",
     "@tanstack/react-table": "^8.21.3",
@@ -24,6 +26,7 @@
     "gray-matter": "^4.0.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-net-templates": "^0.0.1",
     "react-router": "^7.6.0",
     "react-router-dom": "^7.6.0",
     "swr": "^2.3.3",

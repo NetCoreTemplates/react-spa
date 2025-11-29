@@ -3,10 +3,10 @@ import { useClient, FormLoading, ErrorSummary, TextInput, PrimaryButton, Seconda
 import { serializeToObject, leftPart, rightPart, toPascalCase } from "@servicestack/client"
 import { useNavigate } from "react-router-dom"
 import Page from "@/components/LayoutPage"
-import { getRedirect } from "@/gateway"
-import { Register, RegisterResponse } from "@/dtos"
+import { getRedirect } from "@/lib/gateway"
+import { Register, RegisterResponse } from "@/lib/dtos"
 import { useSearchParams } from "react-router-dom"
-import { appAuth, Redirecting } from "@/auth.tsx"
+import { appAuth, Redirecting } from "@/lib/auth"
 
 export default () => {
 

@@ -16,7 +16,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
-import { cn } from "@/utils"
+import { cn } from "@/lib/utils"
 
 import { toPascalCase, splitTitleCase } from "@servicestack/client"
 

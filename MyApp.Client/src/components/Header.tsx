@@ -1,7 +1,6 @@
 import { Link, NavLink } from "react-router-dom"
-import Logo from "@/assets/img/logo.svg?react"
 import { DarkModeToggle, SecondaryButton } from "@servicestack/react"
-import { appAuth } from "@/auth.tsx"
+import { appAuth } from "@/lib/auth"
 
 export default () => {
     const { user, hasRole, signOut } = appAuth()
@@ -14,16 +13,18 @@ export default () => {
     return (<header className="border-b border-gray-200 dark:border-gray-800 pr-3">
         <div className="flex flex-wrap items-center">
             <div className="absolute z-10 top-2 left-2 sm:static flex-shrink flex-grow-0">
-                <div className="cursor-pointer">
+                <div className="p-4 cursor-pointer">
                     <Link to="/" className="navbar-brand flex items-center">
-                        <Logo className="w-8 h-8 sm:ml-2 sm:w-12 sm:h-12" title="MyApp logo"/>
-                        <span className="hidden ml-2 sm:block text-2xl font-semibold">My App</span>
+                        <img src="/assets/img/logo.svg" className="size-8" title="MyApp logo"/>
                     </Link>
                 </div>
             </div>
             <div className="flex flex-grow flex-shrink flex-nowrap justify-end items-center">
-                <nav className="relative flex flex-grow leading-6 font-semibold text-slate-700 dark:text-slate-200">
+                <nav className="relative flex flex-grow">
                     <ul className="flex flex-wrap items-center justify-end w-full m-0">
+                        <li className="relative flex flex-wrap just-fu-start m-0">
+                            <NavLink to="/shadcn-ui" className={navClass}>shadcn/ui</NavLink>
+                        </li>
                         <li className="relative flex flex-wrap just-fu-start m-0">
                             <NavLink to="/counter" className={navClass}>Counter</NavLink>
                         </li>
@@ -37,9 +38,6 @@ export default () => {
                             <NavLink to="/bookings-auto" className={navClass}>Bookings</NavLink>
                         </li>
                         <li className="relative flex flex-wrap just-fu-start m-0">
-                            <NavLink to="/whatsnew" className={navClass}>What's New</NavLink>
-                        </li>
-                        <li className="relative flex flex-wrap just-fu-start m-0">
                             <NavLink to="/blog" className={navClass}>Blog</NavLink>
                         </li>
                         <li className="relative flex flex-wrap just-fu-start m-0">
@@ -49,7 +47,7 @@ export default () => {
                             ? (<>
                                 {hasRole('Admin')
                                     ? <li className="relative flex flex-wrap just-fu-start m-0">
-                                        <NavLink to="/admin" className={navClass}>Admin</NavLink>
+                                        <Link to="/admin" className={navClass('/admin')}>Admin</Link>
                                     </li> : null}
                                 <li>
                                     <div className="mx-3 relative">
@@ -74,8 +72,8 @@ export default () => {
                                 </li>
                             </>)
                             : (<li className="relative flex flex-wrap just-fu-start m-0">
-                                <SecondaryButton className="m-2">
-                                    <Link to="/signin">Sign In</Link>
+                                <SecondaryButton href="/signin" className="m-2">
+                                    Sign In
                                 </SecondaryButton>
                             </li>)
                         }

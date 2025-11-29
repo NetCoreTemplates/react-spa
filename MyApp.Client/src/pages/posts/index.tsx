@@ -5,7 +5,7 @@ import SrcPage from "@/components/SrcPage"
 
 import { useContext } from "react"
 import { PressContext } from "@/contexts"
-import { generateSlug } from "@/utils"
+import { generateSlug } from "@/lib/utils"
 import Layout from "@/components/Layout"
 
 type Props = {}

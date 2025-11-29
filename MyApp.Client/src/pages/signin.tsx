@@ -3,10 +3,10 @@ import { SyntheticEvent, useEffect, useState} from "react"
 import { useNavigate } from "react-router-dom"
 
 import Page from "@/components/LayoutPage"
-import { getRedirect } from "@/gateway"
+import { getRedirect } from "@/lib/gateway"
 import { ErrorSummary, TextInput, PrimaryButton, SecondaryButton, useClient, ApiStateContext } from "@servicestack/react"
-import { Authenticate } from "@/dtos"
-import { appAuth, Redirecting } from "@/auth.tsx"
+import { Authenticate } from "@/lib/dtos"
+import { appAuth, Redirecting } from "@/lib/auth"
 import { useSearchParams, Link } from "react-router-dom"
 
 export default () => {

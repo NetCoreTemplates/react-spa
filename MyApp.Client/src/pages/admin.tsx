@@ -1,7 +1,7 @@
 import { SecondaryButton } from "@servicestack/react"
 import { Icon } from "@iconify/react"
 import Page from "@/components/LayoutPage"
-import { ValidateAuth, appAuth } from "@/auth.tsx"
+import { ValidateAuth, appAuth } from "@/lib/auth"
 
 function Admin () {
     const { user, signOut } = appAuth()

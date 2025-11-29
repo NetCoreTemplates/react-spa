@@ -1,7 +1,7 @@
 ---
 title: Animaginary
 url: /blog
-image: /img/whatsnew/animaginary.svg
+image: /assets/img/whatsnew/animaginary.svg
 ---
 
 Introducing Animaginary, the next generation web animation library that's taking the world by storm. 

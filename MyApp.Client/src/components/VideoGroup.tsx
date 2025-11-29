@@ -3,7 +3,7 @@ import MarkdownComponent from "@/components/MarkdownComponent"
 import { lastRightPart } from "@servicestack/client"
 import { useContext } from "react"
 import { PressContext } from "@/contexts"
-import { cn } from "@/utils"
+import { cn } from "@/lib/utils"
 
 
 type Props = {

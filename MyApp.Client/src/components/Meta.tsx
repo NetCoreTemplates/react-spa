@@ -6,7 +6,7 @@ export default () => {
         name="description"
         content={`Vite + React SPA`}
       />
-      <meta property="og:image" content="/img/logo.svg" />
+      <meta property="og:image" content="/assets/img/logo.svg" />
     </>
   )
 }

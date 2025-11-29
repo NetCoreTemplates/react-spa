@@ -1,7 +1,7 @@
 ---
 title: Planetaria
 url: http://planetaria.tech
-image: /img/whatsnew/planetaria.svg
+image: /assets/img/whatsnew/planetaria.svg
 ---
 
 Welcome to the world of Planetaria, a groundbreaking new product that is poised to revolutionize the way we explore space. 

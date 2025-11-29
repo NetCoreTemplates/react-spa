@@ -1,11 +1,10 @@
-import { apiUrl } from "@/gateway"
 export default () => {
     return (
         <div className="pb-20">
             <h4 className="mt-20 text-center text-xl">
                 Manage Bookings in
-                <a className="font-semibold" href={apiUrl('/locode/QueryBookings')}> Locode </a> or
-                <a className="font-semibold" href={apiUrl('/ui/QueryBookings')}> API Explorer </a>
+                <a className="font-semibold" href="/locode/QueryBookings"> Locode </a> or
+                <a className="font-semibold" href="/ui/QueryBookings"> API Explorer </a>
             </h4>
             <div className="mt-20 mx-auto text-gray-500 max-w-screen-lg">
                 <h2 className="mt-4 text-3xl sm:text-4xl text-slate-900 font-extrabold tracking-tight dark:text-slate-50">

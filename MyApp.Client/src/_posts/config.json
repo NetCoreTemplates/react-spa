@@ -1,5 +1,5 @@
 {
-  "localBaseUrl": "http://localhost:5173",
+  "localBaseUrl": "https://localhost:5001",
   "publicBaseUrl": "https://react-spa.servicestack.net",
   "siteTwitter": "@React",
   "blogTitle": "From the blog",

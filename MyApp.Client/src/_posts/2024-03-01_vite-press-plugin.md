@@ -206,7 +206,7 @@ Additional information about the Website Blog is maintained in `_posts/config.js
 
 ```json
 {
-  "localBaseUrl": "http://localhost:5173",
+  "localBaseUrl": "https://localhost:5001",
   "publicBaseUrl": "https://press-vue.servicestack.net",
   "siteTwitter": "@Vue",
   "blogTitle": "From the blog",
@@ -244,27 +244,6 @@ are broadly available for all features:
  - **Live Reload** - Latest Markdown content is displayed during **Development** 
  - **Drafts** - Prevent posts being worked on from being published with `draft: true`
  - **Future Dates** - Posts with a future date wont be published until that date
-
-### What's New Feature
-
-The [/whatsnew](/whatsnew) page is an example of creating a custom Markdown feature to implement a portfolio or a product releases page
-where a new folder is created per release, containing both release date and release or project name, with all features in that release 
-maintained markdown content sorted in alphabetical order:
-
-```files
-/_whatsnew
-  /2023-03-08_Animaginary
-    feature1.md
-  /2023-03-18_OpenShuttle
-    feature1.md
-  /2023-03-28_Planetaria
-    feature1.md
-```
-
-What's New follows the same structure as Pages feature which is rendered in:
-
- - [whatsnew.vue](https://github.com/NetCoreTemplates/vue-spa/blob/main/MyApp.Client/src/pages/whatsnew.vue)
- - [whatsnew.tsx](https://github.com/NetCoreTemplates/react-spa/blob/main/MyApp.Client/src/pages/whatsnew.tsx)
  
 ### Videos Feature
 

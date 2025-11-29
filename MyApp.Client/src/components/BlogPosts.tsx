@@ -2,7 +2,7 @@ import { Post } from "vite-plugin-press"
 import { Link } from "react-router-dom"
 import { useContext } from "react"
 import { PressContext } from "@/contexts"
-import { generateSlug, dateLabel, dateTimestamp } from "@/utils"
+import { generateSlug, dateLabel, dateTimestamp } from "@/lib/utils"
 
 type Props = {
     posts: Post[]

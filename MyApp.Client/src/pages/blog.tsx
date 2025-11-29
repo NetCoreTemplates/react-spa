@@ -2,10 +2,9 @@ import { Link } from "react-router-dom"
 import Layout from "@/components/Layout"
 import SrcPage from "@/components/SrcPage"
 import FollowLinks from "@/components/FollowLinks"
-import Logo from "@/assets/img/logo.svg?react"
 import { useContext } from "react"
 import { PressContext } from "@/contexts"
-import { generateSlug, dateLabel, dateTimestamp } from "@/utils"
+import { generateSlug, dateLabel, dateTimestamp } from "@/lib/utils"
 
 
 export default () => {
@@ -174,7 +173,7 @@ export default () => {
                         <div className="w-1/3">
                             <div className="pl-8">
                                 <div className="flex items-center">
-                                    <Logo className="w-8 h-8 mr-1" title="MyApp logo"/>
+                                    <img src="/assets/img/logo.svg" className="w-8 h-8 mr-1" title="MyApp logo"/>
                                     <span className="hidden sm:block text-lg font-semibold">MyApp</span>
                                 </div>
                                 <div className="p-2">

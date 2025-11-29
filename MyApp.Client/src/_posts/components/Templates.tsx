@@ -1,4 +1,4 @@
-import { cn } from "@/utils"
+import { cn } from "@/lib/utils"
 import { type Template, Icons } from './TemplateIndex'
 import { ChangeEvent, useMemo, useState } from "react"
 

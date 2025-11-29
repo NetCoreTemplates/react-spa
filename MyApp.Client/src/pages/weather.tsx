@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useClient, DataGrid } from "@servicestack/react"
 import LayoutPage from "@/components/LayoutPage"
 import SrcPage from "@/components/SrcPage"
-import { GetWeatherForecast, Forecast } from "@/dtos"
+import { GetWeatherForecast, Forecast } from "@/lib/dtos"
 
 export default (): React.JSX.Element => {
     const client = useClient()

@@ -6,7 +6,7 @@ import { ErrorSummary } from "@servicestack/react"
 import { useContext } from "react"
 import { useParams } from "react-router-dom"
 import { PressContext } from "@/contexts"
-import { generateSlug } from "@/utils"
+import { generateSlug } from "@/lib/utils"
 import Layout from "@/components/Layout"
 
 export default () => {

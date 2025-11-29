@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { TextInput, useClient } from "@servicestack/react"
-import { Hello } from "@/dtos"
+import { Hello } from "@/lib/dtos"
 
 type Props = { value: string }
 export default ({ value }:Props) => {

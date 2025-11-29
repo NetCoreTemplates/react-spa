@@ -1,7 +1,7 @@
 import type { Doc } from "vite-plugin-press"
 import React, { lazy, Suspense, useState, ReactNode, MouseEvent } from 'react'
 import { PressContext } from "@/contexts"
-import { cn } from "@/utils"
+import { cn } from "@/lib/utils"
 import LiteYouTube from "./LiteYouTube"
 import FileLayout from "./FileLayout"
 import { Icon } from "@iconify/react"

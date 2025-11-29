@@ -1,7 +1,7 @@
 import type React from "react"
 import Layout from "@/components/Layout"
 import ErrorBoundary from "@/components/ErrorBoundary"
-import { cn } from "@/utils"
+import { cn } from "@/lib/utils"
 
 type Props = {
     title: string

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AutoQueryGrid, AutoEditForm, TextLink, Icon, PreviewFormat, useFormatters } from "@servicestack/react"
 import Page from "@/components/LayoutPage"
-import { ValidateAuth } from "@/auth.tsx"
+import { ValidateAuth } from "@/lib/auth"
 import SrcPage from "@/components/SrcPage"
 import BookingsInfo from "@/components/BookingsInfo.tsx"
 import { Link } from "react-router-dom"
