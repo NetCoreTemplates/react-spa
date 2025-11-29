@@ -49,16 +49,16 @@ When more capabilities are required and you want a .NET API backend to your Vite
 you can use one of our integrated .NET 8 SPA templates:
 
  - [vue-spa](https://vue-spa.web-templates.io) - .NET 8 API with Vite Vue SPA frontend
- - [react-spa](https://react-spa.web-templates.io) - .NET 8 API with Vite React SPA frontend
+ - [react-spa](https://react-spa.react-templates.net) - .NET 8 API with Vite React SPA frontend
 
 <div class="not-prose mt-8 grid grid-cols-2 gap-4">
     <a class="block group border dark:border-gray-800 hover:border-indigo-700 dark:hover:border-indigo-700 flex flex-col justify-between" href="https://vue-spa.web-templates.io">
         <img class="p-2" src="https://raw.githubusercontent.com/ServiceStack/Assets/master/csharp-templates/vue-spa.png" />
         <div class="bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-semibold group-hover:bg-indigo-700 group-hover:text-white text-center py-2">vue-spa.web-templates.io</div>
     </a>
-    <a class="block group border dark:border-gray-800 hover:border-indigo-700 dark:hover:border-indigo-700 flex flex-col justify-between" href="https://react-spa.web-templates.io">
+    <a class="block group border dark:border-gray-800 hover:border-indigo-700 dark:hover:border-indigo-700 flex flex-col justify-between" href="https://react-spa.react-templates.net">
         <img class="p-2" src="https://raw.githubusercontent.com/ServiceStack/Assets/master/csharp-templates/react-spa.png" />
-        <div class="bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-semibold group-hover:bg-indigo-700 group-hover:text-white text-center py-2">react-spa.web-templates.io</div>
+        <div class="bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-semibold group-hover:bg-indigo-700 group-hover:text-white text-center py-2">react-spa.react-templates.net</div>
     </a>
 </div>
 

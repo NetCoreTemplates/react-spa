@@ -2,9 +2,9 @@
 
 .NET 8.0 react-spa Pages Tailwind Website
 
-[![](https://raw.githubusercontent.com/ServiceStack/Assets/master/csharp-templates/react-spa.png)](http://react-spa.web-templates.io)
+[![](https://raw.githubusercontent.com/ServiceStack/Assets/master/csharp-templates/react-spa.png)](http://react-spa.react-templates.net)
 
-> Browse [source code](https://github.com/NetCoreTemplates/react-spa), view live demo [react-spa.web-templates.io](http://react-spa.web-templates.io) and install with [dotnet-new](https://docs.servicestack.net/dotnet-new):
+> Browse [source code](https://github.com/NetCoreTemplates/react-spa), view live demo [react-spa.react-templates.net](http://react-spa.react-templates.net) and install with [dotnet-new](https://docs.servicestack.net/dotnet-new):
 
     $ dotnet tool install -g x
 
