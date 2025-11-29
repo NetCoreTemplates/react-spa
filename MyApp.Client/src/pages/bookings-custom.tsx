@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { AutoQueryGrid, AutoEditForm, TextLink, Icon, PreviewFormat, useFormatters } from "@servicestack/react"
+import { AutoQueryGrid, useFormatters } from "@servicestack/react"
 import Page from "@/components/LayoutPage"
 import { ValidateAuth } from "@/lib/auth"
 import SrcPage from "@/components/SrcPage"
@@ -20,6 +19,7 @@ function Index() {
         <div className="mt-4 flex flex-col ">
             <AutoQueryGrid
                 type="Booking"
+                hide={['copyApiUrl','downloadCsv']}
                 selectedColumns={['id', 'name', 'cost', 'bookingStartDate', 'bookingEndDate', 'roomNumber', 'createdBy', 'discount']}
                 visibleFrom={{
                     name: 'xl',

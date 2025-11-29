@@ -32,11 +32,11 @@ const API_URL = isProd ? DEPLOY_API : (buildLocal ? '' : target)
 
 // Only required if accessing vite directly, e.g. http://localhost:5173
 const proxy = {
-        '^/api': {
-            target,
-            secure: false
-        }
+    '^/api': {
+        target,
+        secure: false
     }
+}
 
 export default defineConfig({
     define: { apiBaseUrl: `"${API_URL}"` },
@@ -78,6 +78,7 @@ export default defineConfig({
         target: 'baseline-widely-available',
     },
     server: {
-        proxy,        
-    }    
+        proxy,
+        open: false,
+    }
 })
