@@ -120,7 +120,7 @@ but replace their internal implementation to use ASP.NET Identity Auth instead.
 The new Identity Auth integration is contained in the .NET 6+ **ServiceStack.Extensions** NuGet package:
 
 ```xml
-<PackageReference Include="ServiceStack.Extensions" Version="8.*" />
+<PackageReference Include="ServiceStack.Extensions" Version="10.*" />
 ```
 
 Which at a minimum lets you configure ServiceStack to use Identity Auth by simply registering the existing `AuthFeature`

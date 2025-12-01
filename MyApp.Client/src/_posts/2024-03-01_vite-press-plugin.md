@@ -431,14 +431,14 @@ HTML or XML fragments can also be copied by escaping them first:
 
 ```md
 :::copy
-`<PackageReference Include="ServiceStack" Version="8.*" />`
+`<PackageReference Include="ServiceStack" Version="10.*" />`
 :::
 ```
 
 #### Output
 
 :::copy
-`<PackageReference Include="ServiceStack" Version="8.*" />`
+`<PackageReference Include="ServiceStack" Version="10.*" />`
 :::
 
 ### sh

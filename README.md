@@ -12,6 +12,10 @@ A modern full-stack .NET 10.0 + Vite React 19 SPA project template that combines
 npx create-net react-spa MyProject
 ```
 
+## Jumpstart with Copilot
+
+Instantly [scaffold a new App with this template](https://github.com/new?template_name=react-spa&template_owner=NetCoreTemplates) using GitHub Copilot, just describe the features you want and watch Copilot build it!
+
 ## Getting Started
 
 Run Server .NET Project (automatically starts both .NET and Vite dev servers):

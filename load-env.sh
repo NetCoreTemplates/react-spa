@@ -11,7 +11,7 @@
 # - KAMAL_DEPLOY_IP=100.100.100.100    # IP address of server to deploy to
 # - KAMAL_DEPLOY_HOST=www.example.org  # domain name of website
 # - KAMAL_REGISTRY_USERNAME=user       # Container registry credentials (for ghcr.io)
-# - GITHUB_PACKAGES_TOKEN=ghp_xxx      
+# - KAMAL_REGISTRY_PASSWORD=ghp_xxx      
 # Login with:
 # echo $KAMAL_REGISTRY_PASSWORD | docker login ghcr.io -u mythz --password-stdin
 
