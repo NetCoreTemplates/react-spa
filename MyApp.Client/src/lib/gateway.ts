@@ -5,6 +5,7 @@ import { Authenticate } from "@/lib/dtos"
 
 const serverRoutePaths = [
     '/Identity',
+    '/metadata',
     '/api',
     '/ui',
     '/chat',
