@@ -231,10 +231,11 @@ Access built-in admin dashboards at:
 
 ## Learn More
 
+- [react-templates.net](https://react-templates.net)
+- [ServiceStack React Components](https://react.servicestack.net)
 - [ServiceStack Documentation](https://docs.servicestack.net)
 - [Vite Documentation](https://vite.dev)
 - [React Documentation](https://react.dev)
-- [ServiceStack React Components](https://docs.servicestack.net/react)
-- [AutoQuery CRUD](https://docs.servicestack.net/autoquery-crud)
+- [AutoQuery CRUD](https://react-templates.net/docs/autoquery/crud)
 - [Background Jobs](https://docs.servicestack.net/background-jobs)
 - [AI Chat API](https://docs.servicestack.net/ai-chat-api)
