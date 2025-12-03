@@ -6,6 +6,8 @@ A modern full-stack .NET 10.0 + Vite React 19 SPA project template that combines
 
 > Browse [source code](https://github.com/NetCoreTemplates/react-spa)
 
+## Quick Start
+
 ```bash
 npx create-net react-spa MyProject
 ```
@@ -18,7 +20,7 @@ Instantly [scaffold a new App with this template](https://github.com/new?templat
 
 [![](https://github.com/ServiceStack/servicestack.net/blob/main/MyApp/wwwroot/img/posts/vibecode-react-templates/bg.webp?raw=true)](https://react-templates.net)
 
-## Quick Start
+## Getting Started
 
 Run Server .NET Project (automatically starts both .NET and Vite dev servers):
 
