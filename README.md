@@ -1,12 +1,10 @@
 # .NET 10 Full-featured Vite React SPA Identity Auth Template
 
+A modern full-stack .NET 10.0 + Vite React 19 SPA project template that combines the power of ServiceStack with a fast Vite-powered React development experience. It provides a production-ready foundation for building scalable web applications with integrated authentication, database management, and background job processing.
+
 ![](https://github.com/ServiceStack/docs.servicestack.net/blob/main/MyApp/wwwroot/img/pages/react/react-spa.webp)
 
 > Browse [source code](https://github.com/NetCoreTemplates/react-spa)
-
-A modern full-stack .NET 10.0 + Vite React 19 SPA project template that combines the power of ServiceStack with a fast Vite-powered React development experience. It provides a production-ready foundation for building scalable web applications with integrated authentication, database management, and background job processing.
-
-## Quick Start
 
 ```bash
 npx create-net react-spa MyProject
@@ -16,7 +14,11 @@ npx create-net react-spa MyProject
 
 Instantly [scaffold a new App with this template](https://github.com/new?template_name=react-spa&template_owner=NetCoreTemplates) using GitHub Copilot, just describe the features you want and watch Copilot build it!
 
-## Getting Started
+## [react-templates.net](https://react-templates.net)
+
+[![](https://github.com/ServiceStack/servicestack.net/blob/main/MyApp/wwwroot/img/posts/vibecode-react-templates/bg.webp?raw=true)](https://react-templates.net)
+
+## Quick Start
 
 Run Server .NET Project (automatically starts both .NET and Vite dev servers):
 
