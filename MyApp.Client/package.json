@@ -18,7 +18,7 @@
     "@radix-ui/react-slot": "^1.2.2",
     "@radix-ui/react-tabs": "^1.1.13",
     "@servicestack/client": "^2.1.11",
-    "@servicestack/react": "^2.0.15",
+    "@servicestack/react": "^2.0.17",
     "@tanstack/react-table": "^8.21.3",
     "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
