@@ -30,18 +30,6 @@ const DEPLOY_API = process.env.KAMAL_DEPLOY_HOST
 // Now use it for API_URL
 const API_URL = isProd ? DEPLOY_API : (buildLocal ? '' : target)
 
-// Only required if accessing vite directly, e.g. http://localhost:5173
-const proxy = {
-    '^/api': {
-        target,
-        secure: false
-    },
-    '^/metadata': {
-        target,
-        secure: false
-    }
-}
-
 export default defineConfig({
     define: { apiBaseUrl: `"${API_URL}"` },
     plugins: [
@@ -83,7 +71,6 @@ export default defineConfig({
     },
     server: {
         host: true, // Listen on all interfaces (both IPv4 and IPv6)
-        proxy,
         open: false,
     }
 })
