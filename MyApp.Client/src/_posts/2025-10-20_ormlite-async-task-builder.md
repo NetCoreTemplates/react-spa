@@ -2,7 +2,7 @@
 title: RDBMS Async Tasks Builder
 summary: Effortlessly run multiple async DB Requests in parallel with OrmLite's new Async Tasks Builder 
 tags: [db,ormlite]
-author: Gayle Smith
+author: Lucy Bates
 image: https://servicestack.net/img/posts/ormlite-async-task-builder/bg.webp
 ---
 
