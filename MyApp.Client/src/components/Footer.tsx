@@ -1,28 +1,41 @@
-import FeatureLinks from "./FeatureLinks"
 
-export default () => {
-    return (
-        <footer className="bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
-            
-            <FeatureLinks />
-            
-            <div className="container mx-auto px-5">
-                <div className="py-28 flex flex-col lg:flex-row items-center">
-                    <h3 className="text-4xl lg:text-6xl font-bold tracking-tighter leading-tight text-center lg:text-left mb-10 lg:mb-0 lg:pr-4 lg:w-1/2">
-                        A ServiceStack Project
-                    </h3>
-                    <div className="flex flex-col lg:flex-row justify-center items-center lg:pl-4 lg:w-1/2">
-                        <a href="https://react-templates.net/docs"
-                           className="mx-3 bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0">
-                            Read Documentation
-                        </a>
-                        <a href="https://github.com/NetCoreTemplates/react-spa"
-                           className="mx-3 font-bold hover:underline">
-                            View on GitHub
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    )
+const Footer = () => {
+  return (
+    <footer className="bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 relative">
+      <div className="max-w-7xl mx-auto px-6 py-12 lg:py-20">
+
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
+          <div className="text-center lg:text-left space-y-4">
+            <h3 className="text-4xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-white">
+              <a href="https://react-templates.net" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                react templates .net
+              </a>
+            </h3>
+            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              Templates for the next generation of AI-assisted web applications.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <a href="https://react-templates.net/docs"
+              className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white transition-all bg-slate-900 rounded-full hover:bg-slate-800 hover:shadow-lg hover:shadow-slate-900/20 focus:ring-4 focus:ring-slate-900/20 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-500/20 active:scale-95">
+              Read Documentation
+            </a>
+            <a href="https://github.com/NetCoreTemplates/react-spa"
+              className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-slate-900 transition-all bg-white border border-slate-200 rounded-full hover:bg-slate-50 hover:border-slate-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-white dark:hover:border-slate-600 focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-800 active:scale-95">
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div className="absolute bottom-4 left-6 right-6 flex justify-between items-center text-xs text-slate-400 dark:text-slate-600">
+        <p>&copy; {new Date().getFullYear()} My App</p>
+        <a href="#" className="hover:text-slate-600 dark:hover:text-slate-400 transition-colors">Privacy Policy</a>
+      </div>
+    </footer>
+  )
 }
+
+export default Footer
