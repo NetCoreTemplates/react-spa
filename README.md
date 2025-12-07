@@ -61,7 +61,7 @@ Full ASP.NET Core Identity integration with ServiceStack's Auth features:
 - **Admin Users UI** - Built-in user management at `/admin-ui/users`
 - **API Keys** - Generate and manage API keys for programmatic access
 
-### 📊 AutoQuery CRUD
+### 📊 [AutoQuery CRUD](#autoquery-crud-dev-workflow)
 
 Declarative APIs with automatic query and CRUD functionality:
 
@@ -82,14 +82,15 @@ Modern UI built with:
 - **@servicestack/react** - Pre-built form components and AutoQueryGrid
 - **SWR** - React Hooks for data fetching with caching
 
-### 🤖 AI Chat Integration
+### 🗄️ Database
 
-Built-in AI chat capabilities:
+SQLite with dual ORM support:
 
-- **ChatFeature** - Multi-provider AI chat API
-- **Configurable Providers** - ServiceStack, OpenAI, Anthropic, Google, Groq, and more
-- **Chat History** - Persistent storage with `DbChatStore`
-- **Admin Analytics** - Chat usage insights at `/admin-ui/chat`
+- **OrmLite** - ServiceStack's fast micro-ORM for services
+- **Entity Framework Core** - For Identity and complex queries
+- **Code-First Migrations** - EF Core migrations in `/Migrations`
+- **Database Admin UI** - Browse data at `/admin-ui/database`
+- **SQLite** - Default database - [Upgrade to PostgreSQL/SQL Server/MySQL](#upgrading-to-enterprise-database)
 
 ### ⚙️ Background Jobs
 
@@ -99,6 +100,7 @@ Durable job processing with ServiceStack's Background Jobs:
 - **Email Queue** - SMTP email sending via background jobs
 - **Recurring Jobs** - Scheduled task execution
 - **Job Dashboard** - Monitor jobs at `/admin-ui/jobs`
+- Uses monthly rolling Sqlite databases by default - [Upgrade to PostgreSQL/SQL Server/MySQL](#upgrading-to-enterprise-database)
 
 ### 📝 MDX Blog
 
@@ -110,15 +112,6 @@ Integrated markdown blog with:
 - **Frontmatter** - YAML metadata for posts
 - **Typography Styling** - Beautiful prose with `@tailwindcss/typography`
 
-### 🗄️ Database
-
-SQLite with dual ORM support:
-
-- **OrmLite** - ServiceStack's fast micro-ORM for services
-- **Entity Framework Core** - For Identity and complex queries
-- **Code-First Migrations** - EF Core migrations in `/Migrations`
-- **Database Admin UI** - Browse data at `/admin-ui/database`
-
 ### 📡 Request Logging
 
 Comprehensive API logging:
@@ -127,13 +120,6 @@ Comprehensive API logging:
 - **Request Body Tracking** - Full request payload capture
 - **Error Tracking** - Automatic error logging
 - **Admin Dashboard** - View logs at `/admin-ui/logging`
-
-### 🏥 Health Checks
-
-Production-ready health monitoring:
-
-- **Health Endpoint** - `/up` for load balancer checks
-- **Custom Health Checks** - Extensible health check framework
 
 ### 🔄 TypeScript DTOs
 
@@ -150,6 +136,22 @@ API documentation with modern tooling:
 - **OpenAPI 3.0** - Auto-generated API specifications
 - **Scalar API Reference** - Interactive API documentation at `/scalar/v1`
 - **Development Mode** - API docs available in development
+
+### 🤖 AI Chat Integration
+
+Built-in AI chat capabilities:
+
+- **ChatFeature** - Multi-provider AI chat API
+- **Configurable Providers** - ServiceStack, OpenAI, Anthropic, Google, Groq, and more
+- **Chat History** - Persistent storage with `DbChatStore`
+- **Admin Analytics** - Chat usage insights at `/admin-ui/chat`
+
+### 🏥 Health Checks
+
+Production-ready health monitoring:
+
+- **Health Endpoint** - `/up` for load balancer checks
+- **Custom Health Checks** - Extensible health check framework
 
 ### 🐳 Docker Deployment
 
@@ -274,6 +276,7 @@ npm run test:ui     # Run tests with UI
 npm run test:run    # Run tests once
 ```
 
+
 ## Configuration
 
 ### Key Configuration Files
@@ -354,56 +357,6 @@ npx add-in ef-postgres
 npx add-in db-identity
 ```
 
-## Deployment
-
-### Docker + Kamal
-
-This project includes GitHub Actions for CI/CD with automatic Docker image builds and production [deployment with Kamal](https://docs.servicestack.net/kamal-deploy). The `/config/deploy.yml` configuration is designed to be reusable across projects—it dynamically derives service names, image paths, and volume mounts from environment variables, so you only need to configure your server's IP and hostname using GitHub Action secrets.
-
-### GitHub Action Secrets
-
-**Required - App Specific*:
-
-The only secret needed to be configured per Repository.
-
-| Variable | Example | Description |
-|----------|---------|-------------|
-| `KAMAL_DEPLOY_HOST` | `example.org` | Hostname used for SSL certificate and Kamal proxy |
-
-**Required** (Organization Secrets):
-
-Other Required variables can be globally configured in your GitHub Organization or User secrets which will
-enable deploying all your Repositories to the same server.
-
-| Variable | Example  | Description |
-|----------|----------|-------------|
-| `KAMAL_DEPLOY_IP`   | `100.100.100.100` | IP address of the server to deploy to |
-| `SSH_PRIVATE_KEY`   | `ssh-rsa ...`     | SSH private key to access the server |
-| `LETSENCRYPT_EMAIL` | `me@example.org`  | Email for Let's Encrypt SSL certificate |
-
-**Optional**:
-
-| Variable | Example | Description |
-|----------|---------|-------------|
-| `SERVICESTACK_LICENSE` | `...` | ServiceStack license key |
-
-**Inferred** (from GitHub Action context):
-
-These are inferred from the GitHub Action context and don't need to be configured.
-
-| Variable | Source | Description |
-|----------|--------|-------------|
-| `GITHUB_REPOSITORY` | `${{ github.repository }}` | e.g. `acme/example.org` - used for service name and image |
-| `KAMAL_REGISTRY_USERNAME` | `${{ github.actor }}` | GitHub username for container registry |
-| `KAMAL_REGISTRY_PASSWORD` | `${{ secrets.GITHUB_TOKEN }}` | GitHub token for container registry auth |
-
-#### Features
-
-- **Docker containerization** with optimized .NET images
-- **SSL auto-certification** via Let's Encrypt
-- **GitHub Container Registry** integration
-- **Volume persistence** for App_Data including any SQLite database
-
 ## AutoQuery CRUD Dev Workflow
 
 For Rapid Development simple [TypeScript Data Models](https://docs.servicestack.net/autoquery/okai-models) can be used to generate C# AutoQuery APIs and DB Migrations.
@@ -470,6 +423,96 @@ Which will drop the table and then you can get rid of the AutoQuery APIs, DB Mig
 ```bash
 npx okai rm Transaction.d.ts
 ```
+
+## Deployment
+
+### Docker + Kamal
+
+This project includes GitHub Actions for CI/CD with automatic Docker image builds and production [deployment with Kamal](https://docs.servicestack.net/kamal-deploy). The `/config/deploy.yml` configuration is designed to be reusable across projects—it dynamically derives service names, image paths, and volume mounts from environment variables, so you only need to configure your server's IP and hostname using GitHub Action secrets.
+
+### GitHub Action Secrets
+
+**Required - App Specific*:
+
+The only secret needed to be configured per Repository.
+
+| Variable | Example | Description |
+|----------|---------|-------------|
+| `KAMAL_DEPLOY_HOST` | `example.org` | Hostname used for SSL certificate and Kamal proxy |
+
+**Required** (Organization Secrets):
+
+Other Required variables can be globally configured in your GitHub Organization or User secrets which will
+enable deploying all your Repositories to the same server.
+
+| Variable | Example  | Description |
+|----------|----------|-------------|
+| `KAMAL_DEPLOY_IP`   | `100.100.100.100` | IP address of the server to deploy to |
+| `SSH_PRIVATE_KEY`   | `ssh-rsa ...`     | SSH private key to access the server |
+| `LETSENCRYPT_EMAIL` | `me@example.org`  | Email for Let's Encrypt SSL certificate |
+
+**Optional**:
+
+| Variable | Example | Description |
+|----------|---------|-------------|
+| `SERVICESTACK_LICENSE` | `...` | ServiceStack license key |
+
+**Inferred** (from GitHub Action context):
+
+These are inferred from the GitHub Action context and don't need to be configured.
+
+| Variable | Source | Description |
+|----------|--------|-------------|
+| `GITHUB_REPOSITORY` | `${{ github.repository }}` | e.g. `acme/example.org` - used for service name and image |
+| `KAMAL_REGISTRY_USERNAME` | `${{ github.actor }}` | GitHub username for container registry |
+| `KAMAL_REGISTRY_PASSWORD` | `${{ secrets.GITHUB_TOKEN }}` | GitHub token for container registry auth |
+
+#### Features
+
+- **Docker containerization** with optimized .NET images
+- **SSL auto-certification** via Let's Encrypt
+- **GitHub Container Registry** integration
+- **Volume persistence** for App_Data including any SQLite database
+
+## AI-Assisted Development with CLAUDE.md
+
+As part of our objectives of improving developer experience and embracing modern AI-assisted development workflows - all new .NET SPA templates include a comprehensive `AGENTS.md` file designed to optimize AI-assisted development workflows.
+
+### What is CLAUDE.md?
+
+`CLAUDE.md` and [AGENTS.md](https://agents.md) onboards Claude (and other AI assistants) to your codebase by using a structured documentation file that provides it with complete context about your project's architecture, conventions, and technology choices. This enables more accurate code generation, better suggestions, and faster problem-solving.
+
+### What's Included
+
+Each template's `AGENTS.md` contains:
+
+- **Project Architecture Overview** - Technology stack, design patterns, and key architectural decisions
+- **Project Structure** - Gives Claude a map of the codebase
+- **ServiceStack Conventions** - DTO patterns, Service implementation, AutoQuery, Authentication, and Validation
+- **API Integration** - TypeScript DTO generation, API client usage, component patterns, and form handling
+- **Database Patterns** - OrmLite setup, migrations, and data access patterns
+- **Common Development Tasks** - Step-by-step guides for adding APIs, implementing features, and extending functionality
+- **Testing & Deployment** - Test patterns and deployment workflows
+
+### Extending with Project-Specific Details
+
+The existing `CLAUDE.md` serves as a solid foundation, but for best results, you should extend it with project-specific details like the purpose of the project, key parts and features of the project and any unique conventions you've adopted.
+
+### Benefits
+
+- **Faster Onboarding** - New developers (and AI assistants) understand project conventions immediately
+- **Consistent Code Generation** - AI tools generate code following your project's patterns
+- **Better Context** - AI assistants can reference specific ServiceStack patterns and conventions
+- **Reduced Errors** - Clear documentation of framework-specific conventions
+- **Living Documentation** - Keep it updated as your project evolves
+
+### How to Use
+
+Claude Code and most AI Assistants already support automatically referencing `CLAUDE.md` and `AGENTS.md` files, for others you can just include it in your prompt context when asking for help, e.g:
+
+> Using my project's AGENTS.md, can you help me add a new AutoQuery API for managing Products?
+
+The AI will understand your App's ServiceStack conventions, React setup, and project structure, providing more accurate and contextual assistance.
 
 ## Learn More
 
