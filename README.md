@@ -431,7 +431,7 @@ npx okai "Table to store Customer Stripe Subscriptions"
 This launches a TUI that invokes ServiceStack's okai API to fire multiple concurrent requests to frontier cloud 
 and OSS models to generate the TypeScript Data Models required to implement this feature. 
 You'll be able to browse and choose which of the AI Models you prefer which you can accept by pressing `a` 
-to `(a) accept`. These are the data models [Claude Sonnet 4.5 generated](https://servicestack.net/text-to-blazor?id=1764337230546) generated for this prompt.
+to `(a) accept`. These are the data models [Claude Sonnet 4.5 generated](https://servicestack.net/text-to-blazor?id=1764337230546) for this prompt.
 
 #### Regenerate AutoQuery APIs and DB Migrations
 
