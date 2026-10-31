@@ -1,0 +1,4 @@
+# Formatting-only commits, ignored by GitHub blame and `git blame` (git config blame.ignoreRevsFile .git-blame-ignore-revs)
+
+# Format MyApp.Client with Oxfmt
+708faf7cae409323e2de48a09ed9aacc5eb90877
