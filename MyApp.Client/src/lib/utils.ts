@@ -1,6 +1,3 @@
-import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
-
 export function generateSlug(str: string) {
     return str
         .normalize('NFKD') // normalize() with NFKD returns Unicode Normalization Form
@@ -23,6 +20,4 @@ export function dateTimestamp(date: any) {
     }
 }
 
-export function cn(...inputs: ClassValue[]) {
-    return twMerge(clsx(inputs))
-}
+export { cn } from 'cn'
