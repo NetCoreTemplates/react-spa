@@ -40,8 +40,8 @@ export default () => {
                     <div className="relative my-4 mx-auto max-w-7xl">
                         <div className="flex flex-wrap justify-center">
                             {allTags.map(tag => tag == selectedTag
-                                ? <span className="mr-2 mb-2 text-xs leading-5 font-semibold bg-indigo-600 text-white rounded-full py-1 px-3 flex items-center space-x-2">{tag}</span>
-                                : <Link to={tagLink(tag)} className="mr-2 mb-2 text-xs leading-5 font-semibold bg-slate-400/10 dark:bg-slate-400/30 rounded-full py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20 dark:hover:bg-slate-400/40 dark:highlight-white/5">{tag}</Link>)}
+                                ? <span key={tag} className="mr-2 mb-2 text-xs leading-5 font-semibold bg-indigo-600 text-white rounded-full py-1 px-3 flex items-center space-x-2">{tag}</span>
+                                : <Link key={tag} to={tagLink(tag)} className="mr-2 mb-2 text-xs leading-5 font-semibold bg-slate-400/10 dark:bg-slate-400/30 rounded-full py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20 dark:hover:bg-slate-400/40 dark:highlight-white/5">{tag}</Link>)}
                         </div>
                     </div>
                     <div className="mt-12 relative mx-auto max-w-7xl">

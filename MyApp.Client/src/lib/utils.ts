@@ -7,10 +7,10 @@ export function generateSlug(str:string) {
       .toLowerCase()
       .trim()
       .replace(/\s+/g, '-')     // Replace spaces with -
-      .replace(/[^\w\-]+/g, '') // Remove all non-word chars
-      .replace(/\_/g,'-')       // Replace _ with -
-      .replace(/\-\-+/g, '-')   // Replace multiple - with single -
-      .replace(/\-$/g, '');     // Remove trailing -
+      .replace(/[^\w-]+/g, '')   // Remove all non-word chars
+      .replace(/_/g,'-')        // Replace _ with -
+      .replace(/--+/g, '-')     // Replace multiple - with single -
+      .replace(/-$/g, '');       // Remove trailing -
 }
 export function dateLabel(date:any) {
   return new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -18,7 +18,7 @@ export function dateLabel(date:any) {
 export function dateTimestamp(date:any) {
   try {
     return new Date(date).toISOString()
-  } catch (e) {
+  } catch {
     return '2000-01-01T00:00:00.000Z'
   }
 }

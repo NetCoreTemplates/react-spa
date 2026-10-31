@@ -24,6 +24,7 @@ export const Routes = {
 }
 
 export const client = new JsonServiceClient()
+// oxlint-disable-next-line react/rules-of-hooks -- useMetadata is a factory, not a React hook
 export const metadata = useMetadata(client)
 
 // Load Metadata & Auth State on Startup
@@ -55,11 +56,13 @@ class SwrClient {
         this.client = client
     }
 
+    // Only call from React components, it wraps the useSWR hook
     get<T>(fn: () => IReturn<T> | string) {
+        // oxlint-disable-next-line react/rules-of-hooks
         return useSWR(() => {
             let request = fn()
             return appendQueryString(`SwrClient:${nameOf(request)}`, request)
-        }, _ => this.client.get(fn()))
+        }, () => this.client.get(fn()))
     }
 }
 

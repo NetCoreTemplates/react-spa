@@ -13,23 +13,13 @@ type ValidateAuthProps = {
   permission?: string
   redirectTo?: string
 }
-export function ValidateAuth<TOriginalProps extends {}>(Component:React.FC<TOriginalProps>, validateProps? :ValidateAuthProps) {
+export function ValidateAuth<TOriginalProps extends object>(Component:React.FC<TOriginalProps>, validateProps? :ValidateAuthProps) {
     let { role, permission, redirectTo } = validateProps ?? {}
-    const compWithProps: React.FC<TOriginalProps> = (props) => {
+    const ValidatedComponent: React.FC<TOriginalProps> = (props) => {
         const navigate = useNavigate()
         const location = useLocation()
         const authProps = useAuth()
         const { user, isAuthenticated, hasRole } = authProps
-        useEffect(() => {
-            const goTo = shouldRedirect()
-            if (goTo) {
-                if (isServerRoute(goTo)) {
-                    window.location.href = goTo
-                } else {
-                    navigate(goTo, { replace: true })
-                }
-            }
-        }, [user])
 
         redirectTo ??= location.pathname
 
@@ -41,6 +31,17 @@ export function ValidateAuth<TOriginalProps extends {}>(Component:React.FC<TOrig
                     ? Routes.forbidden()
                     : null;
 
+        useEffect(() => {
+            const goTo = shouldRedirect()
+            if (goTo) {
+                if (isServerRoute(goTo)) {
+                    window.location.href = goTo
+                } else {
+                    navigate(goTo, { replace: true })
+                }
+            }
+        }, [user])
+
         if (shouldRedirect()) {
             return <Redirecting />
         }
@@ -48,11 +49,14 @@ export function ValidateAuth<TOriginalProps extends {}>(Component:React.FC<TOrig
         return <Component {...props} />
     }
 
-    return compWithProps
+    return ValidatedComponent
 }
 
+// appAuth is a hook, but keeps its name for compatibility with the other templates
 export function appAuth() {
+    // oxlint-disable-next-line react/rules-of-hooks
     const navigate = useNavigate()
+    // oxlint-disable-next-line react/rules-of-hooks
     const authState = useAuth()
     async function revalidate() {
         try {

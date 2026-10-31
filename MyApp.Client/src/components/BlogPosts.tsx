@@ -26,7 +26,7 @@ export default ({posts}: Props) => {
     }
 
     function authorProfileUrl(name: string) {
-        return author(name)?.profileUrl!
+        return author(name)?.profileUrl
     }
 
     return (<div className="mx-auto grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">

@@ -40,7 +40,7 @@ function LiteYouTubeEmbedComponent(props: LiteYouTubeProps, ref: React.Ref<HTMLI
   const videoPlaylisCovertId = typeof props.playlistCoverId === 'string' ? encodeURIComponent(props.playlistCoverId) : null;
   const videoTitle = props.title;
   const posterImp = props.poster || "hqdefault";
-  const paramsImp = `&${props.params}` || "";
+  const paramsImp = props.params ? `&${props.params}` : "";
   const mutedImp = props.muted ? "&mute=1" : "";
   const announceWatch = props.announce || "Watch";
   const format = props.webp ? 'webp' : 'jpg';

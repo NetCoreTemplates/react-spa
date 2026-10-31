@@ -46,6 +46,7 @@ export function DataTable<TData, TValue>(props: DataTableProps<TData, TValue>) {
     const { enableRowSelection } = props
     const stripedRows = props.stripedRows ?? true
 
+    // oxlint-disable-next-line react/incompatible-library -- TanStack Table isn't React Compiler compatible
     const table = useReactTable({
         ...props,
         getCoreRowModel: getCoreRowModel(),

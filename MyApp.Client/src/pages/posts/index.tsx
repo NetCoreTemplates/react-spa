@@ -8,8 +8,7 @@ import { PressContext } from "@/contexts"
 import { generateSlug } from "@/lib/utils"
 import Layout from "@/components/Layout"
 
-type Props = {}
-export default ({ }: Props) => {
+export default () => {
 
     const press = useContext(PressContext)
     const title = press.blog.config.blogTitle

@@ -35,8 +35,8 @@ export default () => {
                     <div className="mt-4 relative mb-8 mx-auto max-w-7xl">
                         <div className="flex flex-wrap justify-center">
                             {allYears.map(year => forYear == year
-                                ? <b className="ml-3 text-sm font-semibold">{ year }</b>
-                                : <Link className="ml-3 text-sm text-indigo-700 dark:text-indigo-300 font-semibold hover:underline" to={yearLink(year)}>{year}</Link>)}
+                                ? <b key={year} className="ml-3 text-sm font-semibold">{ year }</b>
+                                : <Link key={year} className="ml-3 text-sm text-indigo-700 dark:text-indigo-300 font-semibold hover:underline" to={yearLink(year)}>{year}</Link>)}
                         </div>
                     </div>
                     <div className="mt-12 relative mx-auto max-w-7xl">

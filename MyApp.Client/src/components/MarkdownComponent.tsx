@@ -6,7 +6,7 @@ import LiteYouTube from "./LiteYouTube"
 import FileLayout from "./FileLayout"
 import { Icon } from "@iconify/react"
 
-export const Components: { [name: string]: React.JSX.Element | Function } = {
+export const Components: { [name: string]: React.ElementType } = {
     Files,
     Icon,
     Iconify: Icon, // alias for portability with Vue Markdown
@@ -23,13 +23,22 @@ export const Components: { [name: string]: React.JSX.Element | Function } = {
         box="bg-gray-800" icon="bg-green-600" txt="whitespace-pre text-base text-gray-100" {...remaining} />,
 }
 
+// Create each lazy include once, so it isn't reloaded on every render
+const lazyIncludes = new Map<string, ReturnType<typeof lazy>>()
+function lazyInclude(src: string, factory: any) {
+    if (!lazyIncludes.has(src)) lazyIncludes.set(src, lazy(factory))
+    return lazyIncludes.get(src)!
+}
+
 function Include({ src }: { src: string }) {
     const press = React.useContext(PressContext)
     const factory = (press.components as any).includes[src]
-    const Component = lazy(factory ? factory : () => Promise.resolve(<></>))
-    return factory
-        ? <Suspense fallback={<></>}><Component components={Components} /></Suspense>
-        : <div className="text-red-500">Include '{src}' not found</div>
+    if (!factory) return <div className="text-red-500">Include '{src}' not found</div>
+    const Component = lazyInclude(src, factory)
+    return <Suspense fallback={<></>}>
+        {/* oxlint-disable-next-line react/static-components -- cached per src in lazyIncludes */}
+        <Component components={Components} />
+    </Suspense>
 }
 
 type AlertProps = {

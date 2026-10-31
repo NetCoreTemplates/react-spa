@@ -23,7 +23,6 @@ export function remarkFencedCode(options: { components?:string[] } = {}) {
 // Convert :::component{.cls}::: Markdown Containers to <component className="cls" />
 export function remarkContainers() {
     return function (tree: any) {
-        let i = 0
         let prevType = ''
         visit(tree, (node): any => {
             const type = node.type
