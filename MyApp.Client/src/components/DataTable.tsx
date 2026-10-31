@@ -1,24 +1,12 @@
-﻿import {
-    ColumnDef,
-    flexRender,
-    getCoreRowModel,
-    useReactTable,
-} from "@tanstack/react-table"
+﻿import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 
-import type { TableOptions } from "@tanstack/react-table"
+import type { TableOptions } from '@tanstack/react-table'
 
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils'
 
-import { toPascalCase, splitTitleCase } from "@servicestack/client"
+import { toPascalCase, splitTitleCase } from '@servicestack/client'
 
 type DataTableProps<TData, TValue> = TableOptions<TData> & {
     columns: ColumnDef<TData, TValue>[]
@@ -27,16 +15,19 @@ type DataTableProps<TData, TValue> = TableOptions<TData> & {
 
 export { getCoreRowModel }
 
-export function columnDefs<T>(names:string[], configure?: (name:{ [name:string]: ColumnDef<T> }) => void): ColumnDef<T>[] {
-    const to = names.map(name => ({
+export function columnDefs<T>(names: string[], configure?: (name: { [name: string]: ColumnDef<T> }) => void): ColumnDef<T>[] {
+    const to = names.map((name) => ({
         accessorKey: name,
         header: splitTitleCase(toPascalCase(name)).join(' '),
     }))
     if (configure != null) {
-        const map = to.reduce((acc,x) => {
-            acc[x.accessorKey] = x
-            return acc
-        }, {} as { [name:string]: ColumnDef<T> })
+        const map = to.reduce(
+            (acc, x) => {
+                acc[x.accessorKey] = x
+                return acc
+            },
+            {} as { [name: string]: ColumnDef<T> },
+        )
         configure(map)
     }
     return to
@@ -61,12 +52,7 @@ export function DataTable<TData, TValue>(props: DataTableProps<TData, TValue>) {
                             {headerGroup.headers.map((header) => {
                                 return (
                                     <TableHead key={header.id}>
-                                        {header.isPlaceholder
-                                            ? null
-                                            : flexRender(
-                                                header.column.columnDef.header,
-                                                header.getContext()
-                                            )}
+                                        {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                                     </TableHead>
                                 )
                             })}
@@ -76,21 +62,25 @@ export function DataTable<TData, TValue>(props: DataTableProps<TData, TValue>) {
                 <TableBody>
                     {table.getRowModel().rows?.length ? (
                         table.getRowModel().rows.map((row) => (
-                            <tr className={cn("border-b transition-colors",
-                                (enableRowSelection ? "cursor-pointer " : ""),
-                                enableRowSelection && row.getIsSelected() 
-                                    ? "bg-indigo-100 dark:bg-blue-800" 
-                                    : (enableRowSelection ? "hover:bg-yellow-50 dark:hover:bg-blue-900 " : "") +
-                                        (stripedRows
-                                            ? (row.index % 2 == 0 ? "bg-white dark:bg-black" : "bg-gray-50 dark:bg-gray-800")
-                                            : "bg-white dark:bg-black"))}
+                            <tr
+                                className={cn(
+                                    'border-b transition-colors',
+                                    enableRowSelection ? 'cursor-pointer ' : '',
+                                    enableRowSelection && row.getIsSelected()
+                                        ? 'bg-indigo-100 dark:bg-blue-800'
+                                        : (enableRowSelection ? 'hover:bg-yellow-50 dark:hover:bg-blue-900 ' : '') +
+                                              (stripedRows
+                                                  ? row.index % 2 == 0
+                                                      ? 'bg-white dark:bg-black'
+                                                      : 'bg-gray-50 dark:bg-gray-800'
+                                                  : 'bg-white dark:bg-black'),
+                                )}
                                 key={row.id}
-                                data-state={row.getIsSelected() && "selected"}
-                                onClick={row.getToggleSelectedHandler()}>
+                                data-state={row.getIsSelected() && 'selected'}
+                                onClick={row.getToggleSelectedHandler()}
+                            >
                                 {row.getVisibleCells().map((cell) => (
-                                    <TableCell key={cell.id}>
-                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                    </TableCell>
+                                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                                 ))}
                             </tr>
                         ))

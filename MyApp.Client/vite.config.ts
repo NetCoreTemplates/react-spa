@@ -43,20 +43,9 @@ export default defineConfig({
         svgr(),
         mdx({
             // See https://mdxjs.com/advanced/plugins
-            remarkPlugins: [
-                remarkFrontmatter,
-                remarkFencedCode,
-                remarkDirective,
-                remarkGfm,
-                remarkParse,
-                remarkPrism as any,
-                remarkContainers,
-            ],
+            remarkPlugins: [remarkFrontmatter, remarkFencedCode, remarkDirective, remarkGfm, remarkParse, remarkPrism as any, remarkContainers],
             rehypePlugins: [
-                [
-                    rehypeRaw,
-                    { passThrough: ['mdxjsEsm', 'mdxFlowExpression', 'mdxJsxFlowElement', 'mdxJsxTextElement', 'mdxTextExpression'] },
-                ],
+                [rehypeRaw, { passThrough: ['mdxjsEsm', 'mdxFlowExpression', 'mdxJsxFlowElement', 'mdxJsxTextElement', 'mdxTextExpression'] }],
                 rehypeStringify,
             ],
         }),

@@ -1,25 +1,16 @@
-import { useMetadata, authContext } from "@servicestack/react"
-import { appendQueryString, nameOf, IReturn, JsonServiceClient } from "@servicestack/client"
-import useSWR from "swr"
-import { Authenticate } from "@/lib/dtos"
+import { useMetadata, authContext } from '@servicestack/react'
+import { appendQueryString, nameOf, IReturn, JsonServiceClient } from '@servicestack/client'
+import useSWR from 'swr'
+import { Authenticate } from '@/lib/dtos'
 
-const serverRoutePaths = [
-    '/Identity',
-    '/metadata',
-    '/api',
-    '/ui',
-    '/chat',
-    '/admin-ui',
-    '/swagger',
-    '/scalar',
-]
+const serverRoutePaths = ['/Identity', '/metadata', '/api', '/ui', '/chat', '/admin-ui', '/swagger', '/scalar']
 
-export function isServerRoute(path:string) {
-    return serverRoutePaths.some(x => path.startsWith(x))
+export function isServerRoute(path: string) {
+    return serverRoutePaths.some((x) => path.startsWith(x))
 }
 
 export const Routes = {
-    signin: (redirectTo?: string) => redirectTo ? `/Identity/Account/Login?ReturnUrl=${redirectTo}` : `/signin`,
+    signin: (redirectTo?: string) => (redirectTo ? `/Identity/Account/Login?ReturnUrl=${redirectTo}` : `/signin`),
     forbidden: () => '/forbidden',
 }
 
@@ -32,20 +23,20 @@ export async function init() {
     const authCtx = authContext()
     return await Promise.all([
         metadata.loadMetadata(),
-        client.post(new Authenticate())
-            .then(r => {
+        client
+            .post(new Authenticate())
+            .then((r) => {
                 authCtx.signIn(r)
-            }).catch(() => {
-            authCtx.signOut()
-        })
+            })
+            .catch(() => {
+                authCtx.signOut()
+            }),
     ])
 }
 
-export function getRedirect(searchParams:URLSearchParams) {
+export function getRedirect(searchParams: URLSearchParams) {
     const redirect = searchParams.get('redirect')
-    return redirect && Array.isArray(redirect)
-        ? redirect[0]
-        : redirect
+    return redirect && Array.isArray(redirect) ? redirect[0] : redirect
 }
 
 // Typed Stale While Revalidate client
@@ -59,10 +50,13 @@ class SwrClient {
     // Only call from React components, it wraps the useSWR hook
     get<T>(fn: () => IReturn<T> | string) {
         // oxlint-disable-next-line react/rules-of-hooks
-        return useSWR(() => {
-            let request = fn()
-            return appendQueryString(`SwrClient:${nameOf(request)}`, request)
-        }, () => this.client.get(fn()))
+        return useSWR(
+            () => {
+                let request = fn()
+                return appendQueryString(`SwrClient:${nameOf(request)}`, request)
+            },
+            () => this.client.get(fn()),
+        )
     }
 }
 

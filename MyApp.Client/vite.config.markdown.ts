@@ -4,7 +4,7 @@ import { visit } from 'unist-util-visit'
 const FencedComponents = ['files']
 
 // Convert ```component``` to <component body={children} />
-export function remarkFencedCode(options: { components?:string[] } = {}) {
+export function remarkFencedCode(options: { components?: string[] } = {}) {
     return function (tree: any) {
         visit(tree, (node): any => {
             const allComponents = [...(options.components || []), ...FencedComponents]
@@ -13,7 +13,7 @@ export function remarkFencedCode(options: { components?:string[] } = {}) {
             if (type === 'code' && allComponents.includes(node.lang)) {
                 node.type = 'paragraph'
                 data.hName = node.lang
-                data.hProperties = Object.assign({}, data.hProperties, { className: node.attributes?.class, body:node.value })
+                data.hProperties = Object.assign({}, data.hProperties, { className: node.attributes?.class, body: node.value })
             }
             return node
         })
@@ -42,9 +42,9 @@ export function remarkContainers() {
                     const body = tagBody[1]?.trim() ?? ''
                     data.hName = tag
                     const argName = tag === 'include' ? 'src' : 'arg'
-                    data.hProperties = Object.assign({}, data.hProperties, { [argName]:arg, className: node.attributes?.class })
+                    data.hProperties = Object.assign({}, data.hProperties, { [argName]: arg, className: node.attributes?.class })
                     if (body) {
-                        data.hChildren = [h('p',body)]
+                        data.hChildren = [h('p', body)]
                     }
                 }
             }
