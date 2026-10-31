@@ -1,25 +1,37 @@
-import React, { useEffect } from "react"
-import { useNavigate, useLocation } from "react-router-dom"
-import { useAuth, Loading } from "@servicestack/react"
-import { client, isServerRoute, Routes } from "./gateway"
-import { Authenticate } from "@/lib/dtos"
+import React, { useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useAuth, Loading } from '@servicestack/react'
+import { client, isServerRoute, Routes } from './gateway'
+import { Authenticate } from '@/lib/dtos'
 
 export const Redirecting = () => {
-  return <Loading className="py-2 pl-4">redirecting ...</Loading>
+    return <Loading className="py-2 pl-4">redirecting ...</Loading>
 }
 
 type ValidateAuthProps = {
-  role?: string
-  permission?: string
-  redirectTo?: string
+    role?: string
+    permission?: string
+    redirectTo?: string
 }
-export function ValidateAuth<TOriginalProps extends {}>(Component:React.FC<TOriginalProps>, validateProps? :ValidateAuthProps) {
+export function ValidateAuth<TOriginalProps extends object>(Component: React.FC<TOriginalProps>, validateProps?: ValidateAuthProps) {
     let { role, permission, redirectTo } = validateProps ?? {}
-    const compWithProps: React.FC<TOriginalProps> = (props) => {
+    const ValidatedComponent: React.FC<TOriginalProps> = (props) => {
         const navigate = useNavigate()
         const location = useLocation()
         const authProps = useAuth()
         const { user, isAuthenticated, hasRole } = authProps
+
+        redirectTo ??= location.pathname
+
+        const shouldRedirect = () =>
+            !isAuthenticated
+                ? Routes.signin(redirectTo)
+                : role && !hasRole(role)
+                  ? Routes.forbidden()
+                  : permission && !hasRole(permission)
+                    ? Routes.forbidden()
+                    : null
+
         useEffect(() => {
             const goTo = shouldRedirect()
             if (goTo) {
@@ -31,16 +43,6 @@ export function ValidateAuth<TOriginalProps extends {}>(Component:React.FC<TOrig
             }
         }, [user])
 
-        redirectTo ??= location.pathname
-
-        const shouldRedirect = () => !isAuthenticated
-            ? Routes.signin(redirectTo)
-            : role && !hasRole(role)
-                ? Routes.forbidden()
-                : permission && !hasRole(permission)
-                    ? Routes.forbidden()
-                    : null;
-
         if (shouldRedirect()) {
             return <Redirecting />
         }
@@ -48,11 +50,14 @@ export function ValidateAuth<TOriginalProps extends {}>(Component:React.FC<TOrig
         return <Component {...props} />
     }
 
-    return compWithProps
+    return ValidatedComponent
 }
 
+// appAuth is a hook, but keeps its name for compatibility with the other templates
 export function appAuth() {
+    // oxlint-disable-next-line react/rules-of-hooks
     const navigate = useNavigate()
+    // oxlint-disable-next-line react/rules-of-hooks
     const authState = useAuth()
     async function revalidate() {
         try {
@@ -62,7 +67,7 @@ export function appAuth() {
             authState.signOut()
         }
     }
-    async function signOut(redirectTo?:string) {
+    async function signOut(redirectTo?: string) {
         await client.post(new Authenticate({ provider: 'logout' }))
         authState.signOut()
         if (redirectTo) {

@@ -1,16 +1,14 @@
-import { Link } from "react-router-dom"
-import BlogTitle from "@/components/BlogTitle"
-import BlogPosts from "@/components/BlogPosts"
-import SrcPage from "@/components/SrcPage"
+import { Link } from 'react-router-dom'
+import BlogTitle from '@/components/BlogTitle'
+import BlogPosts from '@/components/BlogPosts'
+import SrcPage from '@/components/SrcPage'
 
-import { useContext } from "react"
-import { PressContext } from "@/contexts"
-import { generateSlug } from "@/lib/utils"
-import Layout from "@/components/Layout"
+import { useContext } from 'react'
+import { PressContext } from '@/contexts'
+import { generateSlug } from '@/lib/utils'
+import Layout from '@/components/Layout'
 
-type Props = {}
-export default ({ }: Props) => {
-
+export default () => {
     const press = useContext(PressContext)
     const title = press.blog.config.blogTitle
     const blogDescription = press.blog.config.blogDescription
@@ -18,7 +16,7 @@ export default ({ }: Props) => {
     const allYears = [...new Set(allPosts.map((x: any) => new Date(x.date).getFullYear()) as number[])]
     const allTags = [...new Set(allPosts.flatMap((x: any) => x.tags) as string[])]
     const tagCounts: { [tag: string]: number } = {}
-    allTags.forEach(tag => tagCounts[tag] = allPosts.filter((x: any) => x.tags.includes(tag)).length)
+    allTags.forEach((tag) => (tagCounts[tag] = allPosts.filter((x: any) => x.tags.includes(tag)).length))
     allTags.sort((a: string, b: string) => tagCounts[b] - tagCounts[a])
 
     function tagLink(tag: string) {
@@ -41,21 +39,39 @@ export default ({ }: Props) => {
                     </div>
                     <div className="relative my-4 mx-auto max-w-7xl">
                         <div className="flex flex-wrap justify-center">
-                            {allTags.map(tag =>
-                                <Link key={tag} to={tagLink(tag)} className="mr-2 mb-2 text-xs leading-5 font-semibold bg-slate-400/10 dark:bg-slate-400/30 rounded-full py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20 dark:hover:bg-slate-400/40 dark:highlight-white/5">{tag}</Link>)}
+                            {allTags.map((tag) => (
+                                <Link
+                                    key={tag}
+                                    to={tagLink(tag)}
+                                    className="mr-2 mb-2 text-xs leading-5 font-semibold bg-slate-400/10 dark:bg-slate-400/30 rounded-full py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20 dark:hover:bg-slate-400/40 dark:highlight-white/5"
+                                >
+                                    {tag}
+                                </Link>
+                            ))}
                         </div>
                     </div>
                     <div className="relative mb-8 mx-auto max-w-7xl">
                         <div className="flex flex-wrap justify-center">
                             <b className="text-sm font-semibold">{thisYear}</b>
-                            {allYears.filter(x => x != thisYear).map(year =>
-                                <Link key={year} className="ml-3 text-sm text-indigo-700 dark:text-indigo-300 font-semibold hover:underline" to={yearLink(year)}>{year}</Link>)}
+                            {allYears
+                                .filter((x) => x != thisYear)
+                                .map((year) => (
+                                    <Link
+                                        key={year}
+                                        className="ml-3 text-sm text-indigo-700 dark:text-indigo-300 font-semibold hover:underline"
+                                        to={yearLink(year)}
+                                    >
+                                        {year}
+                                    </Link>
+                                ))}
                         </div>
                     </div>
                     <div className="relative mx-auto max-w-7xl">
                         <BlogPosts posts={allPosts.filter((x: any) => new Date(x.date).getFullYear() == thisYear)} />
                         <div className="mt-8 text-center">
-                            <Link className="text-sm font-semibold hover:underline" to="/posts">view all posts</Link>
+                            <Link className="text-sm font-semibold hover:underline" to="/posts">
+                                view all posts
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom"
-import { Icon } from "@iconify/react"
+import { Link } from 'react-router-dom'
+import { Icon } from '@iconify/react'
 import { GettingStarted, AutoUis, ReactLogo } from 'react-net-templates'
-import Layout from "@/components/Layout"
-import Include from "@/components/Include"
-import VideoGroup from "@/components/VideoGroup"
-import LiteYouTube from "@/components/LiteYouTube"
-import SrcPage from "@/components/SrcPage"
-import { generateSlug, dateLabel, dateTimestamp } from "@/lib/utils"
-import { PressContext } from "@/contexts"
-import { useContext } from "react"
-import FeatureLinks from "@/components/FeatureLinks"
+import Layout from '@/components/Layout'
+import Include from '@/components/Include'
+import VideoGroup from '@/components/VideoGroup'
+import LiteYouTube from '@/components/LiteYouTube'
+import SrcPage from '@/components/SrcPage'
+import { generateSlug, dateLabel, dateTimestamp } from '@/lib/utils'
+import { PressContext } from '@/contexts'
+import { useContext } from 'react'
+import FeatureLinks from '@/components/FeatureLinks'
 
 const Index = () => {
     const press = useContext(PressContext)
@@ -18,9 +18,7 @@ const Index = () => {
     const postAuthor = primaryPost.author
 
     function authorLink(name: any) {
-        return name && press.blog.authors.some((x: any) => x.name.toLowerCase() == name.toLowerCase())
-            ? `/posts/author/${generateSlug(name)}`
-            : null
+        return name && press.blog.authors.some((x: any) => x.name.toLowerCase() == name.toLowerCase()) ? `/posts/author/${generateSlug(name)}` : null
     }
     function postLink(post: any) {
         return `/posts/${post.slug}`
@@ -29,7 +27,7 @@ const Index = () => {
         return name ? press.blog.authors.filter((x: any) => x.name.toLowerCase() == name.toLowerCase())[0] : null
     }
     function authorProfileUrl(name: string) {
-        return author(name)?.profileUrl ?? "/img/profiles/user1.svg"
+        return author(name)?.profileUrl ?? '/img/profiles/user1.svg'
     }
 
     return (
@@ -45,8 +43,10 @@ const Index = () => {
                     </p>
                     <div className="mx-auto mt-5 max-w-md sm:flex sm:justify-center md:mt-8">
                         <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                            <Link to="https://react.servicestack.net"
-                                className="flex w-full items-center justify-center rounded-md border border-transparent bg-link-dark dark:bg-link-dark px-8 py-3 text-base font-medium text-white hover:bg-gray-700 md:py-4 md:px-10 md:text-lg">
+                            <Link
+                                to="https://react.servicestack.net"
+                                className="flex w-full items-center justify-center rounded-md border border-transparent bg-link-dark dark:bg-link-dark px-8 py-3 text-base font-medium text-white hover:bg-gray-700 md:py-4 md:px-10 md:text-lg"
+                            >
                                 React Component Gallery
                             </Link>
                         </div>
@@ -56,14 +56,9 @@ const Index = () => {
 
             <section className="py-8 flex">
                 <div className="mt-8 mx-auto">
-                    <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl text-center">
-                        Getting Started
-                    </h2>
+                    <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl text-center">Getting Started</h2>
                     <div>
-                        <GettingStarted template="react-spa" 
-                            templateName="React SPA"
-                            logo={<ReactLogo className="size-12" />}
-                            runLabel="Run .NET and Vite" />
+                        <GettingStarted template="react-spa" templateName="React SPA" logo={<ReactLogo className="size-12" />} runLabel="Run .NET and Vite" />
                     </div>
                 </div>
             </section>
@@ -73,48 +68,57 @@ const Index = () => {
             <FeatureLinks />
 
             <div className="container mx-auto px-5 mb-24">
-                {!primaryPost ? null : <section>
-                    <div className="mb-8 md:mb-16">
-                        <div className="sm:mx-0">
-                            <Link aria-label={primaryPost.title} to={postLink(primaryPost)}>
-                                <img src={primaryPost.image} alt={`Cover Image for ${primaryPost.title}`}
-                                    className="shadow-sm hover:shadow-2xl transition-shadow duration-200" />
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
-                        <div>
-                            <h3 className="mb-4 text-4xl lg:text-6xl leading-tight">
-                                <Link className="hover:underline" to={postLink(primaryPost)}>{primaryPost.title}</Link>
-                            </h3>
-                            <div className="mb-4 md:mb-0 text-lg">
-                                <time dateTime={dateTimestamp(primaryPost.date)}>{dateLabel(primaryPost.date)}</time>
+                {!primaryPost ? null : (
+                    <section>
+                        <div className="mb-8 md:mb-16">
+                            <div className="sm:mx-0">
+                                <Link aria-label={primaryPost.title} to={postLink(primaryPost)}>
+                                    <img
+                                        src={primaryPost.image}
+                                        alt={`Cover Image for ${primaryPost.title}`}
+                                        className="shadow-sm hover:shadow-2xl transition-shadow duration-200"
+                                    />
+                                </Link>
                             </div>
                         </div>
-                        <div>
-                            <p className="text-lg leading-relaxed mb-4">{primaryPost.summary}</p>
-                            {authorLink(primaryPost.author)
-                                ? <Link className="flex items-center text-xl font-bold"
-                                    to={authorLink(primaryPost.author)!}>
-                                    <img src={authorProfileUrl(primaryPost.author)}
-                                        className="w-12 h-12 rounded-full mr-4" alt="Author" />
-                                    <span>{postAuthor}</span>
-                                </Link>
-                                : <span className="flex items-center text-xl font-bold">
-                                    <img src={authorProfileUrl(primaryPost.author)}
-                                        className="w-12 h-12 rounded-full mr-4" alt="Author" />
-                                    <span>{postAuthor}</span>
-                                </span>}
+                        <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
+                            <div>
+                                <h3 className="mb-4 text-4xl lg:text-6xl leading-tight">
+                                    <Link className="hover:underline" to={postLink(primaryPost)}>
+                                        {primaryPost.title}
+                                    </Link>
+                                </h3>
+                                <div className="mb-4 md:mb-0 text-lg">
+                                    <time dateTime={dateTimestamp(primaryPost.date)}>{dateLabel(primaryPost.date)}</time>
+                                </div>
+                            </div>
+                            <div>
+                                <p className="text-lg leading-relaxed mb-4">{primaryPost.summary}</p>
+                                {authorLink(primaryPost.author) ? (
+                                    <Link className="flex items-center text-xl font-bold" to={authorLink(primaryPost.author)!}>
+                                        <img src={authorProfileUrl(primaryPost.author)} className="w-12 h-12 rounded-full mr-4" alt="Author" />
+                                        <span>{postAuthor}</span>
+                                    </Link>
+                                ) : (
+                                    <span className="flex items-center text-xl font-bold">
+                                        <img src={authorProfileUrl(primaryPost.author)} className="w-12 h-12 rounded-full mr-4" alt="Author" />
+                                        <span>{postAuthor}</span>
+                                    </span>
+                                )}
+                            </div>
                         </div>
-                    </div>
-                </section>}
+                    </section>
+                )}
             </div>
 
             <div className="relative">
                 <div className="mt-8 max-w-6xl mx-auto">
                     <div className="aspect-w-16 aspect-h-9 pb-24">
-                        <LiteYouTube id="WXLF0piz6G0" poster="maxresdefault"
-                            title="Productive ASP.NET Core Vite React SPA Tailwind Template with Identity Auth" />
+                        <LiteYouTube
+                            id="WXLF0piz6G0"
+                            poster="maxresdefault"
+                            title="Productive ASP.NET Core Vite React SPA Tailwind Template with Identity Auth"
+                        />
                     </div>
                 </div>
             </div>
@@ -128,9 +132,7 @@ const Index = () => {
                 </div>
             </div>
 
-            <div className="text-center text-xl">
-                Opinionated React template for a productive out-of-the-box development UX
-            </div>
+            <div className="text-center text-xl">Opinionated React template for a productive out-of-the-box development UX</div>
             <div className="prose dark:prose-invert lg:prose-xl mx-auto">
                 <Include src="features.md" />
             </div>
@@ -147,12 +149,12 @@ const Index = () => {
             <VideoGroup
                 title="SPA Development"
                 summary="Learn about ServiceStack's productive features for rapidly developing Single Page Apps"
-                group="react" />
+                group="react"
+            />
 
             <div className="my-8 flex justify-center gap-x-4">
                 <SrcPage path="index.tsx" />
             </div>
-
         </Layout>
     )
 }
