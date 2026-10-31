@@ -5,6 +5,7 @@ import Layout from '@/components/Layout'
 import { Loading, ClientContext, setLinkComponent } from '@servicestack/react'
 
 import { ThemeProvider } from '@/components/theme-provider'
+import { TooltipProvider } from '@/components/ui/tooltip'
 import { forwardRef, StrictMode, Suspense, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, useRoutes, useLocation, Link, LinkProps } from 'react-router-dom'
@@ -37,9 +38,11 @@ init().then(() => {
                 }
             >
                 <ThemeProvider defaultTheme="light" storageKey="color-scheme">
-                    <PressContext.Provider value={press}>
-                        <ClientContext.Provider value={client}>{useRoutes(routes)}</ClientContext.Provider>
-                    </PressContext.Provider>
+                    <TooltipProvider>
+                        <PressContext.Provider value={press}>
+                            <ClientContext.Provider value={client}>{useRoutes(routes)}</ClientContext.Provider>
+                        </PressContext.Provider>
+                    </TooltipProvider>
                 </ThemeProvider>
             </Suspense>
         )

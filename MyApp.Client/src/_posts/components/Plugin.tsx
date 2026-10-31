@@ -4,9 +4,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 export default () => {
     return (
         <Dialog>
-            <DialogTrigger asChild>
-                <PrimaryButton>Open Modal</PrimaryButton>
-            </DialogTrigger>
+            <DialogTrigger render={<PrimaryButton />}>Open Modal</DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Greetings</DialogTitle>

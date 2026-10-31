@@ -1,4 +1,4 @@
-﻿import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 
 import type { TableOptions } from '@tanstack/react-table'
 
@@ -8,7 +8,8 @@ import { cn } from '@/lib/utils'
 
 import { toPascalCase, splitTitleCase } from '@servicestack/client'
 
-type DataTableProps<TData, TValue> = TableOptions<TData> & {
+// getCoreRowModel is provided by DataTable
+type DataTableProps<TData, TValue> = Omit<TableOptions<TData>, 'getCoreRowModel'> & {
     columns: ColumnDef<TData, TValue>[]
     stripedRows?: boolean
 }
@@ -46,7 +47,7 @@ export function DataTable<TData, TValue>(props: DataTableProps<TData, TValue>) {
     return (
         <div className="rounded-md border">
             <Table>
-                <TableHeader className="bg-gray-50 dark:bg-gray-900">
+                <TableHeader className="bg-muted/50">
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
                             {headerGroup.headers.map((header) => {
@@ -62,27 +63,16 @@ export function DataTable<TData, TValue>(props: DataTableProps<TData, TValue>) {
                 <TableBody>
                     {table.getRowModel().rows?.length ? (
                         table.getRowModel().rows.map((row) => (
-                            <tr
-                                className={cn(
-                                    'border-b transition-colors',
-                                    enableRowSelection ? 'cursor-pointer ' : '',
-                                    enableRowSelection && row.getIsSelected()
-                                        ? 'bg-indigo-100 dark:bg-blue-800'
-                                        : (enableRowSelection ? 'hover:bg-yellow-50 dark:hover:bg-blue-900 ' : '') +
-                                              (stripedRows
-                                                  ? row.index % 2 == 0
-                                                      ? 'bg-white dark:bg-black'
-                                                      : 'bg-gray-50 dark:bg-gray-800'
-                                                  : 'bg-white dark:bg-black'),
-                                )}
+                            <TableRow
                                 key={row.id}
+                                className={cn(stripedRows && 'even:bg-muted/40', enableRowSelection && 'cursor-pointer')}
                                 data-state={row.getIsSelected() && 'selected'}
                                 onClick={row.getToggleSelectedHandler()}
                             >
                                 {row.getVisibleCells().map((cell) => (
                                     <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                                 ))}
-                            </tr>
+                            </TableRow>
                         ))
                     ) : (
                         <TableRow>
